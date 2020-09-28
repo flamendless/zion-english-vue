@@ -1,18 +1,16 @@
 <template>
 <b-navbar toggleable="lg" type="light" variant="light" :sticky=true>
-	<b-navbar-brand href="#">{{ title }}</b-navbar-brand>
+	<b-navbar-brand href="#home">{{ title }}</b-navbar-brand>
 	<b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 	<b-collapse id="nav-collapse" is-nav>
 		<b-navbar-nav class="ml-auto">
-			<b-nav-item :href="links.home">Home</b-nav-item>
-			<b-nav-item :href="links.services">Services</b-nav-item>
-			<b-nav-item :href="links.teachers">Teachers</b-nav-item>
-			<b-nav-item :href="links.about_us">About Us</b-nav-item>
-
-			<b-nav-item-dropdown text="Contact Us" right>
-				<b-dropdown-item :href="links.email">E-Mail</b-dropdown-item>
-				<b-dropdown-item :href="links.skype">Skype</b-dropdown-item>
-			</b-nav-item-dropdown>
+			<b-nav-item
+				v-for="(item, i) in items" :key="i"
+				:href="item.hash"
+				:active="hash == item.hash || hash == item.hash2"
+				v-on:click="click">
+				{{ item.title }}
+			</b-nav-item>
 		</b-navbar-nav>
 	</b-collapse>
 </b-navbar>
@@ -24,16 +22,44 @@ export default {
 	props: {
 		title: String,
 	},
+
+	methods: {
+		click: function(event) {
+			this.hash = window.location.hash;
+			// const items = this.$el.querySelectorAll(".nav-item");
+			// items.forEach(function(item) {
+			// 	item.classList.remove("active");
+			// });
+			event.target.classList.add("active");
+		}
+	},
+
 	data: function() {
 		return {
-			links: {
-				home: "#",
-				services: "#services",
-				teachers: "#teachers",
-				about_us: "#about_us",
-				email: "#email",
-				skype: "#skype",
-			},
+			hash: window.location.hash,
+			items: [
+				{
+					hash: "#home",
+					hash2: "",
+					title: "Home",
+				},
+				{
+					hash: "#services",
+					title: "Services",
+				},
+				{
+					hash: "#teachers",
+					title: "Teachers",
+				},
+				{
+					hash: "#about",
+					title: "About",
+				},
+				{
+					hash: "#contacts",
+					title: "Contacts",
+				},
+			],
 		}
 	}
 }
