@@ -1,14 +1,13 @@
 <template>
 <b-navbar toggleable="lg" type="light" variant="light" :sticky=true>
-	<b-navbar-brand href="#home">{{ title }}</b-navbar-brand>
+	<b-navbar-brand href="/home">{{ title }}</b-navbar-brand>
 	<b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 	<b-collapse id="nav-collapse" is-nav>
 		<b-navbar-nav class="ml-auto">
 			<b-nav-item
 				v-for="(item, i) in items" :key="i"
-				:href="item.hash"
-				:active="hash == item.hash || hash == item.hash2"
-				v-on:click="click">
+				:to="item.route"
+				:active="get_route == item.route || get_route == item.route2">
 				{{ item.title }}
 			</b-nav-item>
 		</b-navbar-nav>
@@ -23,40 +22,34 @@ export default {
 		title: String,
 	},
 
-	methods: {
-		click: function(event) {
-			this.hash = window.location.hash;
-			// const items = this.$el.querySelectorAll(".nav-item");
-			// items.forEach(function(item) {
-			// 	item.classList.remove("active");
-			// });
-			event.target.classList.add("active");
+	computed: {
+		get_route() {
+			return this.$route.name;
 		}
 	},
 
 	data: function() {
 		return {
-			hash: window.location.hash,
 			items: [
 				{
-					hash: "#home",
-					hash2: "",
+					route: "/home",
+					route2: "",
 					title: "Home",
 				},
 				{
-					hash: "#services",
+					route: "/services",
 					title: "Services",
 				},
 				{
-					hash: "#teachers",
+					route: "/teachers",
 					title: "Teachers",
 				},
 				{
-					hash: "#about",
+					route: "/about",
 					title: "About",
 				},
 				{
-					hash: "#contacts",
+					route: "/contacts",
 					title: "Contacts",
 				},
 			],
