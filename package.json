@@ -21,8 +21,12 @@
     "node-sass": "^4.14.1",
     "sass-loader": "^10.0.2",
     "swiper": "^6.3.2",
+    "v-ripple-directive": "^0.2.0",
     "vue": "^2.6.12",
     "vue-awesome-swiper": "^4.1.1",
+    "vue-gtag": "^1.9.1",
+    "vue-js-modal": "^2.0.0-rc.6",
+    "vue-meta": "^2.4.0",
     "vue-router": "^3.4.5",
     "vue-toasted": "^1.1.28"
   },

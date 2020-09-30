@@ -11,10 +11,10 @@
 	<b-collapse id="nav-collapse" is-nav>
 		<b-navbar-nav class="ml-auto">
 			<b-nav-item
+				v-ripple
 				v-for="(item, i) in items" :key="i"
 				:to="item.route"
 				:title="item.title"
-				@mousedown="on_click(item.title)"
 				:active="get_route == item.route || get_route == item.route2">
 				<b-icon class="nav-icon" :icon="item.icon"></b-icon>
 				{{ item.title }}
@@ -25,8 +25,6 @@
 </template>
 
 <script>
-import Data from "@/data.js"
-
 export default {
 	name: "NavBar",
 	props: {
@@ -35,43 +33,6 @@ export default {
 
 	computed: {
 		get_route() { return this.$route.name; }
-	},
-
-	methods: {
-		on_click: function(name) {
-			if (name == "Contacts")
-			{
-				this.$toasted.clear();
-
-				this.$toasted.show("E-Mail: " + Data.email, {
-					iconPack: "material",
-					icon: "email",
-					position: "top-right",
-					duration: "3000",
-					keepOnHover: true,
-					closeOnSwipe: true,
-					action: {
-						text: "Copy",
-						onClick: () => {
-						}
-					}
-				});
-
-				this.$toasted.show("SkypeID: " + Data.skype_id, {
-					iconPack: "fontawesome",
-					icon: "font-awesome",
-					position: "top-right",
-					duration: "3000",
-					keepOnHover: true,
-					closeOnSwipe: true,
-					action: {
-						text: "Copy",
-						onClick: () => {
-						}
-					}
-				});
-			}
-		}
 	},
 
 	data: function() {

@@ -3,20 +3,14 @@
 	<swiper class="swiper" :options="swiper_option">
 		<div class="parallax-bg" slot="parallax-bg" data-swiper-parallax="-23%"></div>
 		<swiper-slide v-for="(item, i) in carousel" :key="i">
-			<div class="title" data-swiper-parallax="-100">
-				{{ item.title }}
-			</div>
-			<div class="subtitle" data-swiper-parallax="-240">
-				{{ item.subtitle }}
-			</div>
-			<div class="caption" data-swiper-parallax="-360">
-				{{ item.caption }}
-			</div>
+			<div class="title" data-swiper-parallax="-100">{{ item.title }}</div>
+			<div class="subtitle" data-swiper-parallax="-240">{{ item.subtitle }}</div>
+			<div class="caption" data-swiper-parallax="-360">{{ item.caption }}</div>
 		</swiper-slide>
 
-		<div class="swiper-pagination swiper-pagination-black" slot="pagination"></div>
-		<div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>
-		<div class="swiper-button-next swiper-button-black" slot="button-next"></div>
+		<div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
+		<div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+		<div class="swiper-button-next swiper-button-white" slot="button-next"></div>
 	</swiper>
 </div>
 </template>
@@ -44,12 +38,17 @@ export default {
 				},
 			],
 			swiper_option: {
-				loop: true,
 				speed: 600,
 				parallax: true,
+				autoplay: {
+					delay: 2500,
+					disableOnInteraction: false,
+				},
 				pagination: {
 					el: ".swiper-pagination",
 					clickable: true,
+					dynamicBullets: true,
+					dynamicMainBullets: 1,
 				},
 				navigation: {
 					nextEl: ".swiper-button-next",
@@ -57,7 +56,11 @@ export default {
 				}
 			}
 		}
-	}
+	},
+
+	meta_info: {
+		title: "Learn English With Us",
+	},
 }
 </script>
 
@@ -72,7 +75,7 @@ export default {
 	height: 100%;
 	background-size: cover;
 	background-position: left;
-	background-image: url("../assets/logo.png");
+	background-image: url("../assets/images/sample.jpg");
 }
 
 .swiper {
@@ -83,9 +86,9 @@ export default {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		color: $black;
+		color: $white;
 		box-sizing: border-box;
-		padding: 0 64px;
+		padding: 0 80px;
 		background-color: transparent;
 
 		.title {

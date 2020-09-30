@@ -1,6 +1,11 @@
 import Vue from "vue"
 import VueAwesomeSwiper from "vue-awesome-swiper"
-import {Swiper as SwiperClass, Pagination, Navigation, Mousewheel, Autoplay} from "swiper/swiper.esm"
+import VModal from "vue-js-modal/dist/index.nocss.js"
+import VRipple from "v-ripple-directive"
+import VueGtag from "vue-gtag"
+import Meta from "vue-meta"
+import {Swiper as SwiperClass, Pagination, Navigation, Mousewheel, Autoplay, Parallax}
+	from "swiper/swiper.esm"
 import getAwesomeSwiper from "vue-awesome-swiper/dist/exporter"
 import Toasted from "vue-toasted"
 import App from "./App.vue"
@@ -14,6 +19,8 @@ import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
 import "../node_modules/material-icons/iconfont/material-icons.css"
 import "swiper/swiper-bundle.min.css"
+import "vue-js-modal/dist/styles.css"
+import "v-ripple-directive/src/index.scss";
 
 library.add(faExclamationTriangle);
 library.add(faFontAwesome);
@@ -24,8 +31,17 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(Toasted);
 Vue.use(VueAwesomeSwiper);
+Vue.use(VModal);
+Vue.use(VRipple);
+Vue.use(VueGtag, {
+	config: {id: "GTM-5WVBKJG"},
+});
+Vue.use(Meta, {
+	keyName: "meta_info",
+	refreshOnceOnNavigation: true,
+});
 
-SwiperClass.use([Pagination, Mousewheel, Navigation, Autoplay]);
+SwiperClass.use([Pagination, Mousewheel, Navigation, Autoplay, Parallax]);
 Vue.use(getAwesomeSwiper(SwiperClass));
 
 Vue.config.productionTip = false;
