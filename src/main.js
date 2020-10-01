@@ -8,7 +8,7 @@ import {Swiper as SwiperClass, Pagination, Navigation, Mousewheel, Autoplay, Par
 	from "swiper/swiper.esm"
 import getAwesomeSwiper from "vue-awesome-swiper/dist/exporter"
 import Toasted from "vue-toasted"
-import App from "./App.vue"
+import App from "./app.vue"
 import router from "./router"
 import {BootstrapVue, IconsPlugin} from "bootstrap-vue"
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome"
@@ -34,7 +34,7 @@ Vue.use(VueAwesomeSwiper);
 Vue.use(VModal);
 Vue.use(VRipple);
 Vue.use(VueGtag, {
-	config: {id: "GTM-5WVBKJG"},
+	config: {id: "UA-141260881-2"},
 });
 Vue.use(Meta, {
 	keyName: "meta_info",

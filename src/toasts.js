@@ -19,7 +19,7 @@ function copy_email(toast) {
 
 function copy_skype(toast) {
 	toast.show("Skype ID Copied!", {
-		iconPack: "fontawesome",
+		iconPack: "custom-class",
 		icon: "font-awesome",
 		position: "top-right",
 		duration: "3000",

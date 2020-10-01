@@ -21,5 +21,11 @@ export default {
 	meta_info: {
 		title: "Contacts",
 	},
+
+	data: function() {
+		this.$toasted.clear();
+		Toasts.copy_email(this.$toasted);
+		Toasts.copy_skype(this.$toasted);
+	}
 }
 </script>

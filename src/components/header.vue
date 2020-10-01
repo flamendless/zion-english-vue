@@ -1,11 +1,10 @@
 <template>
 <div class="header">
 	<swiper class="swiper" :options="swiper_option">
-		<div class="parallax-bg" slot="parallax-bg" data-swiper-parallax="-23%"></div>
-		<swiper-slide v-for="(item, i) in carousel" :key="i">
-			<div class="title" data-swiper-parallax="-100">{{ item.title }}</div>
-			<div class="subtitle" data-swiper-parallax="-240">{{ item.subtitle }}</div>
-			<div class="caption" data-swiper-parallax="-360">{{ item.caption }}</div>
+		<swiper-slide v-for="(item, i) in carousel" :key="i" :class="'slide-' + i">
+			<div class="title">{{ item.title }}</div>
+			<div class="subtitle">{{ item.subtitle }}</div>
+			<div class="caption">{{ item.caption }}</div>
 		</swiper-slide>
 
 		<div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
@@ -37,9 +36,10 @@ export default {
 					caption: "Text 3",
 				},
 			],
+
 			swiper_option: {
 				speed: 600,
-				parallax: true,
+				effect: "fade",
 				autoplay: {
 					delay: 2500,
 					disableOnInteraction: false,
@@ -47,8 +47,6 @@ export default {
 				pagination: {
 					el: ".swiper-pagination",
 					clickable: true,
-					dynamicBullets: true,
-					dynamicMainBullets: 1,
 				},
 				navigation: {
 					nextEl: ".swiper-button-next",
@@ -67,29 +65,30 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/styles/variables.scss";
 
-.parallax-bg {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 130%;
-	height: 100%;
-	background-size: cover;
-	background-position: left;
-	background-image: url("../assets/images/sample.jpg");
-}
-
 .swiper {
 	width: 100%;
-	height: 380px;
+	height: 720px;
 
 	.swiper-slide {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		color: $white;
+		color: $black;
 		box-sizing: border-box;
 		padding: 0 80px;
-		background-color: transparent;
+		background-size: cover;
+
+		&.slide-0 {
+			background-image: url("../assets/images/header.jpg");
+		}
+
+		&.slide-1 {
+			background-image: url("../assets/images/header.jpg");
+		}
+
+		&.slide-2 {
+			background-image: url("../assets/images/header.jpg");
+		}
 
 		.title {
 			margin-bottom: $lg-gap;
