@@ -8,8 +8,12 @@
 		</swiper-slide>
 
 		<div class="swiper-pagination swiper-pagination-black" slot="pagination"></div>
-		<div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>
-		<div class="swiper-button-next swiper-button-black" slot="button-next"></div>
+		<div class="swiper-button-prev swiper-button-black"
+			slot="button-prev" v-ripple>
+		</div>
+		<div class="swiper-button-next swiper-button-black"
+			slot="button-next" v-ripple>
+		</div>
 	</swiper>
 </div>
 </template>
@@ -70,7 +74,7 @@ export default {
 
 .swiper {
 	width: 100%;
-	height: 720px;
+	height: 540px;
 
 	.swiper-slide {
 		display: flex;
@@ -79,18 +83,20 @@ export default {
 		color: $black;
 		box-sizing: border-box;
 		padding: 0 120px;
-		background-size: cover;
+		background-position: center;
+		background-size: 1280px 540px;
+		background-repeat: no-repeat;
 
 		&.slide-0 {
-			background-image: url("../assets/images/header.jpg");
+			background-image: url("../assets/images/header1.jpg");
 		}
 
 		&.slide-1 {
-			background-image: url("../assets/images/header.jpg");
+			background-image: url("../assets/images/header2.jpg");
 		}
 
 		&.slide-2 {
-			background-image: url("../assets/images/header.jpg");
+			background-image: url("../assets/images/header3.jpg");
 		}
 
 		.title {

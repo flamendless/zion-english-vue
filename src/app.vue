@@ -55,7 +55,5 @@ export default {
 		Montserrat, Quicksand, PalanquinDark;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: #333333;
-	height: 1000px;
 }
 </style>

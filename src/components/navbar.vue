@@ -1,6 +1,6 @@
 <template>
 <b-navbar toggleable="lg" type="dark" :sticky=true>
-	<b-navbar-brand href="/home">{{ site_name }}</b-navbar-brand>
+	<b-navbar-brand href="/home" v-ripple>{{ site_name }}</b-navbar-brand>
 	<b-navbar-toggle target="nav-collapse">
 		<template v-slot:default="{ expanded }">
 			<b-icon v-if="expanded" icon="caret-up-fill"></b-icon>
@@ -72,7 +72,8 @@ export default {
 
 <style scoped>
 .navbar {
-	background-color: red;
+	background-color: #98642a;
+	box-shadow: 0px 8px 16px grey;
 }
 
 .navbar-brand {
@@ -83,7 +84,7 @@ export default {
 .nav-icon {
 	transition: opacity 1s;
 	color: white;
-	opacity: 0.75;
+	opacity: 0.8;
 }
 
 .nav-item {
