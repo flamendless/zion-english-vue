@@ -48,8 +48,11 @@ export default {
 </script>
 
 <style>
+@import "assets/styles/fonts.css";
+
 #app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
+	font-family: Avenir, Helvetica, Arial, sans-serif,
+		Montserrat, Quicksand, PalanquinDark;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	background-color: #333333;

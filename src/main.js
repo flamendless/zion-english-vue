@@ -4,7 +4,8 @@ import VModal from "vue-js-modal/dist/index.nocss.js"
 import VRipple from "v-ripple-directive"
 import VueGtag from "vue-gtag"
 import Meta from "vue-meta"
-import {Swiper as SwiperClass, Pagination, Navigation, Mousewheel, Autoplay, Parallax}
+import {Swiper as SwiperClass, Pagination, Navigation,
+	Mousewheel, Autoplay, Parallax, EffectFade}
 	from "swiper/swiper.esm"
 import getAwesomeSwiper from "vue-awesome-swiper/dist/exporter"
 import Toasted from "vue-toasted"
@@ -41,7 +42,7 @@ Vue.use(Meta, {
 	refreshOnceOnNavigation: true,
 });
 
-SwiperClass.use([Pagination, Mousewheel, Navigation, Autoplay, Parallax]);
+SwiperClass.use([Pagination, Mousewheel, Navigation, Autoplay, Parallax, EffectFade]);
 Vue.use(getAwesomeSwiper(SwiperClass));
 
 Vue.config.productionTip = false;

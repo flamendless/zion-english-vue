@@ -7,9 +7,9 @@
 			<div class="caption">{{ item.caption }}</div>
 		</swiper-slide>
 
-		<div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
-		<div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-		<div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+		<div class="swiper-pagination swiper-pagination-black" slot="pagination"></div>
+		<div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>
+		<div class="swiper-button-next swiper-button-black" slot="button-next"></div>
 	</swiper>
 </div>
 </template>
@@ -24,16 +24,19 @@ export default {
 					title: "Slide 1",
 					subtitle: "Subtitle 1",
 					caption: "Text 1",
+					image: "../assets/images/header.jpg",
 				},
 				{
 					title: "Slide 2",
 					subtitle: "Subtitle 2",
 					caption: "Text 2",
+					image: "../assets/images/header.jpg",
 				},
 				{
 					title: "Slide 3",
 					subtitle: "Subtitle 3",
 					caption: "Text 3",
+					image: "../assets/images/header.jpg",
 				},
 			],
 
@@ -75,7 +78,7 @@ export default {
 		justify-content: center;
 		color: $black;
 		box-sizing: border-box;
-		padding: 0 80px;
+		padding: 0 120px;
 		background-size: cover;
 
 		&.slide-0 {
@@ -92,12 +95,14 @@ export default {
 
 		.title {
 			margin-bottom: $lg-gap;
-			font-size: $font-size-huge * 2;
+			font-family: "PalanquinDark";
+			font-size: $font-size-huge * 3;
 			font-weight: bold;
 		}
 
 		.subtitle {
-			margin-bottom: $gap;
+			margin-bottom: $lg-gap;
+			font-family: "PalanquinDark";
 			font-size: $font-size-base * 2;
 		}
 

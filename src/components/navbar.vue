@@ -1,5 +1,5 @@
 <template>
-<b-navbar toggleable="lg" type="light" variant="light" :sticky=true>
+<b-navbar toggleable="lg" type="dark" :sticky=true>
 	<b-navbar-brand href="/home">{{ site_name }}</b-navbar-brand>
 	<b-navbar-toggle target="nav-collapse">
 		<template v-slot:default="{ expanded }">
@@ -71,12 +71,24 @@ export default {
 </script>
 
 <style scoped>
+.navbar {
+	background-color: red;
+}
+
+.navbar-brand {
+	font-family: "Montserrat";
+	font-weight: 900;
+}
+
 .nav-icon {
 	transition: opacity 1s;
-	opacity: 0.5;
+	color: white;
+	opacity: 0.75;
 }
 
 .nav-item {
+	font-family: "Quicksand";
+	font-weight: bold;
 	margin-left: 8px;
 	margin-right: 8px;
 }
