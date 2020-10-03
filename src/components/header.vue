@@ -81,6 +81,7 @@ export default {
 .swiper {
 	width: 100%;
 	height: 540px;
+	background-color: white;
 
 	.swiper-slide {
 		display: flex;
@@ -89,7 +90,7 @@ export default {
 		color: $black;
 		box-sizing: border-box;
 		padding: 0 60px;
-		background-position: center;
+		background-position: right;
 		background-size: 1280px 540px;
 		background-repeat: no-repeat;
 
