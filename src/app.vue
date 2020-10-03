@@ -47,13 +47,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 @import "assets/styles/fonts.css";
+@import "@/assets/styles/variables.scss";
 
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif,
 		Montserrat, Quicksand, PalanquinDark;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background-color: $khaki_web;
 }
 </style>

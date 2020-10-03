@@ -8,11 +8,13 @@
 		</swiper-slide>
 
 		<div class="swiper-pagination swiper-pagination-black" slot="pagination"></div>
-		<div class="swiper-button-prev swiper-button-black"
-			slot="button-prev" v-ripple>
+		<div
+			class="swiper-button-prev swiper-button-black d-none d-md-block"
+			slot="button-prev">
 		</div>
-		<div class="swiper-button-next swiper-button-black"
-			slot="button-next" v-ripple>
+		<div
+			class="swiper-button-next swiper-button-black d-none d-md-block"
+			slot="button-next">
 		</div>
 	</swiper>
 </div>
@@ -25,21 +27,21 @@ export default {
 		return {
 			carousel: [
 				{
-					title: "Slide 1",
-					subtitle: "Subtitle 1",
-					caption: "Text 1",
+					title: "Let's Break The Barriers...",
+					subtitle: "with Zion English",
+					caption: "It is our goal to help students learn English language with our quality service/teaching yet made affordable to everyone.",
 					image: "../assets/images/header.jpg",
 				},
 				{
-					title: "Slide 2",
-					subtitle: "Subtitle 2",
-					caption: "Text 2",
+					title: "Learn With Best Quality...",
+					subtitle: "with Zion English",
+					caption: "We hire only experienced Filipino online teachers with wide experience of teaching and variety of specialties.",
 					image: "../assets/images/header.jpg",
 				},
 				{
-					title: "Slide 3",
-					subtitle: "Subtitle 3",
-					caption: "Text 3",
+					title: "Love The Language...",
+					subtitle: "with Zion English",
+					caption: "We hope to meet and even exceed our learner’s expectation. We cater to all ages from zero beginners to adult professional covering wide range of topics.",
 					image: "../assets/images/header.jpg",
 				},
 			],
@@ -58,7 +60,7 @@ export default {
 				navigation: {
 					nextEl: ".swiper-button-next",
 					prevEl: ".swiper-button-prev",
-				}
+				},
 			}
 		}
 	},
@@ -72,6 +74,10 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/styles/variables.scss";
 
+.header {
+	box-shadow: 0px 8px 8px grey;
+}
+
 .swiper {
 	width: 100%;
 	height: 540px;
@@ -82,7 +88,7 @@ export default {
 		justify-content: center;
 		color: $black;
 		box-sizing: border-box;
-		padding: 0 120px;
+		padding: 0 60px;
 		background-position: center;
 		background-size: 1280px 540px;
 		background-repeat: no-repeat;
@@ -99,22 +105,42 @@ export default {
 			background-image: url("../assets/images/header3.jpg");
 		}
 
+		.title, .subtitle, .caption {
+			color: black;
+		}
+
 		.title {
 			margin-bottom: $lg-gap;
 			font-family: "PalanquinDark";
 			font-size: $font-size-huge * 3;
-			font-weight: bold;
+			font-weight: 600;
+			max-width: 430px;
+			line-height: 1;
 		}
 
 		.subtitle {
 			margin-bottom: $lg-gap;
-			font-family: "PalanquinDark";
-			font-size: $font-size-base * 2;
+			font-family: "Quicksand";
+			font-weight: 500;
+			font-size: $font-size-huge * 2;
 		}
 
 		.caption {
-			max-width: 430px;
+			font-family: "Quicksand";
+			font-size: $font-size-base * 1.5;
+			max-width: 320px;
 			line-height: 1.32;
+		}
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.swiper .swiper-slide {
+		padding: 0px 32px;
+		text-align: center;
+
+		.title, .caption {
+			max-width: 100%;
 		}
 	}
 }

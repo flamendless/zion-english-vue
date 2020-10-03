@@ -3,6 +3,8 @@
 		<Header />
 
 		<div class="body">
+			<b-container fluid="md">
+			</b-container>
 		</div>
 	</div>
 </template>
@@ -22,11 +24,15 @@ export default {
 @import "@/assets/styles/variables.scss";
 
 .body {
-	margin-top: $body-gap;
-	margin-left: $body-gap;
-	margin-right: $body-gap;
+	margin: $body-gap;
 
 	height: 320px;
 	background-color: red;
+}
+
+@media screen and (max-width: 992px) {
+	.body {
+		margin: $body-gap-sm;
+	}
 }
 </style>

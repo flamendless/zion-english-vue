@@ -70,9 +70,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/assets/styles/variables.scss";
+
 .navbar {
-	background-color: #98642a;
+	background-color: $golden_brown;
 	box-shadow: 0px 8px 16px grey;
 }
 
