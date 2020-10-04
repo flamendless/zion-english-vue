@@ -1,21 +1,24 @@
 <template>
-	<div id="home">
-		<Header />
+<div id="home">
+	<Header />
 
-		<div class="body">
-			<b-container fluid="md">
-			</b-container>
-		</div>
+	<div class="body">
+		<b-container fluid="md">
+			<!-- <Services /> -->
+		</b-container>
 	</div>
+</div>
 </template>
 
 <script>
 import Header from "@/components/header.vue"
+// import Services from "@/components/services.vue"
 
 export default {
 	name: "Home",
 	components: {
 		Header,
+		// Services,
 	},
 }
 </script>
@@ -25,9 +28,6 @@ export default {
 
 .body {
 	margin: $body-gap;
-
-	height: 320px;
-	background-color: red;
 }
 
 @media screen and (max-width: 992px) {

@@ -12,11 +12,13 @@
 		<div class="swiper-pagination swiper-pagination-black" slot="pagination"></div>
 		<div
 			class="swiper-button-prev swiper-button-black d-none d-md-block"
-			slot="button-prev">
+			slot="button-prev"
+			v-ripple>
 		</div>
 		<div
 			class="swiper-button-next swiper-button-black d-none d-md-block"
-			slot="button-next">
+			slot="button-next"
+			v-ripple>
 		</div>
 	</swiper>
 </div>
@@ -143,13 +145,35 @@ export default {
 	}
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1024px) {
 	.swiper .swiper-slide {
 		padding: 0px 32px;
 		text-align: center;
 
 		.title, .caption {
 			max-width: 100%;
+		}
+
+		.title, .subtitle, .caption {
+			padding: 8px;
+			color: black;
+			text-shadow: 0px 0px 8px black;
+			background-color: rgba(255, 255, 255, 0.8);
+		}
+
+		&.slide-0 {
+			background-image: url("../assets/images/header1-mobile.jpg");
+			background-position: left;
+		}
+
+		&.slide-1 {
+			background-image: url("../assets/images/header2-mobile.jpg");
+			background-position: left;
+		}
+
+		&.slide-2 {
+			background-image: url("../assets/images/header3-mobile.jpg");
+			background-position: center;
 		}
 	}
 }
