@@ -1,10 +1,12 @@
 <template>
 <div class="header">
-	<swiper class="swiper" :options="swiper_option">
+	<swiper class="swiper" :options="swiper_option" ref="swiper">
 		<swiper-slide v-for="(item, i) in carousel" :key="i" :class="'slide-' + i">
-			<div class="title">{{ item.title }}</div>
-			<div class="subtitle">{{ item.subtitle }}</div>
-			<div class="caption">{{ item.caption }}</div>
+			<div v-if="current_slide === i">
+				<div class="title">{{ item.title }}</div>
+				<div class="subtitle">{{ item.subtitle }}</div>
+				<div class="caption">{{ item.caption }}</div>
+			</div>
 		</swiper-slide>
 
 		<div class="swiper-pagination swiper-pagination-black" slot="pagination"></div>
@@ -46,6 +48,7 @@ export default {
 				},
 			],
 
+			current_slide: 0,
 			swiper_option: {
 				speed: 600,
 				effect: "fade",
@@ -61,6 +64,11 @@ export default {
 					nextEl: ".swiper-button-next",
 					prevEl: ".swiper-button-prev",
 				},
+				on: {
+					slideChange: () => {
+						this.current_slide = this.$refs.swiper.$swiper.activeIndex;
+					}
+				}
 			}
 		}
 	},
@@ -80,18 +88,18 @@ export default {
 
 .swiper {
 	width: 100%;
-	height: 540px;
+	height: 720px;
 	background-color: white;
 
 	.swiper-slide {
 		display: flex;
+		box-sizing: border-box;
 		flex-direction: column;
 		justify-content: center;
 		color: $black;
-		box-sizing: border-box;
 		padding: 0 60px;
 		background-position: right;
-		background-size: 1280px 540px;
+		background-size: 1280px 720px;
 		background-repeat: no-repeat;
 
 		&.slide-0 {
