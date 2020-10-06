@@ -6,6 +6,12 @@
 				<div class="title">{{ item.title }}</div>
 				<div class="subtitle">{{ item.subtitle }}</div>
 				<div class="caption">{{ item.caption }}</div>
+
+				<b-button class="btn" :href="button.href" variant="dark">
+					<b-icon-heart class="icon">
+					</b-icon-heart>
+					{{ button.title }}
+				</b-button>
 			</div>
 		</swiper-slide>
 
@@ -71,6 +77,11 @@ export default {
 						this.current_slide = this.$refs.swiper.$swiper.activeIndex;
 					}
 				}
+			},
+
+			button: {
+				title: "Affordable Price at $3.99/25 min",
+				href: "/get_started",
 			}
 		}
 	},
@@ -103,6 +114,10 @@ export default {
 		background-position: right;
 		background-size: 1280px 720px;
 		background-repeat: no-repeat;
+
+		.btn {
+			margin-top: 24px;
+		}
 
 		&.slide-0 {
 			background-image: url("../assets/images/header1.jpg");
@@ -157,7 +172,7 @@ export default {
 		.title, .subtitle, .caption {
 			padding: 8px;
 			color: black;
-			text-shadow: 0px 0px 8px black;
+			text-shadow: 0px 0px 8px grey;
 			background-color: rgba(255, 255, 255, 0.8);
 		}
 
@@ -174,6 +189,14 @@ export default {
 		&.slide-2 {
 			background-image: url("../assets/images/header3-mobile.jpg");
 			background-position: center;
+		}
+	}
+}
+
+@media screen and (max-width: 432px) {
+	.swiper .swiper-slide {
+		&.slide-1 {
+			background-position: right;
 		}
 	}
 }

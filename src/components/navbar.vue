@@ -1,6 +1,6 @@
 <template>
 <b-navbar toggleable="lg" type="dark" :sticky=true>
-	<b-navbar-brand href="/home" v-ripple>{{ site_name }}</b-navbar-brand>
+	<b-navbar-brand :href="home" v-ripple>{{ site_name }}</b-navbar-brand>
 	<b-navbar-toggle target="nav-collapse">
 		<template v-slot:default="{ expanded }">
 			<b-icon v-if="expanded" icon="caret-up-fill"></b-icon>
@@ -13,7 +13,7 @@
 			<b-nav-item
 				v-ripple
 				v-for="(item, i) in items" :key="i"
-				:to="item.route"
+				:href="item.route"
 				:title="item.title"
 				:active="get_route == item.route || get_route == item.route2">
 				<b-icon class="nav-icon" :icon="item.icon"></b-icon>
@@ -39,30 +39,31 @@ export default {
 
 	data: function() {
 		return {
+			home: "/",
 			items: [
 				{
-					route: "/home",
+					route: "#home",
 					route2: "",
 					title: "Home",
 					icon: "house-fill",
 				},
 				{
-					route: "/services",
+					route: "#services",
 					title: "Services",
 					icon: "briefcase-fill",
 				},
 				{
-					route: "/teachers",
+					route: "#teachers",
 					title: "Teachers",
 					icon: "people-fill",
 				},
 				{
-					route: "/about",
+					route: "#about",
 					title: "About",
 					icon: "info-circle-fill",
 				},
 				{
-					route: "/contacts",
+					route: "#contacts",
 					title: "Contacts",
 					icon: "telephone-fill",
 				},
