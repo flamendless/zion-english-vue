@@ -3,7 +3,8 @@
 	<Header />
 
 	<div class="body">
-		<Services />
+		<Services class="services"/>
+		<Teachers class="teachers"/>
 	</div>
 </div>
 </template>
@@ -11,12 +12,14 @@
 <script>
 import Header from "@/components/header.vue"
 import Services from "@/components/services.vue"
+import Teachers from "@/components/teachers.vue"
 
 export default {
 	name: "Home",
 	components: {
 		Header,
 		Services,
+		Teachers,
 	},
 }
 </script>
@@ -25,14 +28,18 @@ export default {
 @import "@/assets/styles/variables.scss";
 
 .body {
-	margin-top: $body-gap;
-	margin-bottom: $body-gap;
+	.services, .teachers {
+		margin-top: $body-gap;
+		margin-bottom: $body-gap;
+	}
 }
 
 @media screen and (max-width: 992px) {
 	.body {
-		margin-top: $body-gap-sm;
-		margin-bottom: $body-gap-sm;
+		.services, .teachers {
+			margin-top: $body-gap-sm;
+			margin-bottom: $body-gap-sm;
+		}
 	}
 }
 </style>

@@ -14,7 +14,7 @@ import router from "./router"
 import {BootstrapVue, IconsPlugin} from "bootstrap-vue"
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome"
 import {library, dom} from "@fortawesome/fontawesome-svg-core"
-import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons"
+import {faQuoteLeft, faQuoteRight} from "@fortawesome/free-solid-svg-icons"
 import {faFontAwesome} from "@fortawesome/free-brands-svg-icons"
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
@@ -23,8 +23,9 @@ import "swiper/swiper-bundle.min.css"
 import "vue-js-modal/dist/styles.css"
 import "v-ripple-directive/src/index.scss";
 
-library.add(faExclamationTriangle);
 library.add(faFontAwesome);
+library.add(faQuoteLeft);
+library.add(faQuoteRight);
 dom.watch();
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
