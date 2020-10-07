@@ -12,6 +12,7 @@ import Toasted from "vue-toasted"
 import App from "./app.vue"
 import router from "./router"
 import {BootstrapVue, IconsPlugin} from "bootstrap-vue"
+import {MediaQueries, CommonBands} from "vue-media-queries"
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome"
 import {library, dom} from "@fortawesome/fontawesome-svg-core"
 import {faQuoteLeft, faQuoteRight} from "@fortawesome/free-solid-svg-icons"
@@ -43,6 +44,9 @@ Vue.use(Meta, {
 	refreshOnceOnNavigation: true,
 });
 
+const mq = new MediaQueries({bands: CommonBands.Bootstrap4});
+Vue.use(mq);
+
 SwiperClass.use([Pagination, Mousewheel, Navigation, Autoplay, Parallax, EffectFade]);
 Vue.use(getAwesomeSwiper(SwiperClass));
 
@@ -50,5 +54,7 @@ Vue.config.productionTip = false;
 
 new Vue({
     router,
+    mediaQueries: mq,
+    mixins: [CommonBands.Bootstrap4.mixin],
     render: h => h(App)
 }).$mount("#app")

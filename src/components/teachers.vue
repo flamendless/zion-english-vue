@@ -1,36 +1,62 @@
 <template>
-<b-carousel id="teachers" class="teachers"
-	controls
-	:interval="3000"
-	indicators background="#ababab"
->
-	<b-carousel-slide v-for="(set, i) in sets" :key="i">
-		<template #img>
-			<b-card-group deck class="deck">
-				<b-card no-body class="card" v-for="(item, n) in set" :key="n"
-					:class="{empty: item.empty}">
-					<b-card-img :src="item.img" :alt="item.alt">
-					</b-card-img>
+<div id="teachers">
+	<div v-if="$resize && $mq.above(992)">
+		<b-carousel class="teachers"
+			controls :interval="3000"
+			indicators background="#ababab">
+			<b-carousel-slide v-for="(set, i) in sets" :key="i">
+				<template #img>
+					<b-card-group deck class="deck">
+						<b-card no-body class="card" v-for="(item, n) in set" :key="n"
+							:class="{bg: n < 2 && i == 0}">
+							<b-card-img v-if="item.img"
+								class="img" :src="item.img" :alt="item.alt">
+							</b-card-img>
 
-					<b-card-text class="content">
-						<h1>{{ item.name }}</h1>
-						<!-- <h5> -->
-						<!-- 	<font&#45;awesome&#45;icon icon="quote&#45;left" /> -->
-						<!-- 	{{ item.text }} -->
-						<!-- 	<font&#45;awesome&#45;icon icon="quote&#45;right" /> -->
-						<!-- </h5> -->
-					</b-card-text>
-				</b-card>
-			</b-card-group>
-		</template>
-	</b-carousel-slide>
-</b-carousel>
+							<b-card-text class="content d-flex">
+								<h1 class="m-auto">{{ item.name }}</h1>
+								<!-- <h5> -->
+								<!-- 	<font&#45;awesome&#45;icon icon="quote&#45;left" /> -->
+								<!-- 	{{ item.text }} -->
+								<!-- 	<font&#45;awesome&#45;icon icon="quote&#45;right" /> -->
+								<!-- </h5> -->
+							</b-card-text>
+						</b-card>
+					</b-card-group>
+				</template>
+			</b-carousel-slide>
+		</b-carousel>
+	</div>
+
+	<div v-else>
+		<!-- IMPLEMENT LABEL (JUMBOTRON?) -->
+		<b-carousel class="teachers"
+			controls :interval="3000"
+			indicators background="#ababab">
+			<b-carousel-slide v-for="(item, i) in teachers_list" :key="i">
+				<template #img>
+					<b-card-group deck class="deck">
+						<b-card no-body class="card">
+							<b-card-img v-if="item.img"
+								class="img" :src="item.img" :alt="item.alt">
+							</b-card-img>
+
+							<b-card-text class="content d-flex">
+								<h1 class="m-auto">{{ item.name }}</h1>
+							</b-card-text>
+						</b-card>
+					</b-card-group>
+				</template>
+			</b-carousel-slide>
+		</b-carousel>
+	</div>
+</div>
 </template>
 
 <script>
+import img_hazel from "@/assets/images/teachers/hazel.png"
 import img_jedson from "@/assets/images/teachers/jedson.png"
 import img_julie from "@/assets/images/teachers/julie.png"
-import img_hazel from "@/assets/images/teachers/hazel.png"
 import img_vivien from "@/assets/images/teachers/vivien.png"
 import img_chris from "@/assets/images/teachers/chris.png"
 import img_charizza from "@/assets/images/teachers/charizza.png"
@@ -39,25 +65,49 @@ import img_aureeh from "@/assets/images/teachers/aureeh.png"
 export default {
 	name: "Teachers",
 	created: function() {
-		this.sets = [];
+		this.teachers_list = [...this.teachers];
+
 		const max = 3;
 		let i = 0;
 
-		while (i < this.teachers.length) {
-			const arr = this.teachers.splice(i, max);
-			this.sets.push(arr);
-		}
+		if (this.teachers.length % 2 == 0) {
+			while (i < this.teachers.length) {
+				const arr = this.teachers.splice(i, max);
+				this.sets.push(arr);
+			}
+		} else {
+			this.sets.push(this.teachers.splice(0, 1));
+			const first = this.sets[0]
+			// first.splice(0, 0, {empty: true, name: "", img: "", alt: "", text: ""});
+			first.splice(0, 0, {
+				center: true,
+				name: "Meet Our Teachers",
+				text: "",
+			});
+			// first.splice(max - 1, 0, {empty: true, name: "", img: "", alt: "", text: ""});
+			first.splice(1, 0, {
+				center: true,
+				name: "dasdsa",
+				text: "",
+			});
 
-		const last = this.sets[this.sets.length - 1];
-		if (last.length < max) {
-			last.splice(0, 0, {empty: true, name: "", img: "", alt: "", text: ""});
-			last.splice(max - 1, 0, {empty: true, name: "", img: "", alt: "", text: ""});
+			while (i < this.teachers.length) {
+				const arr = this.teachers.splice(i, max);
+				this.sets.push(arr);
+			}
 		}
 	},
 
 	data: function() {
 		return {
+			sets: [],
 			teachers: [
+				{
+					name: "Teacher Hazel",
+					img: img_hazel,
+					alt: "img_teacher_hazel",
+					text: "Good day everyone, Teacher Hazel here. I’m a TESOL certified ESL tutor for almost 3 years now catered for 4 different nationalities including Koreans. I can teach both Kids and adult professionals covering wide varieties of English lessons. I’m patient, passionate and I’ll make learning fun and exciting. Hope to see you in my class soon"
+				},
 				{
 					name: "Teacher Jedson",
 					img: img_jedson,
@@ -69,12 +119,6 @@ export default {
 					img: img_julie,
 					alt: "img_teacher_julie",
 					text: "Hello everyone! My name is teacher Julie. I've been teaching ESL/EFL for almost 13 years now. I can handle all student levels regardless of age, nationality and their level of understanding in the English language. We can make English classes very informative but at the same time fun. "
-				},
-				{
-					name: "Teacher Hazel",
-					img: img_hazel,
-					alt: "img_teacher_hazel",
-					text: "Good day everyone, Teacher Hazel here. I’m a TESOL certified ESL tutor for almost 3 years now catered for 4 different nationalities including Koreans. I can teach both Kids and adult professionals covering wide varieties of English lessons. I’m patient, passionate and I’ll make learning fun and exciting. Hope to see you in my class soon"
 				},
 				{
 					name: "Teacher Vivien",
@@ -107,29 +151,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/styles/variables.scss";
 $title-gap: 16px;
 
 .teachers {
 	.deck {
-		background-color: #ffffff;
 		padding: 32px;
+		background-color: white;
+
+		.img {
+			box-shadow: 0px 8px 16px black;
+			border-radius: 50%;
+		}
 
 		.card {
 			box-shadow: -8px 8px 16px grey;
-			background-color: #ffffff;
+			background-color: $burnt_amber;
+			/* background-color: #ffffff; */
+			/* background-image: url("../assets/images/header3-mobile.jpg"); */
 			padding: 16px;
 		}
 
-		.empty {
-			visibility: hidden;
+		.bg {
+			background-color: #00ff00;
 		}
 	}
 
 	.content {
 		padding: $title-gap;
+		height: 100%;
 
 		h1 {
+			color: white;
+			text-shadow: -4px 4px 8px black;
 			font-family: "PalanquinDark";
+			font-size: 1.25em;
 			text-align: center;
 		}
 	}
