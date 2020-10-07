@@ -17,10 +17,12 @@
 						<li>{{ item }}</li>
 					</ul>
 
-					<b-button class="btn" :href="button.href" variant="primary">
-						<b-icon-info-circle class="icon"></b-icon-info-circle>
-						{{ button.title }}
-					</b-button>
+					<div class="text-center">
+						<b-button :href="button.href" variant="primary">
+							<b-icon-info-circle class="icon"></b-icon-info-circle>
+							{{ button.title }}
+						</b-button>
+					</div>
 				</b-card-text>
 			</b-card-body>
 		</b-col>
@@ -75,10 +77,6 @@ $title-gap: 16px;
 		.list {
 			font-family: "Quicksand";
 			font-weight: 500;
-		}
-
-		.btn {
-			padding: 8px;
 		}
 
 		.icon {

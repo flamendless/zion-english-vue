@@ -4,27 +4,24 @@
 	:interval="3000"
 	indicators background="#ababab"
 >
-	<b-carousel-slide v-for="(item, i) in teachers" :key="i">
+	<b-carousel-slide v-for="(set, i) in sets" :key="i">
 		<template #img>
-			<b-card no-body>
-				<b-row no-gutter>
-					<b-col md="5" class="text-center">
-						<b-card-img :src="item.img" :alt="item.alt" class="img">
-						</b-card-img>
-					</b-col>
+			<b-card-group deck class="deck">
+				<b-card no-body class="card" v-for="(item, n) in set" :key="n"
+					:class="{empty: item.empty}">
+					<b-card-img :src="item.img" :alt="item.alt">
+					</b-card-img>
 
-					<b-col md="7" align-self="center">
-						<b-card-text class="content">
-							<h1>{{ item.name }}</h1>
-							<h5>
-								<font-awesome-icon icon="quote-left" />
-								{{ item.text }}
-								<font-awesome-icon icon="quote-right" />
-							</h5>
-						</b-card-text>
-					</b-col>
-				</b-row>
-			</b-card>
+					<b-card-text class="content">
+						<h1>{{ item.name }}</h1>
+						<!-- <h5> -->
+						<!-- 	<font&#45;awesome&#45;icon icon="quote&#45;left" /> -->
+						<!-- 	{{ item.text }} -->
+						<!-- 	<font&#45;awesome&#45;icon icon="quote&#45;right" /> -->
+						<!-- </h5> -->
+					</b-card-text>
+				</b-card>
+			</b-card-group>
 		</template>
 	</b-carousel-slide>
 </b-carousel>
@@ -41,6 +38,23 @@ import img_aureeh from "@/assets/images/teachers/aureeh.png"
 
 export default {
 	name: "Teachers",
+	created: function() {
+		this.sets = [];
+		const max = 3;
+		let i = 0;
+
+		while (i < this.teachers.length) {
+			const arr = this.teachers.splice(i, max);
+			this.sets.push(arr);
+		}
+
+		const last = this.sets[this.sets.length - 1];
+		if (last.length < max) {
+			last.splice(0, 0, {empty: true, name: "", img: "", alt: "", text: ""});
+			last.splice(max - 1, 0, {empty: true, name: "", img: "", alt: "", text: ""});
+		}
+	},
+
 	data: function() {
 		return {
 			teachers: [
@@ -96,29 +110,27 @@ export default {
 $title-gap: 16px;
 
 .teachers {
+	.deck {
+		background-color: #ffffff;
+		padding: 32px;
+
+		.card {
+			box-shadow: -8px 8px 16px grey;
+			background-color: #ffffff;
+			padding: 16px;
+		}
+
+		.empty {
+			visibility: hidden;
+		}
+	}
+
 	.content {
 		padding: $title-gap;
 
 		h1 {
 			font-family: "PalanquinDark";
 			text-align: center;
-		}
-
-		h5 {
-			font-family: "Quicksand";
-			text-align: center;
-			font-size: 1.25rem;
-			line-height: 1.64;
-			margin-top: 24px;
-		}
-	}
-}
-
-@media screen and (max-width: 432px) {
-	.teachers {
-		.img {
-			width: auto;
-			height: 267px;
 		}
 	}
 }
