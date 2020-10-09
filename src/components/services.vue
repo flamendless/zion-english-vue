@@ -60,6 +60,8 @@ export default {
 $title-gap: 16px;
 
 .services {
+	box-shadow: 0px 8px 8px grey;
+
 	.content {
 		padding: $title-gap;
 

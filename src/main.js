@@ -3,6 +3,7 @@ import VueAwesomeSwiper from "vue-awesome-swiper"
 import VModal from "vue-js-modal/dist/index.nocss.js"
 import VRipple from "v-ripple-directive"
 import VueGtag from "vue-gtag"
+import vmodal from "vue-js-modal"
 import Meta from "vue-meta"
 import {Swiper as SwiperClass, Pagination, Navigation,
 	Mousewheel, Autoplay, Parallax, EffectFade}
@@ -36,6 +37,7 @@ Vue.use(Toasted);
 Vue.use(VueAwesomeSwiper);
 Vue.use(VModal);
 Vue.use(VRipple);
+Vue.use(vmodal);
 Vue.use(VueGtag, {
 	config: {id: "UA-141260881-2"},
 });

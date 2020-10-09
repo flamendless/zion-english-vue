@@ -29,7 +29,9 @@
     "vue-media-queries": "^0.0.5",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.4.5",
-    "vue-toasted": "^1.1.28"
+    "vue-social-sharing": "^3.0.2",
+    "vue-toasted": "^1.1.28",
+    "vuescroll": "^4.16.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
