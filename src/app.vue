@@ -5,17 +5,21 @@
 	<div class="content">
 		<router-view/>
 	</div>
+
+	<Footer />
 </div>
 </template>
 
 <script>
 import Data from "@/data.js"
 import NavBar from "@/components/navbar.vue"
+import Footer from "@/components/footer.vue"
 
 export default {
 	name: "App",
 	components: {
 		NavBar,
+		Footer,
 	},
 	data: function() {
 		return {

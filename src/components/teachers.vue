@@ -1,5 +1,5 @@
 <template>
-<div id="teachers">
+<div>
 	<TeacherModal />
 	<div v-if="$resize && $mq.above(992)">
 		<b-carousel class="teachers" controls :interval="5000">

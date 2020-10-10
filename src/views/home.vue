@@ -3,8 +3,13 @@
 	<Header />
 
 	<div class="body">
-		<Services class="services"/>
-		<Teachers class="teachers"/>
+		<div id="services">
+			<Services class="services"/>
+		</div>
+
+		<div id="teachers">
+			<Teachers class="teachers"/>
+		</div>
 	</div>
 </div>
 </template>
@@ -32,6 +37,16 @@ export default {
 		margin-top: $body-gap;
 		margin-bottom: $body-gap;
 	}
+}
+
+.btn_btt {
+	width: 60px;
+	height: 60px;
+	padding: 10px 16px;
+	border-radius: 50%;
+	font-size: 22px;
+	line-height: 22px;
+	background-color: rgba(255, 255, 255, 0.75);
 }
 
 @media screen and (max-width: 992px) {

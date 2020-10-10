@@ -7,7 +7,7 @@
 				<div class="subtitle">{{ item.subtitle }}</div>
 				<div class="caption">{{ item.caption }}</div>
 
-				<b-button class="btn" :href="button.href" variant="dark">
+				<b-button class="btn" :href="button.href" variant="dark" v-ripple>
 					<b-icon-heart class="icon">
 					</b-icon-heart>
 					{{ button.title }}

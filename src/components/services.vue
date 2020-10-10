@@ -1,5 +1,5 @@
 <template>
-<b-card id="services" class="services" no-body v-animate.repeat="'slide-up'">
+<b-card class="services" no-body v-animate="'slide-up'">
 	<b-row no-gutters>
 		<b-col md="8">
 			<b-card-img src="@/assets/images/learn_with_us.png" alt="img_learn">
@@ -18,7 +18,7 @@
 					</ul>
 
 					<div class="text-center">
-						<b-button :href="button.href" variant="primary">
+						<b-button :href="button.href" variant="primary" v-ripple>
 							<b-icon-info-circle class="icon"></b-icon-info-circle>
 							{{ button.title }}
 						</b-button>

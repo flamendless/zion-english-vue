@@ -80,13 +80,6 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/styles/variables.scss";
 
-$navbar-dark-active-color: red;
-$navbar-light-active-color: red;
-$navbar-light-brand-color: red;
-$navbar-light-brand-hover-color: red;
-$navbar-dark-brand-color: red;
-$navbar-dark-brand-hover-color: red;
-
 .navbar {
 	background-color: $golden_brown;
 	box-shadow: 0px 8px 16px grey;
