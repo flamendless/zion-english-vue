@@ -1,9 +1,9 @@
 <template>
-<modal name="teacher_modal" transition="pop-out"
+<modal name="teacher_modal" v-animate="'slide-up'"
 	@before-open="before_open"
 	:focus-trap="true"
 	:adaptive="true"
-	:width="720"
+	:width="960"
 	:height="480">
 	<div class="box">
 		<div id="bp-left" class="box-part">
@@ -15,9 +15,9 @@
 
 					<div class="partition-text">
 						<h5>
-							<font-awesome-icon icon="quote-left" />
+							<font-awesome-icon icon="quote-left" class="icn_quote" />
 							{{ text }}
-							<font-awesome-icon icon="quote-right" />
+							<font-awesome-icon icon="quote-right" class="icn_quote" />
 						</h5>
 					</div>
 				</vuescroll>
@@ -62,12 +62,11 @@ $background_color: #404142;
 .box {
 	background: white;
 	overflow: hidden;
-	border-radius: 2px;
 	box-sizing: border-box;
 	box-shadow: 0 0 16px black;
 	color: #4b4c4d;
 	font-size: 0;
-	width: 720px;
+	width: 960px;
 	height: 480px;
 
 	.box-part {
@@ -79,6 +78,7 @@ $background_color: #404142;
 		width: 50%;
 
 		&#bp-right {
+			box-shadow: 0px 0px 8px grey;
 			background-repeat: no-repeat;
 			background-size: auto;
 			background-position: center;
@@ -91,8 +91,6 @@ $background_color: #404142;
 		height: 100%;
 
 		.partition-title {
-			box-shadow: 0 0 8px grey;
-			box-sizing: border-box;
 			padding: 24px;
 			width: 100%;
 
@@ -104,28 +102,21 @@ $background_color: #404142;
 		}
 
 		.partition-text {
-			box-shadow: 0 4px 8px grey;
-			box-sizing: border-box;
-			padding: 16px;
+			padding: 32px;
 			width: 100%;
 
 			h5 {
 				font-family: "Quicksand";
-				text-align: center;
+				text-align: justify;
 				font-size: 1.75vw;
 				font-weight: 300;
 			}
+
+			.icn_quote {
+				font-size: 12px;
+				margin-bottom: 12px;
+			}
 		}
 	}
-}
-
-.pop-out-enter-active,
-	.pop-out-leave-active {
-	transition: all 0.5s;
-}
-.pop-out-enter,
-.pop-out-leave-active {
-	opacity: 0;
-	transform: translateY(24px);
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-<b-card id="services" class="services" no-body>
+<b-card id="services" class="services" no-body v-animate.repeat="'slide-up'">
 	<b-row no-gutters>
 		<b-col md="8">
 			<b-card-img src="@/assets/images/learn_with_us.png" alt="img_learn">

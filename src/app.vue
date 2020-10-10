@@ -58,4 +58,19 @@ export default {
 	-moz-osx-font-smoothing: grayscale;
 	background-color: $khaki_web;
 }
+
+.animate {
+	transition-delay: .05s;
+	transition-duration: .25s;
+	transition-timing-function: ease-in;
+}
+
+.slide-up {
+	transform: translateY(256px);
+}
+
+.slide-up.animate-active {
+	transform: translateY(0);
+}
+
 </style>

@@ -1,4 +1,5 @@
 import Vue from "vue"
+import VueAnimate from "vue-animate-scroll"
 import VueAwesomeSwiper from "vue-awesome-swiper"
 import VModal from "vue-js-modal/dist/index.nocss.js"
 import VRipple from "v-ripple-directive"
@@ -34,6 +35,7 @@ Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(Toasted);
+Vue.use(VueAnimate);
 Vue.use(VueAwesomeSwiper);
 Vue.use(VModal);
 Vue.use(VRipple);

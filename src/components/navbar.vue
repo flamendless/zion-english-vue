@@ -1,6 +1,10 @@
 <template>
 <b-navbar toggleable="lg" type="dark" :sticky=true>
-	<b-navbar-brand :href="home" v-ripple>{{ site_name }}</b-navbar-brand>
+	<b-navbar-brand :href="home" v-ripple>
+		<b-img src="@/assets/images/brand.png" height="48">
+		</b-img>
+		<!-- {{ site_name }} -->
+	</b-navbar-brand>
 	<b-navbar-toggle target="nav-collapse">
 		<template v-slot:default="{ expanded }">
 			<b-icon v-if="expanded" icon="caret-up-fill"></b-icon>

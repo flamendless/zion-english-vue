@@ -2,9 +2,7 @@
 <div id="teachers">
 	<TeacherModal />
 	<div v-if="$resize && $mq.above(992)">
-		<b-carousel class="teachers"
-			controls :interval="3000"
-			indicators background="#ababab">
+		<b-carousel class="teachers" controls :interval="5000">
 			<b-carousel-slide v-for="(set, i) in sets" :key="i">
 				<template #img>
 					<b-card-group deck class="deck">
@@ -180,10 +178,9 @@ $title-gap: 16px;
 		}
 
 		.card {
+			border-radius: 16px;
 			box-shadow: -8px 8px 16px grey;
 			background-color: $burnt_amber;
-			/* background-color: #ffffff; */
-			/* background-image: url("../assets/images/header3-mobile.jpg"); */
 			padding: 16px;
 			cursor: pointer;
 		}

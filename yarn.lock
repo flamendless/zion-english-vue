@@ -8643,6 +8643,11 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
+vue-animate-scroll@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/vue-animate-scroll/-/vue-animate-scroll-0.1.5.tgz#28db28bacdbd6009fe56e07be3d4384770e7f1af"
+  integrity sha512-YF+sPM7po7XJ4vce7coPx0Ec57g5ryRA78yYsiMuhZLsfY7hRLU7t/CPvWzLvNKh6YLFumhH7XK/NWrugr0bfw==
+
 vue-awesome-swiper@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/vue-awesome-swiper/-/vue-awesome-swiper-4.1.1.tgz#8f7ab221ad003021d756b86aa618f429924900fe"
