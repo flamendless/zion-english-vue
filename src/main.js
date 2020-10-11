@@ -6,6 +6,7 @@ import VRipple from "v-ripple-directive"
 import VueGtag from "vue-gtag"
 import vmodal from "vue-js-modal"
 import VueSocialSharing from "vue-social-sharing"
+import vueScrollwatch from "vue-scrollwatch"
 import Meta from "vue-meta"
 import {Swiper as SwiperClass, Pagination, Navigation,
 	Mousewheel, Autoplay, Parallax, EffectFade} from "swiper/swiper.esm"
@@ -45,6 +46,7 @@ Vue.use(VModal);
 Vue.use(VRipple);
 Vue.use(vmodal);
 Vue.use(VueSocialSharing);
+Vue.use(vueScrollwatch);
 Vue.use(VueGtag, {
 	config: {id: "UA-141260881-2"},
 });

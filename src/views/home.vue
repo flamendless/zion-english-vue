@@ -1,13 +1,13 @@
 <template>
-<div id="home">
+<div id="home" v-scrollWatch="{name: 'home'}">
 	<Header />
 
 	<div class="body">
-		<div id="services">
+		<div id="services" v-scrollWatch="{name: 'services'}">
 			<Services class="services"/>
 		</div>
 
-		<div id="teachers">
+		<div id="teachers" v-scrollWatch="{name: 'teachers'}">
 			<Teachers class="teachers"/>
 		</div>
 	</div>

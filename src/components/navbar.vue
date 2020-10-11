@@ -17,7 +17,7 @@
 			<b-nav-item
 				v-ripple
 				v-for="(item, i) in items" :key="i"
-				:href="item.route"
+				@click="scroll_to(item.route)"
 				:title="item.title"
 				:active="get_route == item.route || get_route == item.route2">
 				<b-icon class="nav-icon" :icon="item.icon"></b-icon>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import scrollWatch from "vue-scrollwatch"
+
 export default {
 	name: "NavBar",
 	props: {
@@ -38,6 +40,14 @@ export default {
 	computed: {
 		get_route() {
 			return this.$route.path;
+		}
+	},
+
+	methods: {
+		scroll_to: function(name) {
+			const n = name.substring(1);
+			scrollWatch.scrollTo(n);
+			window.location.href = name;
 		}
 	},
 
