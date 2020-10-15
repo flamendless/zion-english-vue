@@ -1,6 +1,8 @@
 <template>
 <div>
-	<TeacherModal />
+	<TeacherModal v-if="$resize && $mq.above(720)" />
+	<TeacherModalMobile v-else />
+
 	<div v-if="$resize && $mq.above(992)">
 		<b-carousel class="teachers" controls :interval="5000">
 			<b-carousel-slide v-for="(set, i) in sets" :key="i">
@@ -9,13 +11,14 @@
 						<b-card no-body class="card"
 							v-for="(item, n) in set" :key="n"
 							:class="{bg: n < 2 && i == 0}"
-							@click="modal_show(item)">
+							@click="modal_show(item)"
+						>
 							<b-card-img v-if="item.img"
 								class="img" :src="item.img" :alt="item.alt">
 							</b-card-img>
 
 							<b-card-text class="content d-flex">
-								<h1 class="m-auto" v-if="item.center">
+								<h1 class="header-card m-auto" v-if="item.center">
 									{{ item.name }}
 								</h1>
 								<h1 class="m-auto" v-else>
@@ -32,12 +35,14 @@
 	<div v-else>
 		<!-- IMPLEMENT LABEL (JUMBOTRON?) -->
 		<b-carousel class="teachers"
-			controls :interval="3000"
+			:interval="3000"
 			indicators background="#ababab">
 			<b-carousel-slide v-for="(item, i) in teachers_list" :key="i">
 				<template #img>
 					<b-card-group deck class="deck">
-						<b-card no-body class="card">
+						<b-card no-body class="card"
+							@click="modal_show_mobile(item)"
+						>
 							<b-card-img v-if="item.img"
 								class="img" :src="item.img" :alt="item.alt">
 							</b-card-img>
@@ -59,15 +64,17 @@ import img_hazel from "@/assets/images/teachers/hazel.png"
 import img_jedson from "@/assets/images/teachers/jedson.png"
 import img_julie from "@/assets/images/teachers/julie.png"
 import img_vivien from "@/assets/images/teachers/vivien.png"
-import img_chris from "@/assets/images/teachers/chris.png"
+import img_chris from "@/assets/images/teachers/chris.jpg"
 import img_charizza from "@/assets/images/teachers/charizza.png"
 import img_aureeh from "@/assets/images/teachers/aureeh.png"
 import TeacherModal from "@/components/teacher_modal.vue"
+import TeacherModalMobile from "@/components/teacher_modal_mobile.vue"
 
 export default {
 	name: "Teachers",
 	components: {
 		TeacherModal,
+		TeacherModalMobile,
 	},
 	created: function() {
 		this.teachers_list = [...this.teachers];
@@ -86,13 +93,15 @@ export default {
 			// first.splice(0, 0, {empty: true, name: "", img: "", alt: "", text: ""});
 			first.splice(0, 0, {
 				center: true,
-				name: "Meet Our Teachers",
+				// name: "Meet Our Teachers",
+				name: this.header1,
 				text: "",
 			});
 			// first.splice(max - 1, 0, {empty: true, name: "", img: "", alt: "", text: ""});
 			first.splice(1, 0, {
 				center: true,
-				name: "dasdsa",
+				// name: "Our teachers are skilled English tutors with years of experience in online teaching and are carefully selected to ensure quality teaching",
+				name: this.header2,
 				text: "",
 			});
 
@@ -106,12 +115,17 @@ export default {
 	methods: {
 		modal_show: function(item) {
 			this.$modal.show("teacher_modal", item);
+		},
+		modal_show_mobile: function(item) {
+			this.$modal.show("teacher_modal_mobile", item);
 		}
 	},
 
 	data: function() {
 		return {
 			sets: [],
+			header1: "Meet Our Teachers",
+			header2: "Our teachers are skilled English tutors with years of experience in online teaching and are carefully selected to ensure quality teaching",
 			teachers: [
 				{
 					name: "Hazel",
@@ -178,15 +192,19 @@ $title-gap: 16px;
 		}
 
 		.card {
-			border-radius: 16px;
-			box-shadow: -8px 8px 16px grey;
-			background-color: $burnt_amber;
+			/* border-radius: 16px; */
+			/* box-shadow: -8px 8px 16px grey; */
+			/* background-color: $burnt_amber; */
+			border-color: transparent;
 			padding: 16px;
 			cursor: pointer;
 		}
 
 		.bg {
 			background-color: #00ff00;
+			border-radius: 16px;
+			/* border-radius: 50%; */
+			box-shadow: -8px 8px 16px grey;
 		}
 	}
 
@@ -194,11 +212,17 @@ $title-gap: 16px;
 		padding: $title-gap;
 		height: 100%;
 
-		h1 {
+		.header-card {
+			text-align: justify;
 			color: white;
-			text-shadow: -4px 4px 8px black;
+			text-shadow: -4px 4px 8px grey;
+		}
+
+		h1 {
+			color: $burnt_amber;
+			/* text-shadow: -4px 4px 8px grey; */
 			font-family: "PalanquinDark";
-			font-size: 1.25em;
+			font-size: 1.75em;
 			text-align: center;
 		}
 	}

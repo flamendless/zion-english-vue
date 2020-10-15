@@ -5,6 +5,7 @@
 	:adaptive="true"
 	:width="960"
 	:height="480">
+
 	<div class="box">
 		<div id="bp-left" class="box-part">
 			<div id="partition-info" class="partition">
