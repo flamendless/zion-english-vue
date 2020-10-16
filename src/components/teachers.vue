@@ -60,13 +60,13 @@
 </template>
 
 <script>
-import img_hazel from "@/assets/images/teachers/hazel.png"
-import img_jedson from "@/assets/images/teachers/jedson.png"
-import img_julie from "@/assets/images/teachers/julie.png"
-import img_vivien from "@/assets/images/teachers/vivien.png"
+import img_hazel from "@/assets/images/teachers/hazel.jpg"
+import img_jedson from "@/assets/images/teachers/jedson.jpg"
+import img_julie from "@/assets/images/teachers/julie.jpg"
+import img_vivien from "@/assets/images/teachers/vivien.jpg"
 import img_chris from "@/assets/images/teachers/chris.jpg"
-import img_charizza from "@/assets/images/teachers/charizza.png"
-import img_aureeh from "@/assets/images/teachers/aureeh.png"
+import img_charizza from "@/assets/images/teachers/charizza.jpg"
+import img_aureeh from "@/assets/images/teachers/aureeh.jpg"
 import TeacherModal from "@/components/teacher_modal.vue"
 import TeacherModalMobile from "@/components/teacher_modal_mobile.vue"
 
