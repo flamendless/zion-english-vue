@@ -65,7 +65,7 @@ export default {
 
 .animate {
 	transition-delay: .05s;
-	transition-duration: .25s;
+	transition-duration: .1s;
 	transition-timing-function: ease-in;
 }
 

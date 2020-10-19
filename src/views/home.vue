@@ -39,16 +39,6 @@ export default {
 	}
 }
 
-.btn_btt {
-	width: 60px;
-	height: 60px;
-	padding: 10px 16px;
-	border-radius: 50%;
-	font-size: 22px;
-	line-height: 22px;
-	background-color: rgba(255, 255, 255, 0.75);
-}
-
 @media screen and (max-width: 992px) {
 	.body {
 		.services, .teachers {

@@ -4,6 +4,11 @@
 	<TeacherModalMobile v-else />
 
 	<div v-if="$resize && $mq.above(992)">
+		<div class="label">
+			<h1>
+				<span>{{ header1 }}</span>
+			</h1>
+		</div>
 		<b-carousel class="teachers" controls :interval="5000">
 			<b-carousel-slide v-for="(set, i) in sets" :key="i">
 				<template #img>
@@ -18,7 +23,9 @@
 							</b-card-img>
 
 							<b-card-text class="content d-flex">
-								<h1 class="header-card m-auto" v-if="item.center">
+								<h1 class="header-card m-auto" v-if="item.center"
+									:class="{header1: n == 0}"
+								>
 									{{ item.name }}
 								</h1>
 								<h1 class="m-auto" v-else>
@@ -33,7 +40,12 @@
 	</div>
 
 	<div v-else>
-		<!-- IMPLEMENT LABEL (JUMBOTRON?) -->
+		<div class="label">
+			<h1>
+				<span>{{ header1 }}</span>
+			</h1>
+			<h4>{{ header2 }}</h4>
+		</div>
 		<b-carousel class="teachers"
 			:interval="3000"
 			indicators background="#ababab">
@@ -201,7 +213,7 @@ $title-gap: 16px;
 		}
 
 		.bg {
-			background-color: #00ff00;
+			background-color: $golden_brown;
 			border-radius: 16px;
 			/* border-radius: 50%; */
 			box-shadow: -8px 8px 16px grey;
@@ -215,7 +227,13 @@ $title-gap: 16px;
 		.header-card {
 			text-align: justify;
 			color: white;
-			text-shadow: -4px 4px 8px grey;
+			text-shadow: -4px 4px 8px black;
+		}
+
+		.header1 {
+			text-align: center;
+			color: white;
+			font-size: 6vw;
 		}
 
 		h1 {
@@ -224,6 +242,73 @@ $title-gap: 16px;
 			font-family: "PalanquinDark";
 			font-size: 1.75em;
 			text-align: center;
+		}
+	}
+
+	.label {
+		background-color: white;
+		text-align: center;
+		font-family: "Montserrat";
+		padding: 16px;
+
+		h1 {
+			font-size: 2.75rem;
+			border-bottom: 2px solid black;
+			line-height: 0.1em;
+			margin: 32px 30px 30px;
+		}
+
+		h1 span {
+			background: white;
+			padding: 0 10px;
+		}
+
+		h4 {
+			font-family: "Quicksand";
+			padding: 8px;
+			font-size: 1rem;
+		}
+	}
+}
+
+@media screen and (max-width: 720px) {
+	.teachers {
+		.deck {
+			padding: 16px;
+		}
+
+		.card {
+			padding: 8px;
+		}
+	}
+
+	.content {
+		padding: $title-gap/2;
+		height: 100%;
+	}
+
+	.label {
+		background-color: white;
+		text-align: center;
+		font-family: "Montserrat";
+		padding: 16px;
+
+		h1 {
+			font-size: 1.75rem;
+			border-bottom: 2px solid black;
+			line-height: 0.1em;
+			margin: 10px 0 30px;
+		}
+
+		h1 span {
+			background: white;
+			padding: 0 10px;
+		}
+
+		h4 {
+			font-family: "Quicksand";
+			padding: 8px;
+			font-size: 1rem;
 		}
 	}
 }

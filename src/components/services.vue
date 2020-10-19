@@ -9,8 +9,11 @@
 		<b-col md="4" align-self="center">
 			<b-card-body>
 				<b-card-text class="content">
-					<h1>{{ title }}</h1>
-					<hr>
+					<h1>
+						<span>
+							{{ title }}
+						</span>
+					</h1>
 					<h5>{{ subtitle }}</h5>
 					<ul class="list"
 						v-for="(item, i) in items" :key="i">
@@ -68,9 +71,19 @@ $title-gap: 16px;
 		h1 {
 			font-family: "PalanquinDark";
 			text-align: center;
+			border-bottom: 2px solid black;
+			line-height: 0.1em;
+			margin: 10px 0 30px;
+			font-size: 2rem;
+		}
+
+		h1 span {
+			background: white;
+			padding: 0 10px;
 		}
 
 		h5 {
+			font-size: 1.25rem;
 			font-family: "PalanquinDark";
 			text-align: center;
 			margin-bottom: 24px;

@@ -11,7 +11,7 @@
 		:twitterUser="sharing.twitterUser">
 
 	<div class="link">
-		<font-awesome-icon :icon="[item.pre, item.icon]" size="lg">
+		<font-awesome-icon :icon="[item.pre, item.icon]" size="sm">
 		</font-awesome-icon>
 	</div>
 
@@ -28,9 +28,9 @@ export default {
 				url: "https://zion-english.com",
 				title: "Zion English",
 				description: "Breaking The Barrier with Zion English",
-				quote: "Breaking The Barrier with Zion English",
-				hashtags: "english,zion-english,learn",
-				twitterUser: "flam8studio",
+				quote: "Learning English in the Best Way",
+				hashtags: "learn,english,zion-english",
+				twitterUser: "zion_english",
 			},
 			items: [
 				{network: "email", name: "E-Mail", icon: "envelope", color: "#333333", pre: "fas"},
@@ -47,12 +47,13 @@ export default {
 .social_media {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 	justify-content: space-around;
 
 	.network {
 		.link {
 			color: white;
-			font-size: 2em;
+			font-size: 2.5em;
 			cursor: pointer;
 		}
 	}

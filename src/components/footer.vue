@@ -3,7 +3,7 @@
 	<div class="info">
 		<h3>Zion English</h3>
 		<h5>Philippines</h5>
-		<h5> ©️  zion-english 2020-2021 </h5>
+		<h5>©️  zion-english 2020-2021</h5>
 	</div>
 
 	<div class="logo" v-if="$resize && $mq.above(640)">
@@ -13,7 +13,9 @@
 
 	<div class="social_media">
 		<h3>
-			Share Us
+			<span>
+				Share Us
+			</span>
 		</h3>
 		<SocialMedia />
 	</div>
@@ -25,7 +27,7 @@ import SocialMedia from "@/components/social_media.vue"
 
 export default {
 	name: "Footer",
-	components: { SocialMedia },
+	components: {SocialMedia},
 }
 </script>
 
@@ -69,6 +71,14 @@ export default {
 			font-weight: bold;
 			text-align: center;
 			color: white;
+			border-bottom: 2px solid white;
+			line-height: 0.1em;
+			margin: 10px 0 30px;
+		}
+
+		h3 span {
+			background: $golden_brown;
+			padding: 0 10px;
 		}
 	}
 }
