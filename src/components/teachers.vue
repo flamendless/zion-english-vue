@@ -260,7 +260,7 @@ $title-gap: 16px;
 
 		h1 span {
 			background: white;
-			padding: 0 10px;
+			padding: 0 32px;
 		}
 
 		h4 {
@@ -302,7 +302,7 @@ $title-gap: 16px;
 
 		h1 span {
 			background: white;
-			padding: 0 10px;
+			padding: 0 32px;
 		}
 
 		h4 {

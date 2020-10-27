@@ -21,7 +21,7 @@
 					</ul>
 
 					<div class="text-center">
-						<b-button :href="button.href" variant="primary" v-ripple>
+						<b-button :href="button.href" variant="primary" v-ripple disabled>
 							<b-icon-info-circle class="icon"></b-icon-info-circle>
 							{{ button.title }}
 						</b-button>

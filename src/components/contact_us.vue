@@ -1,0 +1,160 @@
+<template>
+<div class="contact_us" v-animate="'slide-up'">
+	<b-row>
+		<b-col>
+			<h1><span>Contact Us</span></h1>
+		</b-col>
+	</b-row>
+	<b-row>
+		<b-col>
+			<h3>Don't be shy, ask <em>Zion English!</em></h3>
+		</b-col>
+	</b-row>
+
+	<b-card-group deck class="deck">
+		<b-card class="card"
+			v-for="(item, i) in items" :key="i">
+
+			<b-card-title class="icon">
+				<font-awesome-icon
+					class="f-icon"
+					transform="down-2"
+					:icon="[item.pre, item.icon]" size="3x"
+					:mask="[item.pre, 'circle']">
+				</font-awesome-icon>
+			</b-card-title>
+
+			<b-card-title class="title">{{ item.title }}</b-card-title>
+
+			<b-button class="btn" variant="info" @click="on_click(item.id)">{{ item.btn }}</b-button>
+		</b-card>
+	</b-card-group>
+</div>
+</template>
+
+<script>
+import Toasts from "@/toasts.js"
+import Data from "@/data.js"
+
+export default {
+	name: "ContactUs",
+
+	methods: {
+		to_clipboard: function(text, fn) {
+			this.$copyText(text).then(fn)
+		},
+		on_click: function(id) {
+			const toast = this.$toasted;
+			toast.clear();
+
+			if (id == "email")
+			{
+				this.to_clipboard(Data.fb, function() {
+					Toasts.copy_email(toast);
+				});
+			}
+			else if (id == "text")
+			{
+				this.to_clipboard(Data.number, function() {
+					Toasts.copy_number(toast);
+				});
+			}
+			else if (id == "skype")
+			{
+				this.to_clipboard(Data.skype, function() {
+					Toasts.copy_skype(toast);
+				});
+			}
+			else if (id == "fb")
+				window.open(Data.fb, "_blank");
+		}
+	},
+
+	data: function() {
+		return {
+			items: [
+				{id: "email", title: "drop us a line", btn: "E-Mail", pre: "fas", icon: "envelope"},
+				{id: "text", title: "message us", btn: "Text", pre: "fas", icon: "mobile-alt"},
+				{id: "skype", title: "reach out to us", btn: "Skype", pre: "fab", icon: "skype"},
+				{id: "fb", title: "let us chat", btn: "Facebook", pre: "fab", icon: "facebook-square"},
+			]
+		}
+	}
+}
+</script>
+
+<style lang="scss" scoped>
+@import "@/assets/styles/variables.scss";
+
+.contact_us {
+	padding: 32px;
+	background-color: white;
+
+	h1 {
+		font-family: "PalanquinDark";
+		text-align: center;
+		border-bottom: 2px solid black;
+		line-height: 0.1em;
+		margin: 10px 0 30px;
+		font-size: 2rem;
+	}
+
+	h1 span {
+		background: white;
+		padding: 0 32px;
+	}
+
+	h3 {
+		font-family: "Quicksand";
+		text-align: center;
+		font-size: 1.5rem;
+	}
+
+	.deck {
+		margin-top: 72px;
+
+		.card {
+			border-radius: 8px;
+			box-shadow: 0 0 8px grey;
+			background-color: $khaki_web;
+			text-align: center;
+
+			.title {
+				font-family: "Quicksand";
+			}
+
+			.icon {
+				margin-top: -64px;
+				margin-bottom: 32px;
+
+				.f-icon {
+					color: $golden_brown;
+					border-radius: 32px;
+					background-color: $khaki_web;
+					width: 128px;
+				}
+			}
+
+			.btn {
+				background-color: $golden_brown;
+				border: 0;
+				color: white;
+				font-family: "PalanquinDark";
+				font-size: 1.25em;
+				margin-top: 32px;
+				padding: 8px 32px;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 720px) {
+.contact_us {
+	.deck {
+		.card {
+			margin-bottom: 64px;
+		}
+	}
+}
+}
+</style>

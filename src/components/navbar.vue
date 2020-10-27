@@ -57,7 +57,7 @@ export default {
 			items: [
 				{
 					route: "#home",
-					route2: "",
+					route2: "/",
 					title: "Home",
 					icon: "house-fill",
 				},

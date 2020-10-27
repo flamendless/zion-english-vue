@@ -81,7 +81,8 @@ export default {
 
 			button: {
 				title: "Affordable Price at $3.99/25 min",
-				href: "/get_started",
+				// href: "/get_started",
+				href: "#contact_us",
 			}
 		}
 	},

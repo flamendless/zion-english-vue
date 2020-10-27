@@ -7,6 +7,7 @@ import VueGtag from "vue-gtag"
 import vmodal from "vue-js-modal"
 import VueSocialSharing from "vue-social-sharing"
 import vueScrollwatch from "vue-scrollwatch"
+import VueClipboard from "vue-clipboard2"
 import Meta from "vue-meta"
 import {Swiper as SwiperClass, Pagination, Navigation,
 	Mousewheel, Autoplay, Parallax, EffectFade} from "swiper/swiper.esm"
@@ -18,8 +19,10 @@ import {BootstrapVue, IconsPlugin} from "bootstrap-vue"
 import {MediaQueries, CommonBands} from "vue-media-queries"
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome"
 import {library, dom} from "@fortawesome/fontawesome-svg-core"
-import {faQuoteLeft, faQuoteRight, faEnvelope} from "@fortawesome/free-solid-svg-icons"
-import {faFontAwesome, faFacebook, faTwitter, faSkype} from "@fortawesome/free-brands-svg-icons"
+import {faQuoteLeft, faQuoteRight, faEnvelope, faEnvelopeSquare, faMobileAlt}
+	from "@fortawesome/free-solid-svg-icons"
+import {faFontAwesome, faFacebook, faFacebookSquare, faTwitter, faSkype}
+	from "@fortawesome/free-brands-svg-icons"
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
 import "../node_modules/material-icons/iconfont/material-icons.css"
@@ -32,6 +35,9 @@ library.add(faFacebook);
 library.add(faTwitter);
 library.add(faSkype);
 library.add(faEnvelope);
+library.add(faEnvelopeSquare);
+library.add(faMobileAlt);
+library.add(faFacebookSquare);
 library.add(faQuoteLeft);
 library.add(faQuoteRight);
 dom.watch();
@@ -47,6 +53,9 @@ Vue.use(VRipple);
 Vue.use(vmodal);
 Vue.use(VueSocialSharing);
 Vue.use(vueScrollwatch);
+
+VueClipboard.config.autoSetContainer = true;
+Vue.use(VueClipboard);
 Vue.use(VueGtag, {
 	config: {id: "UA-141260881-2"},
 });

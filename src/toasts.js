@@ -3,7 +3,7 @@ function close(e, toast) {
 }
 
 function copy_email(toast) {
-	toast.show("EMail Copied!", {
+	toast.show("E-Mail copied to clipboard!", {
 		iconPack: "material",
 		icon: "email",
 		position: "top-right",
@@ -18,9 +18,26 @@ function copy_email(toast) {
 }
 
 function copy_skype(toast) {
-	toast.show("Skype ID Copied!", {
-		iconPack: "custom-class",
-		icon: "font-awesome",
+	toast.show("Skype ID copied to clipboard!", {
+		// iconPack: "custom-class",
+		iconPack: "material",
+		icon: "content_copy",
+		position: "top-right",
+		duration: "3000",
+		keepOnHover: true,
+		closeOnSwipe: true,
+		action: {
+			text: "x",
+			onClick: close,
+		}
+	});
+}
+
+function copy_number(toast) {
+	toast.show("Phone Number copied to clipboard!", {
+		// iconPack: "custom-class",
+		iconPack: "material",
+		icon: "content_copy",
 		position: "top-right",
 		duration: "3000",
 		keepOnHover: true,
@@ -35,4 +52,5 @@ function copy_skype(toast) {
 export default {
 	copy_email,
 	copy_skype,
+	copy_number,
 }
