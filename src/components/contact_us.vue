@@ -89,6 +89,7 @@ export default {
 .contact_us {
 	padding: 32px;
 	background-color: white;
+	box-shadow: 0px 8px 8px grey;
 
 	h1 {
 		font-family: "PalanquinDark";

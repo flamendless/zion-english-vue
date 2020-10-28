@@ -7,8 +7,7 @@
 		:title="sharing.title"
 		:description="sharing.description"
 		:quote="sharing.quote"
-		:hashtags="sharing.hashtags"
-		:twitterUser="sharing.twitterUser">
+		:hashtags="sharing.hashtags">
 
 	<div class="link">
 		<font-awesome-icon :icon="[item.pre, item.icon]" size="sm">
@@ -30,13 +29,12 @@ export default {
 				description: "Breaking The Barrier with Zion English",
 				quote: "Learning English in the Best Way",
 				hashtags: "learn,english,zion-english",
-				twitterUser: "zion_english",
 			},
 			items: [
 				{network: "email", name: "E-Mail", icon: "envelope", color: "#333333", pre: "fas"},
 				{network: "facebook", name: "Facebook", icon: "facebook", color: "#1877f2", pre: "fab"},
 				{network: "skype", name: "Skype", icon: "skype", color: "#00aff0", pre: "fab"},
-				{network: "twitter", name: "Twitter", icon: "twitter", color: "#1da1f2", pre: "fab"},
+				{network: "sms", name: "SMS", icon: "sms", color: "#00aff0", pre: "fas"},
 			]
 		}
 	}

@@ -14,6 +14,10 @@
 		<div id="contact_us" v-scrollWatch="{name: 'contact_us'}">
 			<ContactUs class="contact_us"/>
 		</div>
+
+		<div id="testimonials" v-scrollWatch="{name: 'testimonials'}">
+			<Testimonials class="testimonials"/>
+		</div>
 	</div>
 </div>
 </template>
@@ -23,6 +27,7 @@ import Header from "@/components/header.vue"
 import Services from "@/components/services.vue"
 import Teachers from "@/components/teachers.vue"
 import ContactUs from "@/components/contact_us.vue"
+import Testimonials from "@/components/testimonials.vue"
 
 export default {
 	name: "Home",
@@ -31,6 +36,7 @@ export default {
 		Services,
 		Teachers,
 		ContactUs,
+		Testimonials
 	},
 }
 </script>
@@ -39,7 +45,7 @@ export default {
 @import "@/assets/styles/variables.scss";
 
 .body {
-	.services, .teachers {
+	.services, .teachers, .contact_us, .testimonials {
 		margin-top: $body-gap;
 		margin-bottom: $body-gap;
 	}
@@ -47,7 +53,7 @@ export default {
 
 @media screen and (max-width: 992px) {
 	.body {
-		.services, .teachers, .contact_us {
+		.services, .teachers, .contact_us, .testimonials {
 			margin-top: $body-gap-sm;
 			margin-bottom: $body-gap-sm;
 		}

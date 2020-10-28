@@ -248,11 +248,11 @@ $title-gap: 16px;
 	.label {
 		background-color: white;
 		text-align: center;
-		font-family: "Montserrat";
+		font-family: "PalanquinDark";
 		padding: 16px;
 
 		h1 {
-			font-size: 2.75rem;
+			font-size: 2rem;
 			border-bottom: 2px solid black;
 			line-height: 0.1em;
 			margin: 32px 30px 30px;
