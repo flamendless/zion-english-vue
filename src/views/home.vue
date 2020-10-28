@@ -11,12 +11,12 @@
 			<Teachers class="teachers"/>
 		</div>
 
-		<div id="contact_us" v-scrollWatch="{name: 'contact_us'}">
-			<ContactUs class="contact_us"/>
-		</div>
-
 		<div id="testimonials" v-scrollWatch="{name: 'testimonials'}">
 			<Testimonials class="testimonials"/>
+		</div>
+
+		<div id="contact_us" v-scrollWatch="{name: 'contact_us'}">
+			<ContactUs class="contact_us"/>
 		</div>
 	</div>
 </div>
@@ -26,8 +26,8 @@
 import Header from "@/components/header.vue"
 import Services from "@/components/services.vue"
 import Teachers from "@/components/teachers.vue"
-import ContactUs from "@/components/contact_us.vue"
 import Testimonials from "@/components/testimonials.vue"
+import ContactUs from "@/components/contact_us.vue"
 
 export default {
 	name: "Home",
@@ -35,8 +35,8 @@ export default {
 		Header,
 		Services,
 		Teachers,
+		Testimonials,
 		ContactUs,
-		Testimonials
 	},
 }
 </script>

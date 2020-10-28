@@ -2,6 +2,6 @@ export default {
 	site_name: "Zion English",
 	skype_id: "hazeltam1975",
 	email: "zion.english.learn@gmail.com",
-	fb: "facebook.com/zion.english.learn",
+	fb: "https://facebook.com/zion.english.learn",
 	number: "+639321336162",
 }

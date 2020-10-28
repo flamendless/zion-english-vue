@@ -72,9 +72,9 @@ export default {
 					icon: "people-fill",
 				},
 				{
-					route: "#about",
-					title: "About",
-					icon: "info-circle-fill",
+					route: "#testimonials",
+					title: "Testimonials",
+					icon: "star-fill",
 				},
 				{
 					route: "#contacts",
