@@ -77,7 +77,7 @@ export default {
 					icon: "star-fill",
 				},
 				{
-					route: "#contacts",
+					route: "#contact_us",
 					title: "Contacts",
 					icon: "telephone-fill",
 				},

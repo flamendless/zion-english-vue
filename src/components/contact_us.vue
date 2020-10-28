@@ -61,7 +61,7 @@ export default {
 			}
 			else if (id == "skype")
 			{
-				this.to_clipboard(Data.skype, function() {
+				this.to_clipboard(Data.skype_id, function() {
 					Toasts.copy_skype(toast);
 				});
 			}
