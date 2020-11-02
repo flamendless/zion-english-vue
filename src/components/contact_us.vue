@@ -52,15 +52,21 @@ export default {
 				this.to_clipboard(Data.fb, function() {
 					Toasts.copy_email(toast);
 				});
+				const href = "mailto:" + Data.email;
+				window.open(href, "_blank");
 			}
 			else if (id == "text")
 			{
 				this.to_clipboard(Data.number, function() {
 					Toasts.copy_number(toast);
 				});
+				const href = "https://wa.me/639321336162?text=I'm%20interested%20in%20Zion%20English";
+				window.open(href, "_blank");
 			}
 			else if (id == "skype")
 			{
+				const href = `skype:${Data.skype_id}?call`;
+				window.open(href, "_blank");
 				this.to_clipboard(Data.skype_id, function() {
 					Toasts.copy_skype(toast);
 				});

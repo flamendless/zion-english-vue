@@ -34,7 +34,7 @@ export default {
 				{network: "email", name: "E-Mail", icon: "envelope", color: "#333333", pre: "fas"},
 				{network: "facebook", name: "Facebook", icon: "facebook", color: "#1877f2", pre: "fab"},
 				{network: "skype", name: "Skype", icon: "skype", color: "#00aff0", pre: "fab"},
-				{network: "sms", name: "SMS", icon: "sms", color: "#00aff0", pre: "fas"},
+				{network: "whatsapp", name: "Whatsapp", icon: "whatsapp", color: "#25d366", pre: "fab"},
 			]
 		}
 	}

@@ -1,6 +1,6 @@
 module.exports = {
     // publicPath: process.env.NODE_ENV === 'production' ? '/zion-english-vue/' : '/',
-    publicPath: process.env.NODE_ENV === 'production' ? '/' : '/zion-english-vue',
+    // publicPath: process.env.NODE_ENV === 'production' ? '/' : '/zion-english-vue',
     chainWebpack: config => {
     	config.module.rule("vue").use("vue-loader").loader("vue-loader")
 			.tap(options => {
