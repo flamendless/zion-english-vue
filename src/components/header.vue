@@ -86,10 +86,6 @@ export default {
 			}
 		}
 	},
-
-	meta_info: {
-		title: "Learn English With Us",
-	},
 }
 </script>
 
