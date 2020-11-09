@@ -61,7 +61,7 @@ export default {
 				speed: 600,
 				effect: "fade",
 				autoplay: {
-					delay: 2500,
+					delay: 3000,
 					disableOnInteraction: false,
 				},
 				pagination: {
