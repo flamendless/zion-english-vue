@@ -1,0 +1,68 @@
+{
+  "name": "zion-english",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "deploy": "sh deploy.sh"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-brands-svg-icons": "^5.14.0",
+    "@fortawesome/free-regular-svg-icons": "^5.14.0",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/vue-fontawesome": "2",
+    "bootstrap": "^4.5.2",
+    "bootstrap-vue": "^2.17.3",
+    "core-js": "^3.6.5",
+    "material-icons": "^0.3.1",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^10.0.2",
+    "swiper": "^6.3.2",
+    "v-ripple-directive": "^0.2.0",
+    "vue": "^2.6.12",
+    "vue-animate-scroll": "^0.1.5",
+    "vue-awesome-swiper": "^4.1.1",
+    "vue-clipboard2": "^0.3.1",
+    "vue-gtag": "^1.9.1",
+    "vue-js-modal": "^2.0.0-rc.6",
+    "vue-media-queries": "^0.0.5",
+    "vue-meta": "^2.4.0",
+    "vue-router": "^3.4.5",
+    "vue-scrollwatch": "^1.0.2",
+    "vue-social-sharing": "^3.0.2",
+    "vue-toasted": "^1.1.28",
+    "vuescroll": "^4.16.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
