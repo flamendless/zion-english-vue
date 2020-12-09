@@ -49,10 +49,10 @@ app.post("/register_teacher", (req, res) => {
 	const args = req.body;
 	const pw_hash = bcrypt.hashSync(args.password, SALT_ROUNDS);
 
-	const q_account = `INSERT INTO tbl_account(email, pw_hash) VALUES(?, ?)`;
+	const q_account = `INSERT INTO tbl_account(email, pw_hash, type) VALUES(?, ?, ?)`;
 	const q_teacher = `INSERT INTO tbl_teacher(fname, mname, lname, birthdate) VALUES(?, ?, ?, ?)`;
 
-	DB.query(q_account, [args.email, pw_hash])
+	DB.query(q_account, [args.email, pw_hash, type])
 	.then(data => {
 		if (data.success) {
 			DB.query(q_teacher, [args.fname, args.mname, args.lname, args.birthdate])
@@ -70,7 +70,7 @@ app.post("/register_teacher", (req, res) => {
 
 app.post("/sign_in", (req, res) => {
 	const args = req.body;
-	const query = `SELECT email, pw_hash FROM tbl_account WHERE email = ?`;
+	const query = `SELECT email, pw_hash, type FROM tbl_account WHERE email = ?`;
 
 	DB.query(query, [args.email])
 	.then(data => {
