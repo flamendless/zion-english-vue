@@ -3,7 +3,6 @@
 	<b-navbar-brand :href="home" v-ripple>
 		<b-img src="@/assets/images/brand.png" height="48">
 		</b-img>
-		<!-- {{ site_name }} -->
 	</b-navbar-brand>
 	<b-navbar-toggle target="nav-collapse">
 		<template v-slot:default="{ expanded }">

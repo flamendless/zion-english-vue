@@ -1,12 +1,13 @@
 <template>
 <div id="app">
-	<NavBar :site_name="site_name" />
+	<NavBar :site_name="site_name" v-if="!in_backend" />
+	<NavBarDashboard v-else />
 
 	<div class="content">
 		<router-view/>
 	</div>
 
-	<Footer />
+	<Footer v-if="!in_backend" />
 </div>
 </template>
 
@@ -15,14 +16,28 @@ import Data from "@/data.js"
 import NavBar from "@/components/navbar.vue"
 import Footer from "@/components/footer.vue"
 
+import NavBarDashboard from "@/components/navbar_backend.vue"
+
 export default {
 	name: "App",
 	components: {
 		NavBar,
 		Footer,
+		NavBarDashboard,
 	},
+
+	mount: function() {
+		const name = this.$route.name;
+
+		if (name == "Root" || name == "Home")
+			this.in_backend = false;
+		else
+			this.in_backend = true;
+	},
+
 	data: function() {
 		return {
+			in_backend: false,
 			site_name: Data.site_name,
 		}
 	},
