@@ -20,11 +20,11 @@ const routes = [
 		name: "Backend",
 		component: () => import("../views/backend.vue")
 	},
-	{
-		path: "/dashboard",
-		name: "Dashboard",
-		component: () => import("../views/dashboard.vue")
-	},
+	// {
+	// 	path: "/dashboard",
+	// 	name: "Dashboard",
+	// 	component: () => import("../views/dashboard.vue")
+	// },
 	{
 		path: "/sign_in",
 		name: "SignIn",

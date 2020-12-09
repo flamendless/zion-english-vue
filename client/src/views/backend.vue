@@ -38,7 +38,7 @@ export default {
 		return {
 			signed_in: false,
 			href_sign_in: "/sign_in",
-			href_sign_up: "/registration",
+			href_sign_up: "/sign_up",
 		}
 	},
 }
@@ -47,9 +47,12 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/styles/variables.scss";
 
-.backend
-{
+.backend {
 	padding: 32px;
 }
 
+.btn {
+	margin-left: 32px;
+	margin-right: 32px;
+}
 </style>

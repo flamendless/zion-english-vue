@@ -62,6 +62,21 @@ Vue.use(mq);
 SwiperClass.use([Pagination, Mousewheel, Navigation, Autoplay, Parallax, EffectFade]);
 Vue.use(getAwesomeSwiper(SwiperClass));
 
+import {
+  ValidationObserver,
+  ValidationProvider,
+  extend,
+} from "vee-validate";
+import * as rules from "vee-validate/dist/rules"
+import "@/vee_validate.js"
+
+Object.keys(rules).forEach(rule => {
+	extend(rule, rules[rule]);
+});
+
+Vue.component("ValidationObserver", ValidationObserver);
+Vue.component("ValidationProvider", ValidationProvider);
+
 Vue.config.productionTip = false;
 
 new Vue({

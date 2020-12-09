@@ -1,5 +1,5 @@
 <template>
-<div id="app">
+<div :id="app">
 	<NavBar :site_name="site_name" v-if="!in_backend" />
 	<NavBarDashboard v-else />
 
@@ -26,17 +26,24 @@ export default {
 		NavBarDashboard,
 	},
 
-	mount: function() {
+	mounted: function() {
 		const name = this.$route.name;
 
 		if (name == "Root" || name == "Home")
+		{
 			this.in_backend = false;
+			this.id = "app";
+		}
 		else
+		{
 			this.in_backend = true;
+			this.id = "backend";
+		}
 	},
 
 	data: function() {
 		return {
+			id: "app",
 			in_backend: false,
 			site_name: Data.site_name,
 		}
@@ -78,6 +85,13 @@ export default {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	background-color: $khaki_web;
+}
+
+#app {
+	font-family: Avenir, Helvetica, Arial, sans-serif,
+		Montserrat, Quicksand, PalanquinDark;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .animate {
