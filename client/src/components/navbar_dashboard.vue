@@ -40,7 +40,7 @@
 
 <script>
 export default {
-	name: "NavBar",
+	name: "NavBarDashboard",
 	props: {
 		website_name: String,
 	},
@@ -74,7 +74,7 @@ export default {
 			if (window.confirm("Are you sure you want to sign out?"))
 			{
 				sessionStorage.clear();
-				window.location.href = "/backend";
+				window.location.href = "/join_us";
 			}
 		},
 	},
@@ -87,14 +87,14 @@ export default {
 
 	data: function() {
 		return {
-			home: "/backend",
+			home: "/join_us",
 			href_sign_in: "/sign_in",
 			href_sign_up: "/sign_up",
 			signed_in: false,
 			items: [
 				{
 					route: "#home",
-					route2: "/backend",
+					route2: "/join_us",
 					title: "Dashboard",
 				},
 			],

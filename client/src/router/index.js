@@ -16,9 +16,9 @@ const routes = [
 		component: Home
 	},
 	{
-		path: "/backend",
-		name: "Backend",
-		component: () => import("../views/backend.vue")
+		path: "/join_us",
+		name: "JoinUs",
+		component: () => import("../views/join_us.vue")
 	},
 	// {
 	// 	path: "/dashboard",

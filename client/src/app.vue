@@ -1,5 +1,5 @@
 <template>
-<div :id="app">
+<div :id="id">
 	<NavBar :site_name="site_name" v-if="!in_backend" />
 	<NavBarDashboard v-else />
 
@@ -16,7 +16,7 @@ import Data from "@/data.js"
 import NavBar from "@/components/navbar.vue"
 import Footer from "@/components/footer.vue"
 
-import NavBarDashboard from "@/components/navbar_backend.vue"
+import NavBarDashboard from "@/components/navbar_dashboard.vue"
 
 export default {
 	name: "App",

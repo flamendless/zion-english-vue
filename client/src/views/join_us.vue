@@ -1,9 +1,10 @@
 <template>
-<div class="backend">
+<div class="join_us">
 	<div class="body" v-if="signed_in == false">
 		<b-jumbotron
-			header="Welcome, Teacher"
-			lead="Zion English Dashboard"
+			header="Zion English Dashboard"
+			lead="Welcome, Teacher"
+			lead-tag="h1"
 			class="text-center">
 
 			<hr class="my-4">
@@ -22,7 +23,7 @@
 
 <script>
 export default {
-	name: "Backend",
+	name: "JoinUs",
 
 	mounted: function() {
 		if (sessionStorage["signed_in"])
@@ -47,7 +48,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/styles/variables.scss";
 
-.backend {
+.join_us {
 	padding: 32px;
 }
 

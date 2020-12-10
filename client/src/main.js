@@ -3,7 +3,6 @@ import VueAnimate from "vue-animate-scroll"
 import VueAwesomeSwiper from "vue-awesome-swiper"
 import VModal from "vue-js-modal/dist/index.nocss.js"
 import VRipple from "v-ripple-directive"
-import VueGtag from "vue-gtag"
 import vmodal from "vue-js-modal"
 import VueSocialSharing from "vue-social-sharing"
 import vueScrollwatch from "vue-scrollwatch"
@@ -48,9 +47,6 @@ Vue.use(vueScrollwatch);
 
 VueClipboard.config.autoSetContainer = true;
 Vue.use(VueClipboard);
-Vue.use(VueGtag, {
-	config: {id: "UA-141260881-2"},
-});
 Vue.use(Meta, {
 	keyName: "meta_info",
 	refreshOnceOnNavigation: true,
