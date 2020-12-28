@@ -12,7 +12,10 @@
 	</div>
 
 	<ValidationObserver ref="observer" v-slot="{handleSubmit}">
-		<b-form @submit.prevent="handleSubmit(on_submit)">
+		<b-form
+			@submit.prevent="handleSubmit(on_submit)"
+			enctype="multipart/form-data"
+		>
 			<ValidationProvider
 				name="email"
 				rules="required|email"
@@ -146,6 +149,7 @@
 							label="Birthdate:"
 							label-for="lbl_birthdate">
 							<b-form-datepicker
+								show-decade-nav
 								no-flip
 								:max="get_current_date"
 								v-model="form.birthdate"
@@ -158,6 +162,27 @@
 					</ValidationProvider>
 				</b-col>
 			</b-row>
+
+			<b-img
+				fluid
+				v-if="form.image"
+				:src="get_img_url(form.image)"
+				width="256px"
+				center
+
+			>
+			</b-img>
+
+			<b-form-file
+				name="img_teacher"
+				required
+				placeholder="Choose image"
+				v-model="form.image"
+				accept="image/*"
+				no-drop
+				style="margin-top: 32px; margin-bottom: 32px;"
+			>
+			</b-form-file>
 
 			<b-row>
 				<b-col class="text-center">
@@ -189,6 +214,9 @@ export default {
 	},
 
 	methods: {
+		get_img_url: function(img) {
+			return URL.createObjectURL(img);
+		},
 		on_submit: async function() {
 			const valid_email = await Axios.get("/validate_email/" + this.form.email);
 
@@ -203,6 +231,18 @@ export default {
 			{
 				this.loading = false;
 				const form = this.form;
+
+				const fd = new FormData();
+				fd.append("img_teacher", form.image);
+
+				const r_pic = await Axios({
+					method: "post",
+					url: "/upload_image_teacher",
+					data: fd,
+					headers: {"Content-Type": "multipart/form-data"}
+				});
+
+				const picture_id = r_pic.data.results.insertId;
 				const r_sign_up = await Axios.post("/register_teacher", {
 					email: form.email,
 					password: form.password,
@@ -210,10 +250,14 @@ export default {
 					mname: form.mname,
 					lname: form.lname,
 					birthdate: form.birthdate,
+					picture_id: picture_id,
 					type: "teacher",
 				});
 
-				if (r_sign_up.data.success) window.location.href = "/sign_in";
+				if (r_sign_up.data.success)
+					this.$router.push({
+						name: "SignIn"
+					});
 				else throw new Error("Failed sign up");
 			}
 		},
@@ -241,6 +285,7 @@ export default {
 				mname: "",
 				lname: "",
 				birthdate: "",
+				image: null,
 			},
 		}
 	}

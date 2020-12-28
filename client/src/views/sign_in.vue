@@ -95,16 +95,20 @@ export default {
 				password: this.form.password,
 			}).then(res => {
 				const data = res.data;
-				if (data.success && data.email)
+				if (data.success)
 				{
 					this.loading = false;
-
 					sessionStorage["email"] = data.email;
-
-					if (res.is_admin)
-						sessionStorage["is_admin"] = true;
-
 					sessionStorage["signed_in"] = true;
+
+					const res = data.results[0];
+
+					if (res.type == "admin") {
+						sessionStorage["is_admin"] = true;
+					} else if (res.type == "teacher") {
+						sessionStorage["is_teacher"] = true;
+					}
+
 					this.$router.push({
 						name: "Dashboard",
 						info: res,

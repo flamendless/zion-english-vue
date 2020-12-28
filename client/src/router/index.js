@@ -20,11 +20,11 @@ const routes = [
 		name: "JoinUs",
 		component: () => import("../views/join_us.vue")
 	},
-	// {
-	// 	path: "/dashboard",
-	// 	name: "Dashboard",
-	// 	component: () => import("../views/dashboard.vue")
-	// },
+	{
+		path: "/dashboard",
+		name: "Dashboard",
+		component: () => import("../views/dashboard.vue")
+	},
 	{
 		path: "/sign_in",
 		name: "SignIn",
@@ -34,6 +34,11 @@ const routes = [
 		path: "/sign_up",
 		name: "SignUp",
 		component: () => import("../views/sign_up.vue")
+	},
+	{
+		path: "/teacher_info",
+		name: "TeacherInfo",
+		component: () => import("../views/teacher_info.vue")
 	},
 ]
 

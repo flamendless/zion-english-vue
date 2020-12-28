@@ -17,9 +17,10 @@
 				{{item.title}}
 			</b-nav-item>
 
-			<b-nav-item to="/transaction" v-if="signed_in">
-				New Transaction
-			</b-nav-item>
+			<b-nav-item-dropdown right v-if="signed_in && is_admin">
+				<template #button-content>Lesson</template>
+				<b-dropdown-item :to="/add_lesson">Add Lesson</b-dropdown-item>
+			</b-nav-item-dropdown>
 
 			<b-nav-item-dropdown right>
 				<template #button-content>Account</template>
@@ -66,8 +67,10 @@ export default {
 	methods: {
 		check_signed_in: function() {
 			const email = sessionStorage["email"];
+			const is_admin = sessionStorage["is_admin"];
 
 			if (email) this.signed_in = true;
+			if (is_admin) this.is_admin = true;
 		},
 
 		on_sign_out: function() {
@@ -91,6 +94,7 @@ export default {
 			href_sign_in: "/sign_in",
 			href_sign_up: "/sign_up",
 			signed_in: false,
+			is_admin: false,
 			items: [
 				{
 					route: "#home",
