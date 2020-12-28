@@ -38,7 +38,24 @@ app.post("/upload_image_teacher", upload.single("img_teacher"), function(req, re
 	const query = `INSERT INTO tbl_picture(name) VALUES(?)`;
 
 	DB.query(query, [file.filename]).then(data => {
-		data.path = file.path;
+		if (data.success)
+			res.json(data);
+		else
+			res.json({success: false});
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.post("/update_image_teacher", upload.single("img_teacher"), function(req, res) {
+	const file = req.file;
+	const body = req.body;
+	const query = `UPDATE tbl_picture SET
+		name = ?
+		WHERE picture_id = ${body.picture_id}`;
+
+	DB.query(query, [file.filename]).then(data => {
 		if (data.success)
 			res.json(data);
 		else
@@ -71,6 +88,18 @@ app.get("/validate_email/:email", (req, res) => {
 	const query = `SELECT account_id FROM tbl_account WHERE email = ?`
 
 	DB.query(query, params).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.get("/get_teacher_id/:account_id", (req, res) => {
+	const args = req.params;
+	const query = `SELECT teacher_id FROM tbl_teacher WHERE account_id = ${args.account_id}`;
+
+	DB.query(query).then(data => {
 		res.json(data);
 	}).catch(err => res.json({
 		success: false,
@@ -119,13 +148,23 @@ app.get("/get_teacher_info/:teacher_id", (req, res) => {
 	}));
 });
 
-app.post("/delete_account", (req, res) => {
+app.post("/delete_teacher_account", (req, res) => {
 	const args = req.body;
-	const query = `DELETE FROM tbl_account WHERE account_id = ?`;
+	const q_account = `DELETE FROM tbl_account WHERE account_id = ${args.account_id}`;
+	const q_teacher = `DELETE FROM tbl_teacher WHERE teacher_id = ${args.teacher_id}`;
 
-	DB.query(query, [args.account_id]).then(data => {
-		if (data.success)
-			res.json(data);
+	DB.query(q_account).then(data => {
+		if (data.success) {
+			DB.query(q_teacher).then(data => {
+				if (data.success)
+					res.json(data);
+				else
+					res.json({success: false});
+			}).catch(err => res.json({
+				success: false,
+				err: err,
+			}));
+		}
 		else
 			res.json({success: false});
 	}).catch(err => res.json({
@@ -179,6 +218,22 @@ app.post("/sign_in", (req, res) => {
 				success: match,
 			});
 		} else res.json({success: false});
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+
+app.post("/update_teacher_info", (req, res) => {
+	const args = req.body;
+	const query = `UPDATE tbl_teacher SET
+		fname = ?, mname = ?, lname = ?, birthdate = ?
+		WHERE teacher_id = ${args.teacher_id}`;
+	const params = [args.fname, args.mname, args.lname, args.birthdate];
+
+	DB.query(query, params).then(data => {
+		res.json(data);
 	}).catch(err => res.json({
 		success: false,
 		err: err,

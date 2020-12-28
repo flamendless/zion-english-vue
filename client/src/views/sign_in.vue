@@ -107,6 +107,7 @@ export default {
 						sessionStorage["is_admin"] = true;
 					} else if (res.type == "teacher") {
 						sessionStorage["is_teacher"] = true;
+						sessionStorage["account_id"] = res.account_id;
 					}
 
 					this.$router.push({

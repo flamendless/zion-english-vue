@@ -25,13 +25,6 @@
 				</b-dropdown-form>
 			</b-dropdown>
 		</b-form-group>
-
-		<b-button-group>
-			<b-button :variant="var_delete" :disabled="is_disabled()"
-				@click="on_delete">
-				Delete
-			</b-button>
-		</b-button-group>
 	</b-button-toolbar>
 
 	<b-table
@@ -102,40 +95,11 @@ export default {
 			if (this.selected_item == null) return true;
 			return false;
 		},
-		on_delete: function() {
-			if (window.confirm("Are you sure you want to delete this data?"))
-			{
-				Axios.post("/delete_account", {teacher_id: this.selected_item.account_id})
-				.then(res => {
-					const data = res.data;
-					if (data.success) {
-						const i = this.selected_index;
-						this.items = this.items.slice(0, i)
-							.concat(this.items.slice(i + 1, this.items.length));
-
-						this.selected_item = null;
-						this.selected_index = null;
-					} else throw new Error("error in deleting data");
-				}).catch(err => {
-					alert(err);
-				});
-			}
-		}
 	},
 
 	computed: {
 		visible_fields: function() {
 			return this.fields.filter(field => field.visible);
-		}
-	},
-
-	watch: {
-		selected_item: function() {
-			if (this.selected_item) {
-				this.var_delete = "danger";
-			} else {
-				this.var_delete = null;
-			}
 		}
 	},
 
@@ -146,7 +110,6 @@ export default {
 			selected_index: null,
 			search: "",
 			filter: null,
-			var_delete: null,
 			fields: [
 				{key: "email", sortable: true, visible: true, label: "E-Mail"},
 				{key: "lname", sortable: true, visible: true, label: "Last Name"},

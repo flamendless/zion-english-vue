@@ -1,6 +1,6 @@
 <template>
 <b-navbar toggleable="lg" type="dark" variant="info" :sticky=true>
-	<b-navbar-brand :href="home">
+	<b-navbar-brand :href="signed_in ? home2 : home">
 		Zion English Dashboard
 	</b-navbar-brand>
 
@@ -19,7 +19,7 @@
 
 			<b-nav-item-dropdown right v-if="signed_in && is_admin">
 				<template #button-content>Lesson</template>
-				<b-dropdown-item :to="/add_lesson">Add Lesson</b-dropdown-item>
+				<b-dropdown-item to="/add_lesson">Add Lesson</b-dropdown-item>
 			</b-nav-item-dropdown>
 
 			<b-nav-item-dropdown right>
@@ -91,6 +91,7 @@ export default {
 	data: function() {
 		return {
 			home: "/join_us",
+			home2: "/dashboard",
 			href_sign_in: "/sign_in",
 			href_sign_up: "/sign_up",
 			signed_in: false,

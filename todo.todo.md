@@ -11,6 +11,12 @@
   - [ ] Distribute lesson
   - [X] View list of teachers' info
 
+- [X] Teacher
+  - [X] View teacher info
+  - [X] Delete account (admin)
+  - [X] Change image (teacher)
+  - [X] Edit teacher info (teacher)
+
 - [ ] Lesson
   - [ ] Upload File(s)
 

@@ -15,6 +15,7 @@
 
 	<b-tabs content-class="mt-3" v-if="signed_in && is_teacher">
 		<b-tab title="Overview" lazy active>
+			<TeacherInfo />
 		</b-tab>
 	</b-tabs>
 </div>
@@ -23,11 +24,13 @@
 <script>
 import TableTeachers from "@/components/table_teachers.vue"
 // import TableLessons from "@/components/table_lessons.vue"
+import TeacherInfo from "@/components/teacher_info.vue"
 
 export default {
 	name: "Dashboard",
 	components: {
 		TableTeachers,
+		TeacherInfo,
 		// TableLessons,
 	},
 
