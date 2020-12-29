@@ -4,7 +4,6 @@
 		align="center"
 	>
 		<b-tab title="Overview" active>
-			<!-- <Actions /> -->
 		</b-tab>
 
 		<b-tab title="Teachers" lazy>
@@ -16,16 +15,21 @@
 		</b-tab>
 	</b-tabs>
 
-	<b-tabs content-class="mt-3" v-if="signed_in && is_teacher">
+	<b-tabs content-class="mt-3" v-if="signed_in && is_teacher"
+		align="center"
+	>
 		<b-tab title="Overview" lazy active>
 			<TeacherInfo />
+		</b-tab>
+
+		<b-tab title="My Lessons" lazy>
+			<TableLessons />
 		</b-tab>
 	</b-tabs>
 </div>
 </template>
 
 <script>
-// import Actions from "@/components/actions.vue"
 import TableTeachers from "@/components/table_teachers.vue"
 import TableLessons from "@/components/table_lessons.vue"
 import TeacherInfo from "@/components/teacher_info.vue"
@@ -33,7 +37,6 @@ import TeacherInfo from "@/components/teacher_info.vue"
 export default {
 	name: "Dashboard",
 	components: {
-		// Actions,
 		TableTeachers,
 		TeacherInfo,
 		TableLessons,
@@ -44,7 +47,7 @@ export default {
 		this.signed_in = sessionStorage["signed_in"];
 
 		if (!this.signed_in) {
-			alert("You must sign in first");
+			this.$notify("You must sign in first");
 			this.$router.push({name: "SignIn"});
 		}
 

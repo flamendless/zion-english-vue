@@ -55,17 +55,18 @@
 
 		<template #cell(arr_files)="data">
 			<b-badge
-				v-for="(filename, i) in data.item.arr_files"
-				:key="i"
-				style="margin-right: 8px; margin-bottom: 8px;"
+				v-for="file in data.item.arr_files"
+				:key="file.file_id"
+				style="margin-right: 8px; margin-bottom: 8px; cursor: pointer;"
+				@click="on_file_click(file)"
 			>
 				<font-awesome-icon
-					:icon="get_file_icon(filename)"
+					:icon="get_file_icon(file.filename)"
 					size="lg"
 					style="margin-right: 8px;"
 				>
 				</font-awesome-icon>
-				{{ get_file_name(filename) }}
+				{{ get_file_name(file.filename) }}
 			</b-badge>
 		</template>
 
@@ -86,12 +87,16 @@ export default {
 	name: "TableLessons",
 
 	mounted: function() {
-		if (sessionStorage["is_admin"] == null) {
-			alert("Admin can only view this");
-			this.$router.push({name: "Dashboard"});
-		}
+		this.is_admin = sessionStorage["is_admin"];
+		this.account_id = sessionStorage["account_id"];
 
-		Axios.get("/get_lessons_list/" + this.is_admin)
+		let path;
+		if (this.is_admin)
+			path = "/get_lessons_list/" + this.is_admin;
+		else
+			path = "/get_teachers_lessons/" + this.account_id;
+
+		Axios.get(path)
 		.then(res => {
 			const data = res.data;
 
@@ -118,14 +123,22 @@ export default {
 
 						if (_item.lesson_id == item.lesson_id) {
 							found = true;
-							_item.arr_files.push(item.filename);
+							const o = {
+								file_id: item.file_id,
+								filename: item.filename,
+							}
+							_item.arr_files.push(o);
 
 							break;
 						}
 					}
 
 					if (!found) {
-						item.arr_files.push(item.filename);
+						const o = {
+							file_id: item.file_id,
+							filename: item.filename,
+						}
+						item.arr_files.push(o);
 						t.items.push(item);
 					}
 				});
@@ -136,6 +149,16 @@ export default {
 	},
 
 	methods: {
+		on_file_click: async function(file) {
+			const r_file = await Axios.get("/get_file/" + file.filename, {
+				responseType: "blob"
+			});
+			const f = new Blob([r_file.data], {
+				type: r_file.headers["content-type"],
+			});
+			const url = URL.createObjectURL(f);
+			window.open(url, "_blank");
+		},
 		get_file_icon: function(filename) {
 			const type = filename.split(".").pop();
 			if (type == "pdf")

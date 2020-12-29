@@ -248,11 +248,13 @@ export default {
 					type: "teacher",
 				});
 
-				if (r_sign_up.data.success)
+				if (r_sign_up.data.success) {
+					this.$notify("Signed up successfully");
 					this.$router.push({
 						name: "SignIn"
 					});
-				else throw new Error("Failed sign up");
+				} else
+					this.$notify("Signed up unsuccessfully");
 			}
 		},
 	},

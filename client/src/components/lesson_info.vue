@@ -1,6 +1,23 @@
 <template>
 <div class="lesson_info">
-	<div class="tabContent">
+	<b-jumbotron
+		v-if="cant_access"
+		header="You don't have access to this lesson"
+		class="text-center"
+		fluid
+		header-level="4"
+		bg-variant="info"
+		text-variant="white">
+
+		<b-button
+			style="margin: 32px;"
+			@click="to_dashboard"
+		>
+			Return to Dashboard
+		</b-button>
+	</b-jumbotron>
+
+	<div class="tabContent" v-else>
 		<b-card class="fileSection">
 			<b-card-body style="padding: 8px;">
 				<b-row
@@ -143,23 +160,32 @@ export default {
 
 		this.lesson_id = lesson_id;
 
-		const r_lesson = await Axios.get("/get_lesson_info/" + lesson_id);
-		const res = r_lesson.data.results[0];
+		const r_lesson = await Axios.get("/get_lesson_info/" + lesson_id + "/" + this.account_id + "/" + this.is_admin);
 
-		for (let i = 0; i < r_lesson.data.results.length; i++) {
-			const r = r_lesson.data.results[i];
-			const o = {
-				file_id: r.file_id,
-				filename: r.filename,
+		if (r_lesson.data.success == false) {
+			this.$notify("You can not access this lesson");
+			this.cant_access = true;
+		} else {
+			const res = r_lesson.data.results[0];
+
+			for (let i = 0; i < r_lesson.data.results.length; i++) {
+				const r = r_lesson.data.results[i];
+				const o = {
+					file_id: r.file_id,
+					filename: r.filename,
+				}
+
+				this.files.push(o);
 			}
 
-			this.files.push(o);
+			this.table_data.push(res);
 		}
-
-		this.table_data.push(res);
 	},
 
 	methods: {
+		to_dashboard: function() {
+			this.$router.push({name: "Dashboard"});
+		},
 		on_add: function() {
 			const form_file = this.$refs.form_file;
 			form_file.$el.click();
@@ -200,7 +226,7 @@ export default {
 						location.reload();
 					}
 				}).catch(err => {
-					alert(err);
+					this.$notify(err);
 				});
 			}
 		},
@@ -248,7 +274,7 @@ export default {
 
 					this.can_submit = true;
 				}).catch(err => {
-					alert(err);
+					this.$notify(err);
 				});
 			}
 		},
@@ -270,6 +296,7 @@ export default {
 			can_change: true,
 			can_submit: true,
 			is_admin: false,
+			cant_access: false,
 			table_data: [],
 			files: [],
 			form: {

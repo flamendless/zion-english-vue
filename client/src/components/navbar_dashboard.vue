@@ -17,7 +17,7 @@
 				{{item.title}}
 			</b-nav-item>
 
-			<b-nav-item-dropdown right v-if="signed_in && is_admin">
+			<b-nav-item-dropdown right v-if="signed_in && (is_admin || is_teacher)">
 				<template #button-content>Lesson</template>
 				<b-dropdown-item to="/add_lesson">Add Lesson</b-dropdown-item>
 			</b-nav-item-dropdown>
@@ -68,9 +68,11 @@ export default {
 		check_signed_in: function() {
 			const email = sessionStorage["email"];
 			const is_admin = sessionStorage["is_admin"];
+			const is_teacher = sessionStorage["is_teacher"];
 
 			if (email) this.signed_in = true;
 			if (is_admin) this.is_admin = true;
+			if (is_teacher) this.is_teacher = true;
 		},
 
 		on_sign_out: function() {
@@ -96,6 +98,7 @@ export default {
 			href_sign_up: "/sign_up",
 			signed_in: false,
 			is_admin: false,
+			is_teacher: false,
 			items: [
 				{
 					route: "#home",

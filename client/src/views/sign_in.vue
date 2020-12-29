@@ -110,6 +110,7 @@ export default {
 						sessionStorage["is_teacher"] = true;
 					}
 
+					this.$notify("Signed in successfully");
 					this.$router.push({
 						name: "Dashboard",
 						info: res,
@@ -119,6 +120,7 @@ export default {
 				{
 					this.loading = false;
 					this.show_alert_fail = true;
+					this.$notify("Signed in unsuccessfull");
 				}
 			});
 		}

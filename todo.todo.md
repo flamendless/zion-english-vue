@@ -30,3 +30,4 @@
   - [ ] Manage available time
   - [ ] View schedule
   - [ ] Past lessons
+  - [X] View lessons

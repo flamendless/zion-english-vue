@@ -29,6 +29,7 @@ import "../node_modules/material-icons/iconfont/material-icons.css"
 import "swiper/swiper-bundle.min.css"
 import "vue-js-modal/dist/styles.css"
 import "v-ripple-directive/src/index.scss";
+import VueNotification from "@mathieustan/vue-notification";
 
 library.add([faFontAwesome, faFacebook, faTwitter, faSkype, faEnvelope, faEnvelopeSquare,
 	faMobileAlt, faFacebookSquare, faQuoteLeft, faQuoteRight, faWhatsapp, faSearch,
@@ -46,6 +47,27 @@ Vue.use(VRipple);
 Vue.use(vmodal);
 Vue.use(VueSocialSharing);
 Vue.use(vueScrollwatch);
+Vue.use(VueNotification, {
+	theme: {
+		colors: {
+			success: "#54d861",
+			darkenSuccess: "#2d8e36",
+			info: "#5d6a89",
+			darkenInfo: "#535f7b",
+			warning: "#f8a623",
+			darkenWarning: "#f69a07",
+			error: "#ff4577",
+			darkenError: "#ff245f",
+			offline: "#ff4577",
+			darkenOffline: "#ff245f",
+		},
+		boxShadow: "10px 5px 5px red",
+	},
+	breakpoints: {
+		0: { bottom: true },
+		480: { bottom: true, right: true },
+	},
+});
 
 VueClipboard.config.autoSetContainer = true;
 Vue.use(VueClipboard);

@@ -114,11 +114,6 @@ export default {
 
 		const account_id = sessionStorage["account_id"];
 		if (account_id) this.account_id = account_id;
-
-		if (sessionStorage["is_admin"] == null) {
-			alert("Admin can only add a lesson");
-			this.$router.push({name: "Dashboard"});
-		}
 	},
 
 	methods: {
@@ -166,9 +161,10 @@ export default {
 			});
 
 			if (r_file.data.success) {
-				alert("Lesson successfully added!");
+				this.$notify("Lesson added successfully");
 				this.$router.push({name: "Dashboard"});
-			}
+			} else
+				this.$notify("Lesson added unsuccessfully");
 		},
 	},
 

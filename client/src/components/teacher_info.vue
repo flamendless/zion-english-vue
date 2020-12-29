@@ -257,10 +257,11 @@ export default {
 					headers: {"Content-Type": "multipart/form-data"}
 				});
 
-				if (r_image.data.success)
+				if (r_image.data.success) {
 					this.can_change = true;
-
-				console.log(r_image)
+					this.$notify("Teacher info edit successfully");
+				} else
+					this.$notify("Teacher info edit unsuccessfully");
 			}
 		},
 		on_edit: function() {
@@ -268,7 +269,6 @@ export default {
 		},
 		on_cancel_edit: function() {
 			this.is_edit = false;
-			this.form.reset();
 		},
 		on_delete: function() {
 			if (window.confirm("Are you sure you want to delete this account?"))
@@ -282,7 +282,7 @@ export default {
 					if (data.success)
 						this.$router.push({name: "Dashboard"});
 				}).catch(err => {
-					alert(err);
+					this.$notify(err);
 				});
 			}
 		},

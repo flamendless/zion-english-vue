@@ -157,12 +157,13 @@ app.get("/get_teacher_info/:teacher_id", (req, res) => {
 	}));
 });
 
-app.get("/get_lesson_info/:lesson_id", (req, res) => {
+app.get("/get_lesson_info/:lesson_id/:account_id/:is_admin", (req, res) => {
 	const args = req.params;
 	const query = `SELECT
 		l.lesson_id, l.title, l.description,
 		DATE_FORMAT(l.upload_date, '%m/%d/%Y') AS upload_date,
 		f.file_id, f.name AS filename,
+		f.uploader_id,
 		a.account_id, a.email,
 		t.teacher_id
 		FROM tbl_lesson AS l
@@ -172,7 +173,14 @@ app.get("/get_lesson_info/:lesson_id", (req, res) => {
 		WHERE l.lesson_id = ${args.lesson_id}`;
 
 	DB.query(query).then(data => {
-		res.json(data);
+		if (args.is_admin != "false") {
+			res.json(data);
+		} else {
+			if (data.results[0].uploader_id != args.account_id)
+				res.json({success: false, err: "Can't access this"});
+			else
+				res.json(data);
+		}
 	}).catch(err => res.json({
 		success: false,
 		err: err,
@@ -229,6 +237,28 @@ app.get("/get_lessons_list/:is_admin", (req, res) => {
 		INNER JOIN tbl_file AS f ON l.lesson_id = f.lesson_id
 		INNER JOIN tbl_account AS a ON a.account_id = f.uploader_id
 		INNER JOIN tbl_teacher AS t ON t.account_id = a.account_id`
+
+	DB.query(query).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.get("/get_teachers_lessons/:account_id", (req, res) => {
+	const args = req.params;
+	const query = `SELECT
+		l.lesson_id, l.title, l.description,
+		DATE_FORMAT(l.upload_date, '%m/%d/%Y') AS upload_date,
+		f.file_id, f.name AS filename,
+		a.account_id, a.email,
+		t.teacher_id
+		FROM tbl_lesson AS l
+		INNER JOIN tbl_file AS f ON l.lesson_id = f.lesson_id
+		INNER JOIN tbl_account AS a ON a.account_id = f.uploader_id
+		INNER JOIN tbl_teacher AS t ON t.account_id = a.account_id
+		WHERE a.account_id = ${args.account_id}`;
 
 	DB.query(query).then(data => {
 		res.json(data);
