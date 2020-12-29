@@ -17,12 +17,14 @@
   - [X] Change image (teacher)
   - [X] Edit teacher info (teacher)
 
-- [ ] Lesson
-  - [ ] Delete lesson (admin)
-  - [ ] Delete lesson file (admin)
+- [X] Lesson
   - [X] Upload File(s)
   - [X] Lesson title + desc
   - [X] View lesson
+  - [X] View lesson file
+  - [X] Delete lesson file (admin)
+  - [X] Add lesson file
+  - [X] Delete lesson (admin)
 
 - [ ] Dashboard (Teacher)
   - [ ] Manage available time

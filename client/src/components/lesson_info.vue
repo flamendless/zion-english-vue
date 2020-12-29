@@ -50,16 +50,39 @@
 
 			<b-card-footer>
 				<b-button v-if="is_admin"
-					variant="danger"
-					@click="on_delete"
+					variant="success"
+					@click="on_add"
 					:disabled="can_submit == false"
+					style="margin-bottom: 8px;"
 				>
-					Delete Lesson
+					Add Lesson File
 				</b-button>
+
+				<b-form-file
+					ref="form_file"
+					hidden
+					plain
+					name="file_lesson"
+					required
+					placeholder="Choose lesson file(s)"
+					accept=".doc, .docx, .ppt, .pptx, .pdf"
+					no-drop
+					style="margin-top: 32px; margin-bottom: 32px;"
+					@input="on_file_input"
+				>
+				</b-form-file>
 			</b-card-footer>
 		</b-card>
 
 		<b-card class="tableSection">
+			<b-button v-if="is_admin"
+				variant="danger"
+				@click="on_delete"
+				:disabled="can_submit == false"
+				style="margin-bottom: 8px;"
+			>
+				Delete Lesson
+			</b-button>
 			<b-table
 				v-if="!is_edit"
 				bordered
@@ -110,11 +133,15 @@ export default {
 
 	mounted: async function() {
 		const is_admin = sessionStorage["is_admin"];
+		const account_id = sessionStorage["account_id"];
 
 		if (is_admin) this.is_admin = true;
+		if (account_id) this.account_id = account_id;
 
 		const q = this.$route.query;
 		const lesson_id = q.lesson_id;
+
+		this.lesson_id = lesson_id;
 
 		const r_lesson = await Axios.get("/get_lesson_info/" + lesson_id);
 		const res = r_lesson.data.results[0];
@@ -133,13 +160,55 @@ export default {
 	},
 
 	methods: {
+		on_add: function() {
+			const form_file = this.$refs.form_file;
+			form_file.$el.click();
+		},
+		on_file_input: async function(file) {
+			if (file != null) {
+				this.can_submit = false;
+
+				const fd = new FormData();
+				fd.append("lesson_id", this.lesson_id);
+				fd.append("account_id", this.account_id);
+				fd.append("file_lesson", file);
+
+				const r_file = await Axios({
+					method: "post",
+					url: "/upload_lesson_file",
+					data: fd,
+					headers: {"Content-Type": "multipart/form-data"}
+				});
+
+				if (r_file.data.success) {
+					this.can_submit = true;
+					location.reload();
+				}
+			}
+		},
 		delete_file: async function(file) {
-			this.can_submit = false;
-			console.log(file)
+			if (window.confirm("Are you sure you want to delete this file?"))
+			{
+				this.can_submit = false;
+				Axios.post("/delete_file", {
+					file_id: file.file_id,
+				})
+				.then(res => {
+					const data = res.data;
+					if (data.success) {
+						this.can_submit = true;
+						location.reload();
+					}
+				}).catch(err => {
+					alert(err);
+				});
+			}
 		},
 		open_file: async function(file) {
-			const r_file = await Axios.get("/get_file/" + file.filename);
-			const f = new File([r_file.data], file.filename, {
+			const r_file = await Axios.get("/get_file/" + file.filename, {
+				responseType: "blob"
+			});
+			const f = new Blob([r_file.data], {
 				type: r_file.headers["content-type"],
 			});
 			const url = URL.createObjectURL(f);
@@ -170,8 +239,7 @@ export default {
 			{
 				this.can_submit = false;
 				Axios.post("/delete_lesson", {
-					account_id: this.table_data[0].account_id,
-					teacher_id: this.table_data[0].teacher_id,
+					lesson_id: this.lesson_id,
 				})
 				.then(res => {
 					const data = res.data;

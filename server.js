@@ -3,6 +3,7 @@ const app = express();
 const PORT = 4000;
 const path = require("path");
 const fs = require("fs");
+const mime = require("mime");
 
 const MySQL = require("mysql");
 const Database = require("./database");
@@ -180,13 +181,40 @@ app.get("/get_lesson_info/:lesson_id", (req, res) => {
 
 app.get("/get_file/:filename", (req, res) => {
 	const args = req.params;
-	// const filepath = path.join(__dirname, "client/src/lessons", args.filename);
+	const filepath = path.join(__dirname, "client/src/lessons", args.filename);
 
-	const opt = {
-		root: path.join(__dirname, "client/src/lessons"),
-	}
+	fs.readFile(filepath, function(err, data) {
+		if (err) res.send("Error. File not found");
+		else {
+			res.contentType(mime.getType(args.filename));
+			res.send(data);
+		}
+		res.end();
+	});
+});
 
-	res.sendFile(args.filename, opt);
+app.post("/delete_file", (req, res) => {
+	const args = req.body;
+	const query = `DELETE FROM tbl_file WHERE file_id = ?`;
+
+	DB.query(query, [args.file_id]).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.post("/delete_lesson", (req, res) => {
+	const args = req.body;
+	const query = `DELETE FROM tbl_lesson WHERE lesson_id = ?`;
+
+	DB.query(query, [args.lesson_id]).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
 });
 
 app.get("/get_lessons_list/:is_admin", (req, res) => {
