@@ -193,10 +193,6 @@
 				</b-col>
 			</b-row>
 		</b-form>
-
-		<b-alert v-model="fail" variant="danger" style="margin-top: 32px;">
-			There is an error {{ error_msg }}
-		</b-alert>
 	</ValidationObserver>
 </div>
 </template>
@@ -209,8 +205,6 @@ export default {
 
 	mounted: function() {
 		this.loading = false;
-		this.fail = false;
-		this.error_msg = "";
 	},
 
 	methods: {
@@ -275,8 +269,6 @@ export default {
 	data: function() {
 		return {
 			loading: false,
-			fail: false,
-			error_msg: "",
 			form: {
 				email: "",
 				password: "",

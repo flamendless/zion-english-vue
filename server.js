@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const PORT = 4000;
+const path = require("path");
+const fs = require("fs");
 
 const MySQL = require("mysql");
 const Database = require("./database");
@@ -20,18 +22,20 @@ const multer = require("multer");
 const disk_storage = multer.diskStorage({
 	destination: "client/src/uploads/",
 	filename: function(req, file, cb) {
-		let ext;
-		if (file.mimetype == "image/png")
-			ext = ".png";
-		else if (file.mimetype == "image/jpeg")
-			ext = ".jpeg";
-
 		const u = Date.now() + Math.round(Math.random() * 1E9);
-		cb(null, u + ext);
+		cb(null, u + file.originalname);
 	}
 });
 const upload = multer({storage: disk_storage});
-const upload_file = multer({dest: "client/src/lessons/"});
+
+const disk_storage_file = multer.diskStorage({
+	destination: "client/src/lessons/",
+	filename: function(req, file, cb) {
+		const u = Date.now() + Math.round(Math.random() * 1E9);
+		cb(null, u + file.originalname);
+	}
+});
+const upload_file = multer({storage: disk_storage_file});
 
 app.post("/upload_image_teacher", upload.single("img_teacher"), function(req, res) {
 	const file = req.file;
@@ -66,16 +70,20 @@ app.post("/update_image_teacher", upload.single("img_teacher"), function(req, re
 	}));
 });
 
-app.post("/upload_lesson_file", upload.single("file_lesson"), function(req, res) {
-	const file = req.file;
-	const query = `INSERT INTO tbl_file(lesson_id, name, uploader) VALUES(?, ?, ?)`;
+app.post("/upload_lesson_file", upload_file.array("file_lesson"), function(req, res) {
+	const files = req.files;
+	const body = req.body;
+	const params = [];
+	const query = `INSERT INTO tbl_file(lesson_id, name, uploader_id)
+		VALUES ?`;
 
-	DB.query(query, [file.filename]).then(data => {
-		data.path = file.path;
-		if (data.success)
-			res.json(data);
-		else
-			res.json({success: false});
+	for (let i = 0; i < files.length; i++) {
+		const file = files[i];
+		params.push([body.lesson_id, file.filename, body.account_id]);
+	}
+
+	DB.query(query, [params]).then(data => {
+		res.json(data);
 	}).catch(err => res.json({
 		success: false,
 		err: err,
@@ -139,6 +147,60 @@ app.get("/get_teacher_info/:teacher_id", (req, res) => {
 		INNER JOIN tbl_teacher AS t ON a.account_id = t.account_id
 		LEFT JOIN tbl_picture AS p ON t.picture_id = p.picture_id
 		WHERE t.teacher_id = ${args.teacher_id}`;
+
+	DB.query(query).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.get("/get_lesson_info/:lesson_id", (req, res) => {
+	const args = req.params;
+	const query = `SELECT
+		l.lesson_id, l.title, l.description,
+		DATE_FORMAT(l.upload_date, '%m/%d/%Y') AS upload_date,
+		f.file_id, f.name AS filename,
+		a.account_id, a.email,
+		t.teacher_id
+		FROM tbl_lesson AS l
+		INNER JOIN tbl_file AS f ON l.lesson_id = f.lesson_id
+		INNER JOIN tbl_account AS a ON a.account_id = f.uploader_id
+		INNER JOIN tbl_teacher AS t ON t.account_id = a.account_id
+		WHERE l.lesson_id = ${args.lesson_id}`;
+
+	DB.query(query).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.get("/get_file/:filename", (req, res) => {
+	const args = req.params;
+	// const filepath = path.join(__dirname, "client/src/lessons", args.filename);
+
+	const opt = {
+		root: path.join(__dirname, "client/src/lessons"),
+	}
+
+	res.sendFile(args.filename, opt);
+});
+
+app.get("/get_lessons_list/:is_admin", (req, res) => {
+	const args = req.params;
+	const query = `SELECT
+		l.lesson_id, l.title, l.description,
+		DATE_FORMAT(l.upload_date, '%m/%d/%Y') AS upload_date,
+		f.file_id, f.name AS filename,
+		a.account_id, a.email,
+		t.teacher_id
+		FROM tbl_lesson AS l
+		INNER JOIN tbl_file AS f ON l.lesson_id = f.lesson_id
+		INNER JOIN tbl_account AS a ON a.account_id = f.uploader_id
+		INNER JOIN tbl_teacher AS t ON t.account_id = a.account_id`
 
 	DB.query(query).then(data => {
 		res.json(data);
@@ -231,6 +293,20 @@ app.post("/update_teacher_info", (req, res) => {
 		fname = ?, mname = ?, lname = ?, birthdate = ?
 		WHERE teacher_id = ${args.teacher_id}`;
 	const params = [args.fname, args.mname, args.lname, args.birthdate];
+
+	DB.query(query, params).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.post("/add_lesson", (req, res) => {
+	const args = req.body;
+	const query = `INSERT INTO tbl_lesson(title, description, upload_date)
+		VALUES(?, ?, NOW())`;
+	const params = [args.title, args.desc];
 
 	DB.query(query, params).then(data => {
 		res.json(data);

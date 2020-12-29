@@ -6,10 +6,10 @@
 
 - [ ] Dashboard (Admin)
   - [ ] View list of teachers' schedule
-  - [ ] View list of lessons
-  - [ ] Add lesson
   - [ ] Distribute lesson
   - [X] View list of teachers' info
+  - [X] Add lesson
+  - [X] View list of lessons
 
 - [X] Teacher
   - [X] View teacher info
@@ -18,7 +18,11 @@
   - [X] Edit teacher info (teacher)
 
 - [ ] Lesson
-  - [ ] Upload File(s)
+  - [ ] Delete lesson (admin)
+  - [ ] Delete lesson file (admin)
+  - [X] Upload File(s)
+  - [X] Lesson title + desc
+  - [X] View lesson
 
 - [ ] Dashboard (Teacher)
   - [ ] Manage available time

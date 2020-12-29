@@ -3,13 +3,16 @@
 	<b-tabs content-class="mt-3" v-if="signed_in && is_admin"
 		align="center"
 	>
+		<b-tab title="Overview" active>
+			<!-- <Actions /> -->
+		</b-tab>
 
-		<b-tab title="Teachers" active>
+		<b-tab title="Teachers" lazy>
 			<TableTeachers />
 		</b-tab>
 
 		<b-tab title="Lessons" lazy>
-			<!-- <TableLessons /> -->
+			<TableLessons />
 		</b-tab>
 	</b-tabs>
 
@@ -22,16 +25,18 @@
 </template>
 
 <script>
+// import Actions from "@/components/actions.vue"
 import TableTeachers from "@/components/table_teachers.vue"
-// import TableLessons from "@/components/table_lessons.vue"
+import TableLessons from "@/components/table_lessons.vue"
 import TeacherInfo from "@/components/teacher_info.vue"
 
 export default {
 	name: "Dashboard",
 	components: {
+		// Actions,
 		TableTeachers,
 		TeacherInfo,
-		// TableLessons,
+		TableLessons,
 	},
 
 	mounted: function() {

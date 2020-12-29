@@ -40,6 +40,16 @@ const routes = [
 		name: "TeacherInfo",
 		component: () => import("../components/teacher_info.vue")
 	},
+	{
+		path: "/add_lesson",
+		name: "AddLesson",
+		component: () => import("../components/add_lesson.vue")
+	},
+	{
+		path: "/lesson_info",
+		name: "LessonInfo",
+		component: () => import("../components/lesson_info.vue")
+	},
 ]
 
 const router = new VueRouter({

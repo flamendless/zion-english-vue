@@ -97,17 +97,17 @@ export default {
 				const data = res.data;
 				if (data.success)
 				{
+					const res = data.results[0];
+
 					this.loading = false;
 					sessionStorage["email"] = data.email;
 					sessionStorage["signed_in"] = true;
-
-					const res = data.results[0];
+					sessionStorage["account_id"] = res.account_id;
 
 					if (res.type == "admin") {
 						sessionStorage["is_admin"] = true;
 					} else if (res.type == "teacher") {
 						sessionStorage["is_teacher"] = true;
-						sessionStorage["account_id"] = res.account_id;
 					}
 
 					this.$router.push({

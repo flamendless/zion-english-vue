@@ -62,10 +62,6 @@ const Axios = require("axios");
 
 export default {
 	name: "TableTeachers",
-	props: {
-		is_admin: Boolean,
-	},
-
 	mounted: function() {
 		Axios.get("/get_teachers_list/" + this.is_admin)
 		.then(res => {
@@ -90,10 +86,6 @@ export default {
 		on_search_change: function() {
 			if (this.search.length > 0) this.filter = this.search;
 			else this.filter = null;
-		},
-		is_disabled: function() {
-			if (this.selected_item == null) return true;
-			return false;
 		},
 	},
 

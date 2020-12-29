@@ -18,7 +18,8 @@ import {BootstrapVue, IconsPlugin} from "bootstrap-vue"
 import {MediaQueries, CommonBands} from "vue-media-queries"
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome"
 import {library, dom} from "@fortawesome/fontawesome-svg-core"
-import {faQuoteLeft, faQuoteRight, faEnvelope, faEnvelopeSquare, faMobileAlt, faSearch}
+import {faQuoteLeft, faQuoteRight, faEnvelope, faEnvelopeSquare, faMobileAlt, faSearch,
+	faFileWord, faFilePdf, faFilePowerpoint,}
 	from "@fortawesome/free-solid-svg-icons"
 import {faFontAwesome, faFacebook, faFacebookSquare, faTwitter, faSkype, faWhatsapp}
 	from "@fortawesome/free-brands-svg-icons"
@@ -30,7 +31,8 @@ import "vue-js-modal/dist/styles.css"
 import "v-ripple-directive/src/index.scss";
 
 library.add([faFontAwesome, faFacebook, faTwitter, faSkype, faEnvelope, faEnvelopeSquare,
-	faMobileAlt, faFacebookSquare, faQuoteLeft, faQuoteRight, faWhatsapp, faSearch]);
+	faMobileAlt, faFacebookSquare, faQuoteLeft, faQuoteRight, faWhatsapp, faSearch,
+	faFileWord, faFilePdf, faFilePowerpoint]);
 dom.watch();
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
