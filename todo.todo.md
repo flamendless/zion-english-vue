@@ -1,6 +1,11 @@
 - [X] Sign Up
 - [X] Sign In
 
+- [ ] Schedule
+  - [ ] Edit available schedule (teacher)
+  - [ ] View schedule (admin/teacher)
+  - [X] Add available schedule (teacher)
+
 - [ ] Student avail lesson
   - [ ] Admin get list of who's available
 

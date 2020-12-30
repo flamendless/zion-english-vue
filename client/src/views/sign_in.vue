@@ -108,6 +108,7 @@ export default {
 						sessionStorage["is_admin"] = true;
 					} else if (res.type == "teacher") {
 						sessionStorage["is_teacher"] = true;
+						sessionStorage["teacher_id"] = res.teacher_id;
 					}
 
 					this.$notify("Signed in successfully");

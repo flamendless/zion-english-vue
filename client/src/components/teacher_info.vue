@@ -191,7 +191,8 @@ export default {
 	mounted: async function() {
 		const is_admin = sessionStorage["is_admin"];
 		const is_teacher = sessionStorage["is_teacher"];
-		const account_id = sessionStorage["account_id"];
+		// const account_id = sessionStorage["account_id"];
+		const user_teacher_id = sessionStorage["teacher_id"];
 
 		if (is_admin) this.is_admin = true;
 		if (is_teacher) this.is_teacher = true;
@@ -200,12 +201,10 @@ export default {
 
 		let teacher_id;
 
-		if (account_id) {
-			const r_teacher_id = await Axios.get("/get_teacher_id/" + account_id);
-			teacher_id = r_teacher_id.data.results[0].teacher_id;
-		} else {
+		if (q.teacher_id)
 			teacher_id = q.teacher_id;
-		}
+		else
+			teacher_id = user_teacher_id;
 
 		const r_teacher = await Axios.get("/get_teacher_info/" + teacher_id);
 		const res = r_teacher.data.results[0];

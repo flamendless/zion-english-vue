@@ -104,18 +104,6 @@ app.get("/validate_email/:email", (req, res) => {
 	}));
 });
 
-app.get("/get_teacher_id/:account_id", (req, res) => {
-	const args = req.params;
-	const query = `SELECT teacher_id FROM tbl_teacher WHERE account_id = ${args.account_id}`;
-
-	DB.query(query).then(data => {
-		res.json(data);
-	}).catch(err => res.json({
-		success: false,
-		err: err,
-	}));
-});
-
 app.get("/get_teachers_list/:is_admin", (req, res) => {
 	const args = req.params;
 	const query = `SELECT
@@ -268,6 +256,47 @@ app.get("/get_teachers_lessons/:account_id", (req, res) => {
 	}));
 });
 
+app.get("/get_all_events", (req, res) => {
+	const args = req.params;
+	const query = `SELECT
+		s.schedule_id, s.teacher_id,
+		s.date, s.start_time, s.end_time,
+		a.account_id, a.email,
+		t.fname, t.mname, t.lname
+	FROM tbl_schedule AS s
+	INNER JOIN tbl_teacher AS t ON t.teacher_id = s.teacher_id
+	INNER JOIN tbl_account AS a ON a.account_id = t.account_id`;
+
+	DB.query(query).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.get("/get_events/:account_id", (req, res) => {
+	const args = req.params;
+	const query = `SELECT
+		s.schedule_id, s.teacher_id,
+		DATE_FORMAT(s.date, '%m/%d/%Y') AS date,
+		TIME_FORMAT(s.start_time, '%H:%i') AS start_time,
+		TIME_FORMAT(s.end_time, '%H:%i') AS end_time,
+		a.account_id, a.email,
+		t.fname, t.mname, t.lname
+	FROM tbl_schedule AS s
+	INNER JOIN tbl_teacher AS t ON t.teacher_id = s.teacher_id
+	INNER JOIN tbl_account AS a ON a.account_id = t.account_id
+	WHERE a.account_id = ${args.account_id}`;
+
+	DB.query(query).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
 app.post("/delete_teacher_account", (req, res) => {
 	const args = req.body;
 	const q_account = `DELETE FROM tbl_account WHERE account_id = ${args.account_id}`;
@@ -325,7 +354,12 @@ app.post("/register_teacher", (req, res) => {
 
 app.post("/sign_in", (req, res) => {
 	const args = req.body;
-	const query = `SELECT * FROM tbl_account WHERE email = ?`;
+	const query = `SELECT
+		a.account_id, a.email, a.pw_hash, a.type,
+		t.teacher_id
+		FROM tbl_account AS a
+		LEFT JOIN tbl_teacher AS t ON a.account_id = t.teacher_id
+		WHERE email = ?`;
 
 	DB.query(query, [args.email])
 	.then(data => {
@@ -365,6 +399,20 @@ app.post("/add_lesson", (req, res) => {
 	const query = `INSERT INTO tbl_lesson(title, description, upload_date)
 		VALUES(?, ?, NOW())`;
 	const params = [args.title, args.desc];
+
+	DB.query(query, params).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.post("/add_schedule", (req, res) => {
+	const args = req.body;
+	const query = `INSERT INTO tbl_schedule(teacher_id, date, start_time, end_time)
+		VALUES(?, ?, ?, ?)`;
+	const params = [args.teacher_id, args.date, args.start_time, args.end_time];
 
 	DB.query(query, params).then(data => {
 		res.json(data);
