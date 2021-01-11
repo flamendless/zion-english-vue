@@ -15,6 +15,8 @@
   - [X] View list of teachers' info
   - [X] Add lesson
   - [X] View list of lessons
+  - [X] Add verification
+  - [X] Unverify
 
 - [X] Teacher
   - [X] View teacher info

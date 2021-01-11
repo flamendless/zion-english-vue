@@ -1,5 +1,9 @@
 <template>
 <div class="sign_in">
+	<b-alert v-model="show_alert_not_verified" variant="danger">
+		This account has not been verified by the admin
+	</b-alert>
+
 	<b-alert v-model="show_alert_fail" variant="danger">
 		E-Mail and password does not match
 	</b-alert>
@@ -68,6 +72,7 @@ export default {
 		return {
 			loading: false,
 			show_alert_fail: false,
+			show_alert_not_verified: false,
 			form: {
 				email: "",
 				password: "",
@@ -78,6 +83,7 @@ export default {
 	mounted: function() {
 		this.loading = false;
 		this.show_alert_fail = false;
+		this.show_alert_not_verified = false;
 
 		if (sessionStorage["signed_in"])
 			this.$router.push({
@@ -88,6 +94,7 @@ export default {
 	methods: {
 		on_submit: function() {
 			this.loading = true;
+			this.show_alert_not_verified = false;
 			this.show_alert_fail = false;
 
 			Axios.post("/sign_in", {
@@ -95,27 +102,36 @@ export default {
 				password: this.form.password,
 			}).then(res => {
 				const data = res.data;
-				if (data.success)
+				if (data.success && data.results != null && data.results.length > 0)
 				{
 					const res = data.results[0];
 
 					this.loading = false;
-					sessionStorage["email"] = data.email;
-					sessionStorage["signed_in"] = true;
-					sessionStorage["account_id"] = res.account_id;
 
-					if (res.type == "admin") {
-						sessionStorage["is_admin"] = true;
-					} else if (res.type == "teacher") {
-						sessionStorage["is_teacher"] = true;
-						sessionStorage["teacher_id"] = res.teacher_id;
+					if (res.verified == 1)
+					{
+						sessionStorage["email"] = data.email;
+						sessionStorage["signed_in"] = true;
+						sessionStorage["account_id"] = res.account_id;
+
+						if (res.type == "admin") {
+							sessionStorage["is_admin"] = true;
+						} else if (res.type == "teacher") {
+							sessionStorage["is_teacher"] = true;
+							sessionStorage["teacher_id"] = res.teacher_id;
+						}
+
+						this.$notify("Signed in successfully");
+						this.$router.push({
+							name: "Dashboard",
+							info: res,
+						});
 					}
-
-					this.$notify("Signed in successfully");
-					this.$router.push({
-						name: "Dashboard",
-						info: res,
-					});
+					else
+					{
+						this.show_alert_not_verified = true;
+						this.$notify("Signed in unsuccessfull");
+					}
 				}
 				else
 				{

@@ -108,7 +108,7 @@ app.get("/get_teachers_list/:is_admin", (req, res) => {
 	const args = req.params;
 	const query = `SELECT
 		a.account_id, a.email,
-		t.teacher_id, t.fname, t.mname, t.lname,
+		t.teacher_id, t.fname, t.mname, t.lname, t.verified,
 		DATE_FORMAT(t.birthdate, '%m/%d/%Y') AS birthdate,
 		DATE_FORMAT(t.date_joined, '%m/%d/%Y') AS date_joined,
 		t.picture_id
@@ -279,9 +279,14 @@ app.get("/get_events/:account_id", (req, res) => {
 	const args = req.params;
 	const query = `SELECT
 		s.schedule_id, s.teacher_id,
+		DATE_FORMAT(s.date, '%Y-%m-%d') AS date_key,
 		DATE_FORMAT(s.date, '%m/%d/%Y') AS date,
 		TIME_FORMAT(s.start_time, '%H:%i') AS start_time,
 		TIME_FORMAT(s.end_time, '%H:%i') AS end_time,
+		TIME_FORMAT(s.start_time, '%H') AS start_hr,
+		TIME_FORMAT(s.start_time, '%i') AS start_min,
+		TIME_FORMAT(s.end_time, '%H') AS end_hr,
+		TIME_FORMAT(s.end_time, '%i') AS end_min,
 		a.account_id, a.email,
 		t.fname, t.mname, t.lname
 	FROM tbl_schedule AS s
@@ -296,6 +301,36 @@ app.get("/get_events/:account_id", (req, res) => {
 		err: err,
 	}));
 });
+
+app.post("/verify_account", (req, res) => {
+	const args = req.body;
+	const query = `UPDATE tbl_teacher SET verified = 1 WHERE teacher_id = ?`;
+
+	DB.query(query, [args.teacher_id]).then(data => {
+		if (data.success)
+			res.json(data);
+		else
+			res.json({success: false});
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+})
+
+app.post("/unverify_account", (req, res) => {
+	const args = req.body;
+	const query = `UPDATE tbl_teacher SET verified = 0 WHERE teacher_id = ?`;
+
+	DB.query(query, [args.teacher_id]).then(data => {
+		if (data.success)
+			res.json(data);
+		else
+			res.json({success: false});
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+})
 
 app.post("/delete_teacher_account", (req, res) => {
 	const args = req.body;
@@ -356,7 +391,7 @@ app.post("/sign_in", (req, res) => {
 	const args = req.body;
 	const query = `SELECT
 		a.account_id, a.email, a.pw_hash, a.type,
-		t.teacher_id
+		t.teacher_id, t.verified
 		FROM tbl_account AS a
 		LEFT JOIN tbl_teacher AS t ON a.account_id = t.teacher_id
 		WHERE email = ?`;

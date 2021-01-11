@@ -24,7 +24,7 @@
     "node-sass": "^4.14.1",
     "sass-loader": "^10.0.2",
     "swiper": "^6.3.2",
-    "v-calendar-scheduler": "^0.7.4",
+    "v-calendar": "^2.2.0",
     "v-ripple-directive": "^0.2.0",
     "vee-validate": "^3.4.3",
     "vue": "^2.6.12",

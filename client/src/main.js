@@ -30,8 +30,7 @@ import "swiper/swiper-bundle.min.css"
 import "vue-js-modal/dist/styles.css"
 import "v-ripple-directive/src/index.scss";
 import VueNotification from "@mathieustan/vue-notification";
-import VueScheduler from "v-calendar-scheduler";
-import "v-calendar-scheduler/lib/main.css";
+import VCalendar from "v-calendar";
 
 library.add([faFontAwesome, faFacebook, faTwitter, faSkype, faEnvelope, faEnvelopeSquare,
 	faMobileAlt, faFacebookSquare, faQuoteLeft, faQuoteRight, faWhatsapp, faSearch,
@@ -71,7 +70,7 @@ Vue.use(VueNotification, {
 	},
 });
 
-Vue.use(VueScheduler);
+Vue.use(VCalendar);
 
 VueClipboard.config.autoSetContainer = true;
 Vue.use(VueClipboard);
