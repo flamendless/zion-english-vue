@@ -5,21 +5,30 @@
 				<v-calendar
 					:attributes="attributes"
 				>
-					<template #day-popover="{day, dayTitle, attributes}">
-						<div>
-							<div class="text-xs text-gray-300 font-semibold text-center">
-								{{ dayTitle }}
-							</div>
+					<div
+						slot="day-popover"
+						slot-scope="{ day, dayTitle, attributes }"
+					>
+						<div class="text-xs text-gray-300 font-font-semibold text-center">
+							{{ dayTitle }}
 						</div>
-						<popover-row
-							v-for="attr in attributes"
-							:key="attr.key"
-							:attributes="attr"
+						<ul
+							v-for="{key, customData} in attributes"
+							:key="key"
 						>
-							teacher: {{ attr.customData.email }}
-							time: {{ attr.customData.start_time }} - {{ attr.customData.end_time }}
-						</popover-row>
-					</template>
+							<li v-if="date_past(customData.date_obj)">
+								<b-badge variant="warning">
+									Date is Past Already
+								</b-badge>
+							</li>
+							<li>
+								teacher: {{ customData.email }}
+							</li>
+							<li>
+								time: {{ customData.start_time }} - {{ customData.end_time }}
+							</li>
+						</ul>
+					</div>
 				</v-calendar>
 			</div>
 
@@ -30,22 +39,36 @@
 		</b-col>
 
 		<b-col cols="6" md="auto">
-			<div style="padding: 16px; border: 1px solid rgb(0.1, 0.1, 0.1, 0.25); border-radius: 8px;">
+			<div style="padding: 16px;
+				border: 1px solid rgb(0.1, 0.1, 0.1, 0.25);
+				border-radius: 8px;
+				margin-left: auto; margin-right: auto;"
+			>
 				<h3 style="text-align: center">
 					List of Schedule
 				</h3>
+				<hr>
 
 				<ul>
 					<li
 						v-for="(event, i) in attributes"
 						:key="i"
 					>
-						<b-badge variant="info">
-							{{ event.customData.date }}
-							:
-							{{ event.customData.start_time }}
-							-
-							{{ event.customData.end_time }}
+						<b-badge :variant="get_variant(event.customData)">
+							<del v-if="date_past(event.customData.date_obj)">
+								{{ event.customData.date }}
+								:
+								{{ event.customData.start_time }}
+								-
+								{{ event.customData.end_time }}
+							</del>
+							<div v-else>
+								{{ event.customData.date }}
+								:
+								{{ event.customData.start_time }}
+								-
+								{{ event.customData.end_time }}
+							</div>
 						</b-badge>
 
 						<b-badge variant="success"
@@ -65,19 +88,67 @@
 				</ul>
 			</div>
 		</b-col>
+
+		<b-col>
+			<div
+				style="padding: 16px;
+					border: 1px solid rgb(0.1, 0.1, 0.1, 0.25);
+					border-radius: 8px;
+					margin-top: 12px;
+					margin-left: auto; margin-right: auto;"
+			>
+				<h3 style="text-align: center">
+					New Schedule
+				</h3>
+				<hr>
+
+				Date:
+				<v-date-picker
+					v-model="form.date"
+					is-required
+					style="margin-top: 32px;"
+					:min-date="new Date()"
+					@input="on_date_select"
+				>
+					<template v-slot="{ inputValue, inputEvents }">
+						<input
+							class="bg-white border px-2 py-1 rounded"
+							:value="inputValue"
+							v-on="inputEvents"
+						/>
+					</template>
+				</v-date-picker>
+				<hr>
+
+				Start Time:
+				<v-date-picker mode="time" v-model="form.start_time" />
+				<hr>
+
+				End Time:
+				<v-date-picker mode="time" v-model="form.end_time" />
+
+				<b-row>
+					<b-col class="text-center">
+						<b-button variant="primary"
+							style="margin-top: 32px;"
+							align-middle
+							:disabled="check_date()"
+						>
+							Add Schedule
+						</b-button>
+					</b-col>
+				</b-row>
+			</div>
+		</b-col>
 	</b-row>
 </template>
 
 <script>
 const Axios = require("axios");
 const Moment = require("moment");
-// import PopoverRow from "v-calendar/lib/components/popover-row.umd.min";
 
 export default {
 	name: "Scheduler",
-	components: {
-		// PopoverRow,
-	},
 
 	mounted: async function() {
 		const is_admin = sessionStorage["is_admin"];
@@ -98,17 +169,35 @@ export default {
 		if (r_events.data.results.length > 0) {
 			for (let i = 0; i < r_events.data.results.length; i++) {
 				const e = r_events.data.results[i];
+				const date = new Date(e.date);
+				date.setHours(e.start_hr, e.start_min);
+
+				let is_today;
+				if (this.is_today(date)) {
+					is_today = {
+						color: "green",
+						fillMode: "light"
+					}
+				}
+
+				const past = this.date_past(date);
+				let color;
+
+				if (past) color = "red";
+				else color = "green";
 
 				const o = {
 					key: e.date_key,
-					dot: true,
-					content: "red",
 					dates: e.date,
+					dot: color,
+					highlight: is_today,
+					content: color,
 					popover: {
 						visibility: "hover",
 					},
 					customData: {
 						date: e.date,
+						date_obj: date,
 						start_time: e.start_time,
 						end_time: e.end_time,
 						start: [e.start_hr, e.start_min],
@@ -124,6 +213,47 @@ export default {
 	},
 
 	methods: {
+		check_date: function() {
+			const f = this.form;
+
+			if (f.date == null || f.start_time == null || f.end_time == null)
+				return true;
+
+			if (!(f.end_time > f.start_time))
+				return true;
+
+			return false;
+		},
+		on_date_select: function(date) {
+			this.form.start_time = date;
+			this.form.end_time = date;
+		},
+		is_today: function(date) {
+			const now = new Date();
+			const temp = new Date(date);
+
+			now.setHours(0, 0, 0, 0);
+			temp.setHours(0, 0, 0, 0);
+
+			if (now.setHours(0, 0, 0, 0) == temp.setHours(0, 0, 0, 0))
+				return true;
+
+			return false;
+		},
+		date_past: function(date) {
+			const now = new Date();
+			now.setHours(0, 0, 0, 0);
+
+			return date < now;
+		},
+		get_variant: function(data) {
+			const past = this.date_past(data.date_obj);
+
+			if (past)
+				return "warning";
+			else
+				return "info";
+		},
 		on_day_click: function(day) {
 			const key = day.id;
 
@@ -168,14 +298,11 @@ export default {
 			is_loading: false,
 			view_only: false,
 			attributes: [],
-			config_edit: {
-				title: "Set Available Schedule",
-				createButtonLabel: "Save",
+			form: {
+				date: null,
+				start_time: null,
+				end_time: null,
 			},
-			config_view: {
-				title: "Schedule View",
-				createButtonLabel: "Done",
-			}
 		}
 	},
 }
