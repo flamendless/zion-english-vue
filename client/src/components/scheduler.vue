@@ -71,13 +71,6 @@
 							</div>
 						</b-badge>
 
-						<b-badge variant="success"
-							style="cursor: pointer; margin-left: 16px;"
-							@click="edit_date(event, i)"
-						>
-							Edit
-						</b-badge>
-
 						<b-badge variant="danger"
 							style="cursor: pointer; margin-left: 16px;"
 							@click="delete_date(event, i)"
@@ -133,6 +126,7 @@
 							style="margin-top: 32px;"
 							align-middle
 							:disabled="check_date()"
+							@click="on_add_schedule"
 						>
 							Add Schedule
 						</b-button>
@@ -154,6 +148,7 @@ export default {
 		const is_admin = sessionStorage["is_admin"];
 		this.account_id = sessionStorage["account_id"];
 		this.teacher_id = sessionStorage["teacher_id"];
+		this.email = sessionStorage["email"];
 
 		let req;
 		if (is_admin) {
@@ -169,50 +164,55 @@ export default {
 		if (r_events.data.results.length > 0) {
 			for (let i = 0; i < r_events.data.results.length; i++) {
 				const e = r_events.data.results[i];
-				const date = new Date(e.date);
-				date.setHours(e.start_hr, e.start_min);
 
-				let is_today;
-				if (this.is_today(date)) {
-					is_today = {
-						color: "green",
-						fillMode: "light"
-					}
-				}
-
-				const past = this.date_past(date);
-				let color;
-
-				if (past) color = "red";
-				else color = "green";
-
-				const o = {
-					key: e.date_key,
-					dates: e.date,
-					dot: color,
-					highlight: is_today,
-					content: color,
-					popover: {
-						visibility: "hover",
-					},
-					customData: {
-						date: e.date,
-						date_obj: date,
-						start_time: e.start_time,
-						end_time: e.end_time,
-						start: [e.start_hr, e.start_min],
-						end: [e.end_hr, e.end_min],
-						email: e.email,
-					},
-				};
-
-				this.attributes.push(o);
+				this.add_event(e);
 			}
 		}
 		this.is_loading = false;
 	},
 
 	methods: {
+		add_event: function(e) {
+			const date = new Date(e.date);
+			date.setHours(e.start_hr, e.start_min);
+
+			let is_today;
+			if (this.is_today(date)) {
+				is_today = {
+					color: "green",
+					fillMode: "light"
+				}
+			}
+
+			const past = this.date_past(date);
+			let color;
+
+			if (past) color = "red";
+			else color = "green";
+
+			const o = {
+				key: e.date_key,
+				dates: e.date,
+				dot: color,
+				highlight: is_today,
+				content: color,
+				popover: {
+					visibility: "hover",
+				},
+				customData: {
+					date: e.date,
+					date_obj: date,
+					start_time: e.start_time,
+					end_time: e.end_time,
+					start: [e.start_hr, e.start_min],
+					end: [e.end_hr, e.end_min],
+					email: e.email,
+					schedule_id: e.schedule_id,
+				},
+			};
+
+			this.attributes.push(o);
+		},
 		check_date: function() {
 			const f = this.form;
 
@@ -254,40 +254,52 @@ export default {
 			else
 				return "info";
 		},
-		on_day_click: function(day) {
-			const key = day.id;
+		delete_date: async function(e, i) {
+			if (window.confirm("Are you sure you want to delete this?")) {
+				if (this.is_loading == false) {
+					this.is_loading = true;
 
-			for (let i = 0; i < this.attributes.length; i++) {
-				const e = this.attributes[i];
+					const r_del = await Axios.post("/delete_schedule", {
+						schedule_id: e.customData.schedule_id,
+					});
 
-				if (key == e.key) {
-					this.date_range.start.setHours(...e.customData.start);
-					this.date_range.end.setHours(...e.customData.end);
+					if (r_del.data.success) {
+						this.attributes.splice(i, 1);
+						this.$notify("Schedule removed successfully");
+					} else
+						this.$notify("Schedule removed unsuccessfully");
 
-					// console.log(...e.customData.start)
-					// console.log(this.date_range.start)
-					break;
+					this.is_loading = false;
 				}
 			}
 		},
-		edit_date: function(e, i) {
-			alert(e, i);
-		},
+		on_add_schedule: async function() {
+			const f = this.form;
 
-		event_created_edit: async function(obj) {
+			if (f.date == null || f.start_time == null || f.end_time == null)
+				return false;
+
 			this.is_loading = true;
-			const date = Moment(obj.date).format("YYYY/MM/DD HH:mm:ss");
 
-			const r_event = await Axios.post("/add_schedule", {
-				date: date,
-				start_time: obj.startTime,
-				end_time: obj.endTime,
+			const r_sched = await Axios.post("/add_schedule", {
+				date: Moment(f.date).format("YYYY-MM-DD HH:mm:ss"),
+				start_time: Moment(f.start_time).format("HH:mm:ss"),
+				end_time: Moment(f.end_time).format("HH:mm:ss"),
 				account_id: this.account_id,
 				teacher_id: this.teacher_id,
 			});
 
-			if (r_event.data.success)
+			if (r_sched.data.success) {
 				this.$notify("Schedule set successfully");
+				this.add_event({
+					date: Moment(f.date).format("MM/DD/YYYY"),
+					start_time: Moment(f.start_time).format("HH:mm"),
+					end_time: Moment(f.end_time).format("HH:mm"),
+					start: [f.start_time.getHours(), f.start_time.getMinutes()],
+					end: [f.end_time.getHours(), f.end_time.getMinutes()],
+					email: this.email,
+				});
+			}
 
 			this.is_loading = false;
 		},
@@ -297,6 +309,7 @@ export default {
 		return {
 			is_loading: false,
 			view_only: false,
+			email: null,
 			attributes: [],
 			form: {
 				date: null,

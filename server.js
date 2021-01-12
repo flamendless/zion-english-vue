@@ -457,6 +457,18 @@ app.post("/add_schedule", (req, res) => {
 	}));
 });
 
+app.post("/delete_schedule", (req, res) => {
+	const args = req.body;
+	const query = `DELETE FROM tbl_schedule WHERE schedule_id = ?`;
+
+	DB.query(query, [args.schedule_id]).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
 app.listen(PORT, () => {
 	console.log(`server listening at http://localhost:${PORT}`)
 });
