@@ -260,7 +260,16 @@ app.get("/get_all_events", (req, res) => {
 	const args = req.params;
 	const query = `SELECT
 		s.schedule_id, s.teacher_id,
-		s.date, s.start_time, s.end_time,
+
+		DATE_FORMAT(s.date, '%Y-%m-%d') AS date_key,
+		DATE_FORMAT(s.date, '%m/%d/%Y') AS date,
+		TIME_FORMAT(s.start_time, '%H:%i') AS start_time,
+		TIME_FORMAT(s.end_time, '%H:%i') AS end_time,
+		TIME_FORMAT(s.start_time, '%H') AS start_hr,
+		TIME_FORMAT(s.start_time, '%i') AS start_min,
+		TIME_FORMAT(s.end_time, '%H') AS end_hr,
+		TIME_FORMAT(s.end_time, '%i') AS end_min,
+
 		a.account_id, a.email,
 		t.fname, t.mname, t.lname
 	FROM tbl_schedule AS s

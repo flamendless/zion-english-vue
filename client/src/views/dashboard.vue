@@ -4,6 +4,7 @@
 		align="center"
 	>
 		<b-tab title="Overview" active>
+			<Schedules />
 		</b-tab>
 
 		<b-tab title="Teachers" lazy>
@@ -38,6 +39,7 @@ import TableTeachers from "@/components/table_teachers.vue"
 import TableLessons from "@/components/table_lessons.vue"
 import TeacherInfo from "@/components/teacher_info.vue"
 import Scheduler from "@/components/scheduler.vue"
+import Schedules from "@/components/schedules.vue"
 
 export default {
 	name: "Dashboard",
@@ -46,6 +48,7 @@ export default {
 		TeacherInfo,
 		TableLessons,
 		Scheduler,
+		Schedules,
 	},
 
 	mounted: function() {
