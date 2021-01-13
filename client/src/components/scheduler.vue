@@ -22,10 +22,16 @@
 								</b-badge>
 							</li>
 							<li>
-								teacher: {{ customData.email }}
+								Teacher: {{ customData.email }}
+							</li>
+							<li v-if="customData.student_email">
+								Student: {{ customData.student_email }}
+							</li>
+							<li v-if="customData.lesson_title">
+								Lesson Title: {{ customData.lesson_title }}
 							</li>
 							<li>
-								time: {{ customData.start_time }} - {{ customData.end_time }}
+								Time: {{ customData.start_time }} - {{ customData.end_time }}
 							</li>
 						</ul>
 					</div>
@@ -69,6 +75,13 @@
 								-
 								{{ event.customData.end_time }}
 							</div>
+						</b-badge>
+
+						<b-badge variant="info"
+							style="margin-left: 16px;"
+						>
+							{{ calc_remaining_hours(event.customData) }}
+							hrs. remaining
 						</b-badge>
 
 						<b-badge variant="danger"
@@ -167,6 +180,29 @@ export default {
 				this.add_event(e);
 			}
 		}
+
+		const r_sessions = await Axios.get("/get_sessions/" + this.teacher_id)
+		if (r_sessions.data.success && r_sessions.data.results.length > 0) {
+			for (let i = 0; i < r_sessions.data.results.length; i++) {
+				const d = r_sessions.data.results[i];
+
+				this.add_event({
+					key: d.date_key,
+					date: d.date,
+					start_time: d.session_start,
+					end_time: d.session_end,
+					start_hr: d.start_hr,
+					start_min: d.start_min,
+					end_hr: d.end_hr,
+					end_min: d.end_min,
+					email: d.teacher_email,
+					lesson_title: d.lesson_title,
+					student_email: d.student_email,
+					session_id: d.session_id,
+				});
+			}
+		}
+
 		this.is_loading = false;
 	},
 
@@ -207,10 +243,27 @@ export default {
 					end: [e.end_hr, e.end_min],
 					email: e.email,
 					schedule_id: e.schedule_id,
+					lesson_title: e.lesson_title,
+					student_email: e.student_email,
+					session_id: e.session_id,
 				},
 			};
 
 			this.attributes.push(o);
+		},
+		calc_remaining_hours: function(d) {
+			const today = new Date();
+			const diff = d.date_obj - today;
+
+			if (diff < 0)
+				return 0;
+
+			const d_days = Math.floor(diff / 86400000);
+			let d_hr = Math.floor((diff % 86400000) / 3600000);
+
+			d_hr = d_hr + (d_days * 24);
+
+			return d_hr;
 		},
 		check_date: function() {
 			const f = this.form;
@@ -251,7 +304,7 @@ export default {
 			if (past)
 				return "warning";
 			else
-				return "info";
+				return "primary";
 		},
 		delete_date: async function(e, i) {
 			if (window.confirm("Are you sure you want to delete this?")) {
@@ -309,6 +362,7 @@ export default {
 			is_loading: false,
 			email: null,
 			attributes: [],
+			upcoming: [],
 			form: {
 				date: null,
 				start_time: null,

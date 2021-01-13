@@ -288,6 +288,12 @@
 
 			<b-row>
 				<b-col class="text-center">
+					<div id="paypal-container"></div>
+				</b-col>
+			</b-row>
+
+			<b-row>
+				<b-col class="text-center">
 					<b-button class="btn" type="submit" variant="primary" size="lg">
 						<b-spinner small v-if="loading"></b-spinner>
 						Submit
@@ -324,6 +330,7 @@
 			Schedule Again
 		</b-button>
 	</b-jumbotron>
+
 	<div class="body">
 		<div id="contact_us" v-scrollWatch="{name: 'contact_us'}">
 			<ContactUs class="contact_us"/>
@@ -345,6 +352,11 @@ export default {
 	},
 
 	mounted: async function() {
+		const scr = document.createElement("script");
+		scr.src = "https://www.paypal.com/sdk/js?client-id=AXhdWvoAlyGQNXiYk2WRXIeaDsqRw5vEEY4crNCWEWKMDMWkNT3Qjou2QenlKJQdsvTD9dk01XBpttX3&currency=CAD";
+		// scr.addEventListener("load", this.setLoaded);
+		document.body.appendChild(scr);
+
 		const r_teachers = await Axios.get("/get_teachers_list/" + false);
 		const r_lessons = await Axios.get("/get_lessons_list/" + false);
 
@@ -390,9 +402,13 @@ export default {
 				const end = this.form.end_time;
 				const start = this.form.start_time;
 				const d_ms = end - start;
-				const d_min = Math.round(((d_ms % 86400000) % 3600000) / 60000);
+				const d_hr = Math.floor((d_ms % 86400000) / 3600000);
+				let d_min = Math.round(((d_ms % 86400000) % 3600000) / 60000);
 
+				d_min = d_min + (d_hr * 60);
 				this.form.amount = (d_min/25) * 4.9;
+
+				this.setLoaded();
 			}
 		},
 	},
@@ -457,13 +473,13 @@ export default {
 			});
 
 			if (r_reg.data.success) {
-				console.log(r_reg)
 				const student_id = r_reg.data.results.insertId;
 
 				const r_session = await Axios.post("/register_session", {
 					student_id: student_id,
 					teacher_id: f.teacher.id,
 					lesson_id: f.lesson.id,
+					session_date: Moment(f.date).format("YYYY-MM-DD HH:mm:ss"),
 					session_start: Moment(f.start_time).format("HH:mm:ss"),
 					session_end: Moment(f.end_time).format("HH:mm:ss"),
 					amount: f.amount,
@@ -478,11 +494,35 @@ export default {
 				this.$notify("Application submitted unsuccessfully");
 
 			this.loading = false;
+		},
+		setLoaded: function() {
+			const t = this;
+
+			window.paypal.Buttons({
+				env: "sandbox",
+				createOrder: function(data, actions) {
+					return actions.order.create({
+						purchase_units: [{
+							description: "Lesson payment",
+							amount: {
+								currency_code: "CAD",
+								value: t.form.amount,
+							}
+						}]
+					})
+				},
+				onApprove: async function(data, actions) {
+					const order = await actions.order.capture();
+					console.log(order)
+				}
+			}).render("#paypal-container");
 		}
 	},
 
 	data: function() {
 		return {
+			can_pay: false,
+			paid: false,
 			result: false,
 			loading: false,
 			form: {

@@ -14,6 +14,10 @@
 		<b-tab title="Lessons" lazy>
 			<TableLessons />
 		</b-tab>
+
+		<b-tab title="Transactions" lazy>
+			<Transactions />
+		</b-tab>
 	</b-tabs>
 
 	<b-tabs content-class="mt-3" v-if="signed_in && is_teacher"
@@ -30,6 +34,10 @@
 		<b-tab title="My Schedule" lazy>
 			<Scheduler />
 		</b-tab>
+
+		<b-tab title="Transactions" lazy>
+			<Transactions />
+		</b-tab>
 	</b-tabs>
 </div>
 </template>
@@ -40,6 +48,7 @@ import TableLessons from "@/components/table_lessons.vue"
 import TeacherInfo from "@/components/teacher_info.vue"
 import Scheduler from "@/components/scheduler.vue"
 import Schedules from "@/components/schedules.vue"
+import Transactions from "@/components/transactions.vue"
 
 export default {
 	name: "Dashboard",
@@ -49,6 +58,7 @@ export default {
 		TableLessons,
 		Scheduler,
 		Schedules,
+		Transactions,
 	},
 
 	mounted: function() {

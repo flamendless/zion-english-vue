@@ -14,6 +14,16 @@
 			/>
 
 			<b-card-footer>
+				<b-button variant="success" size="lg">
+					{{ total_earnings }} CAD
+				</b-button>
+
+				<div id="paypal-container"
+					style="margin: 16px;">
+				</div>
+
+				<hr>
+
 				<b-button v-if="is_admin"
 					variant="danger"
 					@click="on_delete"
@@ -189,6 +199,11 @@ export default {
 	name: "TeacherInfo",
 
 	mounted: async function() {
+		const scr = document.createElement("script");
+		scr.src = "https://www.paypal.com/sdk/js?client-id=AXhdWvoAlyGQNXiYk2WRXIeaDsqRw5vEEY4crNCWEWKMDMWkNT3Qjou2QenlKJQdsvTD9dk01XBpttX3&currency=CAD";
+		scr.addEventListener("load", this.setLoaded);
+		document.body.appendChild(scr);
+
 		const is_admin = sessionStorage["is_admin"];
 		const is_teacher = sessionStorage["is_teacher"];
 		// const account_id = sessionStorage["account_id"];
@@ -206,6 +221,8 @@ export default {
 		else
 			teacher_id = user_teacher_id;
 
+		this.teacher_id = teacher_id;
+
 		const r_teacher = await Axios.get("/get_teacher_info/" + teacher_id);
 		const res = r_teacher.data.results[0];
 
@@ -213,6 +230,8 @@ export default {
 			const img = require("@/uploads/" + res.name);
 			this.image = img;
 		}
+
+		this.get_total_earnings();
 
 		this.table_data.push(res);
 
@@ -233,6 +252,12 @@ export default {
 	},
 
 	methods: {
+		get_total_earnings: async function() {
+			const res = await Axios.get("/get_total_earnings/" + this.teacher_id)
+
+			if (res.data.success)
+				this.total_earnings = res.data.results[0].total;
+		},
 		get_img_url: function(img) {
 			return URL.createObjectURL(img);
 		},
@@ -294,15 +319,39 @@ export default {
 			if (r_info.data.success) {
 				location.reload();
 			}
+		},
+		setLoaded: function() {
+			const t = this;
+
+			window.paypal.Buttons({
+				env: "sandbox",
+				createOrder: function(data, actions) {
+					return actions.order.create({
+						purchase_units: [{
+							description: "Salary",
+							amount: {
+								currency_code: "CAD",
+								value: t.total_earnings,
+							}
+						}]
+					})
+				},
+				onApprove: async function(data, actions) {
+					const order = await actions.order.capture();
+					console.log(order)
+				}
+			}).render("#paypal-container");
 		}
 	},
 
 	data: function() {
 		return {
+			teacher_id: null,
 			is_edit: false,
 			can_change: true,
 			is_admin: false,
 			is_teacher: false,
+			total_earnings: 0,
 			image: null,
 			table_data: [],
 			form: {

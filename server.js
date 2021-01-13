@@ -312,6 +312,106 @@ app.get("/get_events/:account_id", (req, res) => {
 	}));
 });
 
+app.get("/get_sessions/:teacher_id", (req, res) => {
+	const args = req.params;
+	const query = `SELECT
+			s.session_id, s.amount,
+			DATE_FORMAT(s.session_date, '%Y-%m-%d') AS date_key,
+			DATE_FORMAT(s.session_date, '%m/%d/%Y') AS date,
+			TIME_FORMAT(s.session_start, '%H:%i') AS session_start,
+			TIME_FORMAT(s.session_end, '%H:%i') AS session_end,
+			TIME_FORMAT(s.session_start, '%H') AS start_hr,
+			TIME_FORMAT(s.session_start, '%i') AS start_min,
+			TIME_FORMAT(s.session_end, '%H') AS end_hr,
+			TIME_FORMAT(s.session_end, '%i') AS end_min,
+			st.student_id, st.fname, st.mname, st.lname, st.email AS student_email,
+			CONCAT_WS(" ", st.fname, st.mname, st.lname) AS student_fullname,
+			l.lesson_id, l.title AS lesson_title,
+			t.teacher_id, a.email AS teacher_email
+		FROM tbl_session AS s
+		INNER JOIN tbl_teacher AS t ON s.teacher_id = t.teacher_id
+		INNER JOIN tbl_account AS a ON t.account_id = a.account_id
+		INNER JOIN tbl_student AS st ON s.student_id = st.student_id
+		INNER JOIN tbl_lesson AS l ON s.lesson_id = l.lesson_id
+		WHERE s.teacher_id = ${args.teacher_id}
+		GROUP BY s.session_id`;
+
+	DB.query(query).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.get("/get_total_earnings/:teacher_id", (req, res) => {
+	const args = req.params;
+	const query = `SELECT
+			SUM(amount) AS total
+		FROM tbl_session
+		WHERE teacher_id = ${args.teacher_id}
+		AND session_date < NOW()
+		AND session_end < NOW()`;
+
+	DB.query(query).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.get("/get_transactions/:teacher_id", (req, res) => {
+	const args = req.params;
+	const query = `SELECT
+			s.session_id, s.amount,
+			t.teacher_id,
+			DATE_FORMAT(s.session_date, '%m/%d/%Y') AS date,
+			TIME_FORMAT(s.session_start, '%H:%i') AS start_time,
+			TIME_FORMAT(s.session_end, '%H:%i') AS end_time,
+			a.email AS teacher_email,
+			st.student_id, st.email AS student_email,
+			l.lesson_id, l.title AS lesson_title
+		FROM tbl_session AS s
+		INNER JOIN tbl_teacher AS t ON s.teacher_id = t.teacher_id
+		INNER JOIN tbl_account AS a ON t.account_id = a.account_id
+		INNER JOIN tbl_student AS st ON s.student_id = st.student_id
+		INNER JOIN tbl_lesson AS l ON s.lesson_id = l.lesson_id
+		WHERE s.teacher_id = ${args.teacher_id}`;
+
+	DB.query(query).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.get("/get_transactions_list", (req, res) => {
+	const args = req.params;
+	const query = `SELECT
+			s.session_id, s.amount,
+			t.teacher_id,
+			DATE_FORMAT(s.session_date, '%m/%d/%Y') AS date,
+			TIME_FORMAT(s.session_start, '%H:%i') AS start_time,
+			TIME_FORMAT(s.session_end, '%H:%i') AS end_time,
+			a.email AS teacher_email,
+			st.student_id, st.email AS student_email,
+			l.lesson_id, l.title AS lesson_title
+		FROM tbl_session AS s
+		INNER JOIN tbl_teacher AS t ON s.teacher_id = t.teacher_id
+		INNER JOIN tbl_account AS a ON t.account_id = a.account_id
+		INNER JOIN tbl_student AS st ON s.student_id = st.student_id
+		INNER JOIN tbl_lesson AS l ON s.lesson_id = l.lesson_id`;
+
+	DB.query(query).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
 app.post("/verify_account", (req, res) => {
 	const args = req.body;
 	const query = `UPDATE tbl_teacher SET verified = 1 WHERE teacher_id = ?`;
@@ -495,9 +595,9 @@ app.post("/register_student", (req, res) => {
 
 app.post("/register_session", (req, res) => {
 	const args = req.body;
-	const query = `INSERT INTO tbl_session(student_id, teacher_id, lesson_id, amount, session_start, session_end)
-		VALUES(?, ?, ?, ?, ?, ?)`;
-	const params = [args.student_id, args.teacher_id, args.lesson_id, args.amount, args.session_start, args.session_end];
+	const query = `INSERT INTO tbl_session(student_id, teacher_id, lesson_id, amount, session_date, session_start, session_end)
+		VALUES(?, ?, ?, ?, ?, ?, ?)`;
+	const params = [args.student_id, args.teacher_id, args.lesson_id, args.amount, args.session_date, args.session_start, args.session_end];
 
 	DB.query(query, params).then(data => {
 		res.json(data);
