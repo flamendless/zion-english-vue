@@ -109,9 +109,10 @@ app.get("/get_teachers_list/:is_admin", (req, res) => {
 	const query = `SELECT
 		a.account_id, a.email,
 		t.teacher_id, t.fname, t.mname, t.lname, t.verified,
+		CONCAT_WS(" ", t.fname, t.mname, t.lname) AS fullname,
 		DATE_FORMAT(t.birthdate, '%m/%d/%Y') AS birthdate,
 		DATE_FORMAT(t.date_joined, '%m/%d/%Y') AS date_joined,
-		t.picture_id
+		t.teacher_id, t.picture_id
 		FROM tbl_account AS a
 		INNER JOIN tbl_teacher AS t ON a.account_id = t.account_id
 		WHERE a.type = 'teacher'`
@@ -483,6 +484,20 @@ app.post("/register_student", (req, res) => {
 	const query = `INSERT INTO tbl_student(email, fname, mname, lname, birthdate, country)
 		VALUES(?, ?, ?, ?, ?, ?)`;
 	const params = [args.email, args.fname, args.mname, args.lname, args.birthdate, args.country];
+
+	DB.query(query, params).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
+app.post("/register_session", (req, res) => {
+	const args = req.body;
+	const query = `INSERT INTO tbl_session(student_id, teacher_id, lesson_id, amount, session_start, session_end)
+		VALUES(?, ?, ?, ?, ?, ?)`;
+	const params = [args.student_id, args.teacher_id, args.lesson_id, args.amount, args.session_start, args.session_end];
 
 	DB.query(query, params).then(data => {
 		res.json(data);
