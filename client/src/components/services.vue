@@ -21,7 +21,9 @@
 					</ul>
 
 					<div class="text-center">
-						<b-button :href="button.href" variant="primary" v-ripple disabled>
+						<b-button variant="primary" v-ripple
+							@click="on_click"
+						>
 							<b-icon-info-circle class="icon"></b-icon-info-circle>
 							{{ button.title }}
 						</b-button>
@@ -36,6 +38,11 @@
 <script>
 export default {
 	name: "Services",
+	methods: {
+		on_click: function() {
+			this.$router.push({name: "StudentApply"});
+		}
+	},
 	data: function() {
 		return {
 			title: "What We Offer",
@@ -51,7 +58,7 @@ export default {
 				"Grammar",
 			],
 			button: {
-				title: "Learn More",
+				title: "Schedule A Lesson",
 				href: "/services"
 			}
 		}

@@ -29,7 +29,7 @@ export default {
 	mounted: function() {
 		const name = this.$route.name;
 
-		if (name == "Root" || name == "Home")
+		if (name == "Root" || name == "Home" || name == "StudentApply")
 		{
 			this.in_backend = false;
 			this.id = "app";

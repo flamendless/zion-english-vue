@@ -50,6 +50,11 @@ const routes = [
 		name: "LessonInfo",
 		component: () => import("../components/lesson_info.vue")
 	},
+	{
+		path: "/StudentApply",
+		name: "StudentApply",
+		component: () => import("../views/student_apply.vue")
+	},
 ]
 
 const router = new VueRouter({

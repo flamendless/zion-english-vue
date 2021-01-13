@@ -152,7 +152,6 @@ export default {
 
 		let req;
 		if (is_admin) {
-			this.view_only = true;
 			req = "/get_all_events";
 		} else {
 			req = "/get_events/" + this.account_id;
@@ -308,7 +307,6 @@ export default {
 	data: function() {
 		return {
 			is_loading: false,
-			view_only: false,
 			email: null,
 			attributes: [],
 			form: {

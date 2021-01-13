@@ -38,6 +38,20 @@ export default {
 		Testimonials,
 		ContactUs,
 	},
+
+	created: function() {
+		const t = this;
+
+		this.$notify({
+			// message: "Schedule A Lesson Now",
+			showClose: true,
+			actionText: "Schedule A Lesson Now",
+			onActionClick: function() {
+				t.$router.push({name: "StudentApply"});
+			},
+			closeDelay: Number.MAX_SAFE_INTEGER/10,
+		});
+	},
 }
 </script>
 

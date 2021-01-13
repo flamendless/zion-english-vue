@@ -8,26 +8,28 @@
 				>
 					<div
 						slot="day-popover"
-						slot-scope="{ day, dayTitle, attributes }"
+						slot-scope="{ day, dayTitle }"
 					>
 						<div class="text-xs text-gray-300 font-font-semibold text-center">
 							{{ dayTitle }}
 						</div>
 						<ul
-							v-for="{key, customData} in attributes"
-							:key="key"
+							v-for="(attr, i) in attributes"
+							:key="i"
 						>
-							<li v-if="date_past(customData.date_obj)">
-								<b-badge variant="warning">
-									Date is Past Already
-								</b-badge>
-							</li>
-							<li>
-								teacher: {{ customData.email }}
-							</li>
-							<li>
-								time: {{ customData.start_time }} - {{ customData.end_time }}
-							</li>
+							<div v-if="day.id == attr.key">
+								<li v-if="date_past(attr.customData.date_obj)">
+									<b-badge variant="warning">
+										Date is Past Already
+									</b-badge>
+								</li>
+								<li>
+									teacher: {{ attr.customData.email }}
+								</li>
+								<li>
+									time: {{ attr.customData.start_time }} - {{ attr.customData.end_time }}
+								</li>
+							</div>
 						</ul>
 					</div>
 				</v-calendar>
@@ -55,28 +57,59 @@
 						v-for="(event, i) in attributes"
 						:key="i"
 					>
-						<b-badge :variant="get_variant(event.customData)">
-							<del v-if="date_past(event.customData.date_obj)">
-								{{ event.customData.date }}
-								:
-								{{ event.customData.start_time }}
-								-
-								{{ event.customData.end_time }}
-							</del>
-							<div v-else>
-								{{ event.customData.date }}
-								:
-								{{ event.customData.start_time }}
-								-
-								{{ event.customData.end_time }}
-							</div>
-						</b-badge>
+						<div v-if="Array.isArray(event)">
+							<b-badge :variant="get_variant(event[0].customData)">
+								<del v-if="date_past(event[0].customData.date_obj)">
+									{{ event[0].customData.date }}
+									:
+									{{ event[0].customData.start_time }}
+									-
+									{{ event[0].customData.end_time }}
+								</del>
+								<div v-else>
+									{{ event[0].customData.date }}
+									:
+									{{ event[0].customData.start_time }}
+									-
+									{{ event[0].customData.end_time }}
+								</div>
+							</b-badge>
 
-						<b-badge variant="info"
-							style="cursor: pointer; margin-left: 16px;"
-						>
-							{{ event.customData.email }}
-						</b-badge>
+							<a :href="event[0].customData.href">
+								<b-badge variant="info"
+									style="cursor: pointer; margin-left: 16px;"
+								>
+									{{ event[0].customData.email }}
+								</b-badge>
+							</a>
+						</div>
+
+						<div v-else>
+							<b-badge :variant="get_variant(event.customData)">
+								<del v-if="date_past(event.customData.date_obj)">
+									{{ event.customData.date }}
+									:
+									{{ event.customData.start_time }}
+									-
+									{{ event.customData.end_time }}
+								</del>
+								<div v-else>
+									{{ event.customData.date }}
+									:
+									{{ event.customData.start_time }}
+									-
+									{{ event.customData.end_time }}
+								</div>
+							</b-badge>
+
+							<a :href="event.customData.href">
+								<b-badge variant="info"
+									style="cursor: pointer; margin-left: 16px;"
+								>
+									{{ event.customData.email }}
+								</b-badge>
+							</a>
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -86,7 +119,6 @@
 
 <script>
 const Axios = require("axios");
-const Moment = require("moment");
 
 export default {
 	name: "Scheduler",
@@ -99,7 +131,6 @@ export default {
 
 		let req;
 		if (is_admin) {
-			this.view_only = true;
 			req = "/get_all_events";
 		} else {
 			req = "/get_events/" + this.account_id;
@@ -114,7 +145,11 @@ export default {
 
 				this.add_event(e);
 			}
+
+			this.combine();
 		}
+		console.log(this.attributes)
+
 		this.is_loading = false;
 	},
 
@@ -155,25 +190,35 @@ export default {
 					end: [e.end_hr, e.end_min],
 					email: e.email,
 					schedule_id: e.schedule_id,
+					href: "/teacher_info?teacher_id=" + e.teacher_id,
 				},
 			};
 
-			this.attributes.push(o);
+			this.temp.push(o);
 		},
-		check_date: function() {
-			const f = this.form;
+		combine: function() {
+			const new_arr = this.attributes;
 
-			if (f.date == null || f.start_time == null || f.end_time == null)
-				return true;
+			for (let i = 0; i < this.temp.length; i++) {
+				const a = this.temp[i];
+				let matched = false;
 
-			if (!(f.end_time > f.start_time))
-				return true;
+				for (let j = i; j < this.temp.length; j++) {
+					const b = this.temp[j];
 
-			return false;
-		},
-		on_date_select: function(date) {
-			this.form.start_time = date;
-			this.form.end_time = date;
+					if (i != j && a.key == b.key) {
+						const arr = [];
+						arr.push(a);
+						arr.push(b);
+
+						new_arr.push(arr);
+						matched = true;
+					}
+				}
+
+				if (!matched)
+					new_arr.push(a)
+			}
 		},
 		is_today: function(date) {
 			const now = new Date();
@@ -201,68 +246,14 @@ export default {
 			else
 				return "info";
 		},
-		delete_date: async function(e, i) {
-			if (window.confirm("Are you sure you want to delete this?")) {
-				if (this.is_loading == false) {
-					this.is_loading = true;
-
-					const r_del = await Axios.post("/delete_schedule", {
-						schedule_id: e.customData.schedule_id,
-					});
-
-					if (r_del.data.success) {
-						this.attributes.splice(i, 1);
-						this.$notify("Schedule removed successfully");
-					} else
-						this.$notify("Schedule removed unsuccessfully");
-
-					this.is_loading = false;
-				}
-			}
-		},
-		on_add_schedule: async function() {
-			const f = this.form;
-
-			if (f.date == null || f.start_time == null || f.end_time == null)
-				return false;
-
-			this.is_loading = true;
-
-			const r_sched = await Axios.post("/add_schedule", {
-				date: Moment(f.date).format("YYYY-MM-DD HH:mm:ss"),
-				start_time: Moment(f.start_time).format("HH:mm:ss"),
-				end_time: Moment(f.end_time).format("HH:mm:ss"),
-				account_id: this.account_id,
-				teacher_id: this.teacher_id,
-			});
-
-			if (r_sched.data.success) {
-				this.$notify("Schedule set successfully");
-				this.add_event({
-					date: Moment(f.date).format("MM/DD/YYYY"),
-					start_time: Moment(f.start_time).format("HH:mm"),
-					end_time: Moment(f.end_time).format("HH:mm"),
-					start: [f.start_time.getHours(), f.start_time.getMinutes()],
-					end: [f.end_time.getHours(), f.end_time.getMinutes()],
-					email: this.email,
-				});
-			}
-
-			this.is_loading = false;
-		},
 	},
 
 	data: function() {
 		return {
 			is_loading: false,
-			view_only: false,
 			email: null,
 			attributes: [],
-			form: {
-				date: null,
-				start_time: null,
-				end_time: null,
-			},
+			temp: [],
 		}
 	},
 }

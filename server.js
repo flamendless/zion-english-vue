@@ -478,6 +478,20 @@ app.post("/delete_schedule", (req, res) => {
 	}));
 });
 
+app.post("/register_student", (req, res) => {
+	const args = req.body;
+	const query = `INSERT INTO tbl_student(email, fname, mname, lname, birthdate, country)
+		VALUES(?, ?, ?, ?, ?, ?)`;
+	const params = [args.email, args.fname, args.mname, args.lname, args.birthdate, args.country];
+
+	DB.query(query, params).then(data => {
+		res.json(data);
+	}).catch(err => res.json({
+		success: false,
+		err: err,
+	}));
+});
+
 app.listen(PORT, () => {
 	console.log(`server listening at http://localhost:${PORT}`)
 });

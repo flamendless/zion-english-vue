@@ -1,22 +1,22 @@
 - [X] Sign Up
 - [X] Sign In
 
-- [ ] Schedule
-  - [ ] Edit available schedule (teacher)
-  - [ ] View schedule (admin/teacher)
+- [X] Schedule
   - [X] Add available schedule (teacher)
+  - [X] Edit available schedule (teacher)
+  - [X] View schedule (admin/teacher)
 
 - [ ] Student avail lesson
   - [ ] Admin get list of who's available
 
 - [ ] Dashboard (Admin)
-  - [ ] View list of teachers' schedule
   - [ ] Distribute lesson
   - [X] View list of teachers' info
   - [X] Add lesson
   - [X] View list of lessons
   - [X] Add verification
   - [X] Unverify
+  - [X] View list of teachers' schedule
 
 - [X] Teacher
   - [X] View teacher info
