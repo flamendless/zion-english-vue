@@ -80,7 +80,7 @@ export default {
 			},
 
 			button: {
-				title: "Affordable Price at $3.99/25 min",
+				title: "Affordable Price at 3.99/25 USD min",
 				// href: "/get_started",
 				href: "#contact_us",
 			}
