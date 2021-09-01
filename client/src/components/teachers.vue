@@ -72,8 +72,8 @@
 </template>
 
 <script>
+import img_pia from "@/assets/images/teachers/pia.png"
 import img_hazel from "@/assets/images/teachers/hazel.jpg"
-import img_jedson from "@/assets/images/teachers/jedson.jpg"
 import img_julie from "@/assets/images/teachers/julie.jpg"
 import img_vivien from "@/assets/images/teachers/vivien.jpg"
 import img_chris from "@/assets/images/teachers/chris.jpg"
@@ -126,7 +126,8 @@ export default {
 
 	methods: {
 		modal_show: function(item) {
-			this.$modal.show("teacher_modal", item);
+			if (item.text)
+				this.$modal.show("teacher_modal", item);
 		},
 		modal_show_mobile: function(item) {
 			this.$modal.show("teacher_modal_mobile", item);
@@ -140,16 +141,16 @@ export default {
 			header2: "Our teachers are skilled English tutors with years of experience in online teaching and are carefully selected to ensure quality teaching",
 			teachers: [
 				{
+					name: "Pia",
+					img: img_pia,
+					bg: "@/assets/images/teachers/pia.png",
+					text: ""
+				},
+				{
 					name: "Hazel",
 					img: img_hazel,
 					bg: "@/assets/images/teachers/hazel.png",
 					text: "Good day everyone, Teacher Hazel here. I’m a TESOL certified ESL tutor for almost 3 years now catered for 4 different nationalities including Koreans. I can teach both Kids and adult professionals covering wide varieties of English lessons. I’m patient, passionate and I’ll make learning fun and exciting. Hope to see you in my class soon"
-				},
-				{
-					name: "Jedson",
-					img: img_jedson,
-					alt: "img_teacher_jedson",
-					text: "Hi. I'm Jedson. I am an experienced ESL teacher for more than 4 years. I have been teaching kids and adults online. In addition, I graduated cum laude in education, a professional licensed teacher and TESOL certified. I enjoy teaching English and I can help you learn English academically. In my classes, I always ensure that my students have enjoyable and productive learning experiences by providing personalized teaching styles, pragmatic drills and practices, and fun activities. I believe with my experiences and passion for teaching, I can effectively improve your English skills in reading, writing, listening and speaking. Hope to see you in class."
 				},
 				{
 					name: "Julie",
