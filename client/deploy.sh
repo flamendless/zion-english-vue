@@ -9,7 +9,7 @@ function deploy() {
 	# navigate into the build output directory
 	cd dist
 	# if you are deploying to a custom domain
-	echo 'zion-english.com' > CNAME
+	# echo 'zion-english.com' > CNAME
 	git init
 	git add -A
 	git commit -m "${msg}"
