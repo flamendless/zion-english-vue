@@ -1,7 +1,7 @@
 <template>
 <div>
-	<TeacherModal v-if="$resize && $mq.above(720)" />
-	<TeacherModalMobile v-else />
+	<TeacherModal v-if="$resize && $mq.above(720)" :on_close="show_navbar" />
+	<TeacherModalMobile v-else :on_close="show_navbar" />
 
 	<div v-if="$resize && $mq.above(992)">
 		<div class="label">
@@ -15,7 +15,7 @@
 					<b-card-group deck class="deck">
 						<b-card no-body class="card"
 							v-for="(item, n) in set" :key="n"
-							:class="{bg: n < 2 && i == 0}"
+							:class="{bg: false & n < 2 && i == 0}"
 							@click="modal_show(item)"
 						>
 							<b-card-img v-if="item.img"
@@ -23,14 +23,17 @@
 							</b-card-img>
 
 							<b-card-text class="content d-flex">
-								<h1 class="header-card m-auto" v-if="item.center"
-									:class="{header1: n == 0}"
-								>
+								<!-- <h1 class="header-card m-auto" v-if="item.center" -->
+								<!-- 	:class="{header1: n == 0}" -->
+								<!-- > -->
+								<!-- 	{{ item.name }} -->
+								<!-- </h1> -->
+								<h1 class="m-auto">
 									{{ item.name }}
 								</h1>
-								<h1 class="m-auto" v-else>
-									Teacher {{ item.name }}
-								</h1>
+								<h2 class="m-auto">
+									{{ item.title }}
+								</h2>
 							</b-card-text>
 						</b-card>
 					</b-card-group>
@@ -60,7 +63,12 @@
 							</b-card-img>
 
 							<b-card-text class="content d-flex">
-								<h1 class="m-auto">{{ item.name }}</h1>
+								<h1 class="m-auto">
+									{{ item.name }}
+								</h1>
+								<h2 class="m-auto">
+									{{ item.title }}
+								</h2>
 							</b-card-text>
 						</b-card>
 					</b-card-group>
@@ -72,15 +80,23 @@
 </template>
 
 <script>
-import img_pia from "@/assets/images/teachers/pia.png"
-import img_hazel from "@/assets/images/teachers/hazel.jpg"
-import img_julie from "@/assets/images/teachers/julie.jpg"
-import img_vivien from "@/assets/images/teachers/vivien.jpg"
-import img_chris from "@/assets/images/teachers/chris.jpg"
-import img_charizza from "@/assets/images/teachers/charizza.jpg"
-import img_aureeh from "@/assets/images/teachers/aureeh.jpg"
+import Data from "@/data.js"
 import TeacherModal from "@/components/teacher_modal.vue"
 import TeacherModalMobile from "@/components/teacher_modal_mobile.vue"
+
+const files = require.context(
+  "@/assets/images/teachers",
+  true,
+  /^.*\.jpg$/
+).keys()
+
+const images = {}
+for (let i = 0; i < files.length; i++) {
+	let orig = files[i]
+	let filename = orig.substring(2)
+	let name = orig.substring(2, orig.length - 4)
+	images[name] = require(`@/assets/images/teachers/${filename}`);
+}
 
 export default {
 	name: "Teachers",
@@ -88,8 +104,15 @@ export default {
 		TeacherModal,
 		TeacherModalMobile,
 	},
+
 	created: function() {
 		this.teachers_list = [...this.teachers];
+
+		for (let i = 0; i < this.teachers_list.length; i++) {
+			let obj = this.teachers_list[i];
+			let alt = obj["alt"];
+			obj["img"] = images[alt];
+		}
 
 		const max = 3;
 		let i = 0;
@@ -107,14 +130,14 @@ export default {
 				center: true,
 				// name: "Meet Our Teachers",
 				name: this.header1,
-				text: "",
+				text: [],
 			});
 			// first.splice(max - 1, 0, {empty: true, name: "", img: "", alt: "", text: ""});
 			first.splice(1, 0, {
 				center: true,
 				// name: "Our teachers are skilled English tutors with years of experience in online teaching and are carefully selected to ensure quality teaching",
 				name: this.header2,
-				text: "",
+				text: [],
 			});
 
 			while (i < this.teachers.length) {
@@ -128,10 +151,22 @@ export default {
 		modal_show: function(item) {
 			if (item.text)
 				this.$modal.show("teacher_modal", item);
+				this.hide_navbar();
 		},
 		modal_show_mobile: function(item) {
 			this.$modal.show("teacher_modal_mobile", item);
-		}
+			this.hide_navbar();
+		},
+		show_navbar: function() {
+			const navbar = Data.navbar;
+			if (navbar)
+				navbar.shown = true;
+		},
+		hide_navbar: function() {
+			const navbar = Data.navbar;
+			if (navbar)
+				navbar.shown = false;
+		},
 	},
 
 	data: function() {
@@ -139,48 +174,193 @@ export default {
 			sets: [],
 			header1: "Meet Our Teachers",
 			header2: "Our teachers are skilled English tutors with years of experience in online teaching and are carefully selected to ensure quality teaching",
+
 			teachers: [
 				{
-					name: "Pia",
-					img: img_pia,
-					bg: "@/assets/images/teachers/pia.png",
-					text: ""
+					name: "HAZEL TAMAYO",
+					alt: "hazel_tamayo",
+					title: "Filipino Manager",
+					text: [
+						"47 Years old",
+						"Bachelor of Science in Business Administration",
+						"TESOL Certified",
+						"5 years of Teaching Experience to Koreans, Chinese, Vietnamese and Taiwanese",
+						"Specializes in Reading, Writing , Phonics for young learners, speaking/daily conversation enhancement for kids and teenagers..",
+						"Daily conversation for adults, accent modification, English proficiency exam preparations such as:  IELTS, TOEFL and CELPIP.",
+					],
 				},
 				{
-					name: "Hazel",
-					img: img_hazel,
-					bg: "@/assets/images/teachers/hazel.png",
-					text: "Good day everyone, Teacher Hazel here. I’m a TESOL certified ESL tutor for almost 3 years now catered for 4 different nationalities including Koreans. I can teach both Kids and adult professionals covering wide varieties of English lessons. I’m patient, passionate and I’ll make learning fun and exciting. Hope to see you in my class soon"
+					name: "MA. KRISTINE URRIZA-MADERAL",
+					alt: "ma_maderal",
+					text: [
+						"40 YEARS OLD",
+						"BS PSYCHOLOGY",
+						"TESOL & TEYL CERTIFIED",
+						"Experience: 3 yrs",
+						"Specialization: Reading and Phonics, Speaking, Grammar, Conversation, and Vocabulary Enrichment for young and adult learners",
+					],
 				},
 				{
-					name: "Julie",
-					img: img_julie,
-					alt: "img_teacher_julie",
-					text: "Hello everyone! My name is teacher Julie. I've been teaching ESL/EFL for almost 13 years now. I can handle all student levels regardless of age, nationality and their level of understanding in the English language. We can make English classes very informative but at the same time fun. "
+					name: "CHARLENE ANN EBITE",
+					alt: "charlene_ebite",
+					text: [
+						"26 years old",
+						"International Business",
+						"Years of teaching: 2 years",
+						"American accent training, Native accent reduction training, Reading, Essay writing, Speech writing, Conversational English for junior and adult learners, and General Academic English for junior and beginner learners",
+					],
 				},
 				{
-					name: "Vivien",
-					img: img_vivien,
-					alt: "img_teacher_vivien",
-					text: "Hi, I'm Teacher Vien, I'm 23 years old and I've been teaching English as second language for 3 years now for Koreans, Japanese and Chinese students. During my spare time I love to read, see movies and watch videos on You Tube. What I really love about teaching is that I get to meet a lot of people and I get to influence, teach them and help them learn and grow as well. So I hope to see you in my classes"
+					name: "ANDRE MICO URRIZA",
+					alt: "andre_urriza",
+					text: [
+						"Course: AB Philosophy",
+						"Years of Experience: 1 year",
+						"Specialization: English for Young and Adult Levels, Conversation, Grammar, Speaking and Writing, Research Writing and Presentation",
+					]
 				},
 				{
-					name: "Chris",
-					img: img_chris,
-					alt: "img_teacher_chris",
-					text: "TESOL Certified, self-motivated individual seeking to teach children English online. Extensive experience teaching children and adults in Japan, China, and Europe. I look forward to helping your students achieve English fluency."
+					name: "CHARISMA MONTIANO",
+					alt: "charisma_montiano",
+					text: [
+						"Age: 28 years old",
+						"Course: AB English",
+						"Years of Experience: 5 years",
+						"Specialization: Reading, Grammar, Word Enunciation, Conversation, and Vocabulary Enrichment for young and adult learners",
+					]
 				},
 				{
-					name: "Charizza",
-					img: img_charizza,
-					alt: "img_teacher_charizza",
-					text: "I enjoy teaching and I am here to help you develop your skills in speaking the English language. Hope to see you in my class!"
+					name: "MARGIE HAGOS",
+					alt: "margie_hagos",
+					text: [
+						"Age : 34 years old",
+						"Course: Bachelor of Science in Elementary Education",
+						"Years of Experience: 4 years ( offline school) 4 years - online teaching",
+						"Specialization : Phonics,Reading,Grammar,Word Enunciation,Conversation and Vocabulary Enrichment for young and adult learners.",
+					],
 				},
 				{
-					name: "Aureeh",
-					img: img_aureeh,
-					alt: "img_teacher_aureeh",
-					text: "Hi! My name is teacher Aureeh. I've been teaching online for 3 years. I believe that learning is fun when you are guided by a diligent and helpful teacher. Let me be your partner in your journey as you explore the English language. I can be your teacher and your friend. See you in my class!"
+					name: "CHERRIE ANN DECENA",
+					alt: "cherrie_decena",
+					text: [
+						"Age: 28 years old",
+						"Course: BACHELOR OF ARTS MAJOR IN ENGLISH",
+						"Years of Experience: 5",
+						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Pronunciation modification, Daily Conversation, Vocabulary Enrichment, Freetalk and Conversation, Business English, IELTS Speaking",
+					],
+				},
+				{
+					name: "ROGELYN AMIL",
+					alt: "rogelyn_amil",
+					text: [
+						"Age: 23 years old",
+						"Course: BACHELOR OF SECONDARY EDUCATION, MAJOR IN TLE",
+						"Years of Experience: 3 years",
+						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment, Freetalk and Daily Conversation",
+					],
+				},
+				{
+					name: "MARY ROSE CASTILLO",
+					alt: "mary_castillo",
+					text: [
+						"Age: 36 years old",
+						"Course: BACHELOR OF SECONDARY EDUCATION, MAJOR IN ENGLISH",
+						"Years of Experience: 8 years",
+						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment,  Freetalk and Conversation, Daily Conversation, Test Preparation (IELTS, TOEFL, TOEIC, CELPIP)",
+					],
+				},
+				{
+					name: "RICHIE CORDON",
+					alt: "richie_cordon",
+					text: [
+						"Age: 37 years old",
+						"Course: BACHELOR OF SCIENCE IN BUSINESS MANAGEMENT",
+						"Years of Experience: 7 years",
+						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Vocabulary Enrichment,  Freetalk and Conversation, Daily Conversation, Business English",
+					],
+				},
+				{
+					name: "ROMA PAULA LAZARO",
+					alt: "roma_lazaro",
+					text: [
+						"Age: 31 years old",
+						"Course: AB COMMUNICATION",
+						"Years of Experience: 7 years",
+						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Vocabulary Enrichment,  Freetalk and Conversation, Daily Conversation",
+					],
+				},
+				{
+					name: "AIREEN MAE MARTIZANO",
+					alt: "aireen_martizano",
+					text: [
+						"Age: 26 years old",
+						"Course: BACHELOR OF ARTS, MAJOR IN ENGLISH",
+						"Years of Experience: 7 years",
+						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Pronunciation modification, Daily Conversation, Vocabulary Enrichment, Freetalk and Conversation, Business English, IELTS Speaking",
+					],
+				},
+				{
+					name: "YVONNE MAGALLANES",
+					alt: "yvonne_magallanes",
+					text: [
+						"Age: 39 years old",
+						"Course: BACHELOR OF ARTS, MAJOR IN POLITICAL SCIENCE",
+						"Years of Experience: 7 years",
+						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Pronunciation modification, Daily Conversation, Vocabulary Enrichment, Freetalk and Conversation, Business English, IELTS Speaking",
+					],
+				},
+				{
+					name: "RHEA DUERO",
+					alt: "rhea_duero",
+					text: [
+						"Age: 35 years old",
+						"Course: BS COMPUTER SCIENCE",
+						"Years of Experience: 13 years",
+						"Specialization:  Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment,  Freetalk and Conversation, Daily Conversation, Test Preparation (IELTS)",
+					],
+				},
+				{
+					name: "ANN WILNER JHOY BERTOLANO",
+					alt: "ann_bertolano",
+					text: [
+						"25 years old",
+						"Bachelor of Secondary Education with Specialization in English",
+						"Five (5) years as an ESL Teacher",
+						"Specialization: Conversational English for Young and Adult Learners, Academic English Grammar (middle and high school), Interactive General English, Reading Comprehension",
+					],
+				},
+				{
+					name: "JENNA GEPANAGA",
+					alt: "jenna_gepanaga",
+					text: [
+						"29 years of age",
+						"AB in Foreign Service Major in Diplomacy",
+						"TEFL Certified",
+						"10 years of teaching My specializations include pronunciation, broaden your vocabulary words, listening skills, and writing skills. My top priority is to teach the proper usage of grammar rules from basic level to advanced students.",
+					],
+				},
+				{
+					name: "KARL JANETH ARO",
+					alt: "karl_aro",
+					title: "English Consultant",
+					text: [
+						"32 years old",
+						"Bachelor of Science in Agribusiness Economics",
+						"University of the Philippines",
+						"TEFL and TESOL Certified",
+						"12 years of Teaching Experience to Korean, Chinese, Japanese, and Vietnamese",
+						"Specializes in Grammar, Phonics for young learners, enhancing speaking skill for kids and teenagers",
+						"Grammar, Daily Conversation, Business English and English proficiency exam for adults: TOEIC, IELT",
+					],
+				},
+				{
+					name: "Journey Balares",
+					alt: "journey_balares",
+					text: [
+						"Age: 29 years old",
+						"Course: Midwifery & Bachelor of Science in Secondary Education Major in English",
+						"Specialization: Teaching kids with Special Needs (Dyslexia, Dysgraphia, Down Syndrome, with ADHD) Reading and Comprehension, Grammar, Writing, Conversational, Vocabulary, Good Listening skills, Communication skills and Speaking in English confidently",
+					],
 				},
 			]
 		}
@@ -202,6 +382,9 @@ $title-gap: 16px;
 		.img {
 			box-shadow: 0px 8px 16px black;
 			border-radius: 50%;
+			height: 240px;
+			width: 240px;
+			align-self: center;
 		}
 
 		.card {
@@ -224,6 +407,7 @@ $title-gap: 16px;
 	.content {
 		padding: $title-gap;
 		height: 100%;
+		flex-direction: column;
 
 		.header-card {
 			text-align: justify;
@@ -242,6 +426,11 @@ $title-gap: 16px;
 			/* text-shadow: -4px 4px 8px grey; */
 			font-family: "PalanquinDark";
 			font-size: 1.75em;
+			text-align: center;
+		}
+		h2 {
+			font-family: "PalanquinDark";
+			font-size: 1.25em;
 			text-align: center;
 		}
 	}
@@ -286,6 +475,7 @@ $title-gap: 16px;
 	.content {
 		padding: $title-gap/2;
 		height: 100%;
+		flex-direction: column;
 	}
 
 	.label {

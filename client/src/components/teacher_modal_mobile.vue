@@ -1,6 +1,7 @@
 <template>
 <modal name="teacher_modal_mobile" v-animate="'slide-up'"
 	@before-open="before_open"
+	@before-close="on_close"
 	:focus-trap="true"
 	width="90%"
 	height="auto"
@@ -14,13 +15,21 @@
 					<h1>{{ name }}</h1>
 				</div>
 
-				<div class="partition-text">
-					<h5>
-						<font-awesome-icon icon="quote-left" class="icn_quote" />
-						{{ text }}
-						<font-awesome-icon icon="quote-right" class="icn_quote" />
-					</h5>
+				<div class="partition-details">
+					<ul>
+						<li v-for="(str, i) in text" :key="i">
+							{{ str }}
+						</li>
+					</ul>
 				</div>
+
+				<!-- <div class="partition-text"> -->
+				<!-- 	<h5> -->
+				<!-- 		<font-awesome-icon icon="quote-left" class="icn_quote" /> -->
+				<!-- 		{{ text }} -->
+				<!-- 		<font-awesome-icon icon="quote-right" class="icn_quote" /> -->
+				<!-- 	</h5> -->
+				<!-- </div> -->
 			</div>
 		</vuescroll>
 	</div>
@@ -33,6 +42,8 @@ import vuescroll from "vuescroll";
 export default {
 	name: "TeacherModalMobile",
 	components: { vuescroll },
+	props: ["on_close"],
+
 	data: function() {
 		return {
 			name: "",
@@ -72,6 +83,17 @@ $background_color: #404142;
 				font-family: "Montserrat";
 				text-align: center;
 				font-size: 6vh;
+			}
+		}
+
+		.partition-details {
+			padding: 6px;
+			width: 100%;
+
+			ul {
+				font-family: "Montserrat";
+				text-align: left;
+				font-size: 1.5vh;
 			}
 		}
 

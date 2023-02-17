@@ -1,7 +1,7 @@
 <template>
-<b-navbar toggleable="lg" type="dark" :sticky=true>
+<b-navbar v-if="shown" toggleable="lg" type="dark" :sticky=true>
 	<b-navbar-brand :href="home" v-ripple>
-		<b-img src="@/assets/images/brand.png" height="48">
+		<b-img src="@/assets/images/brand.png" height="96">
 		</b-img>
 		<!-- {{ site_name }} -->
 	</b-navbar-brand>
@@ -30,6 +30,7 @@
 
 <script>
 import scrollWatch from "vue-scrollwatch"
+import Data from "@/data.js"
 
 export default {
 	name: "NavBar",
@@ -40,7 +41,7 @@ export default {
 	computed: {
 		get_route() {
 			return this.$route.path;
-		}
+		},
 	},
 
 	methods: {
@@ -48,11 +49,16 @@ export default {
 			const n = name.substring(1);
 			scrollWatch.scrollTo(n);
 			window.location.href = name;
-		}
+		},
+	},
+
+	created: function() {
+		Data.navbar = this;
 	},
 
 	data: function() {
 		return {
+			shown: true,
 			home: "/",
 			items: [
 				{

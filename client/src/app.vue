@@ -37,7 +37,7 @@ export default {
 			{name: "robots", content: "index,follow"},
 			{property: "og:title", content: "Zion Cha's English Academy 사온 영어"},
 			{property: "og:description", content: "Learn English with our quality service made affordable to everyone"},
-			{property: "og:site_name", content: "Zion English 사온 영어"},
+			{property: "og:site_name", content: "Zion Cha's English Academy 사온 영어"},
 			{property: "og:type", content: "website"},
 			{property: "og:image", content: "https://zion-cha-english.academy/assets/twitter_card.jpg"},
 

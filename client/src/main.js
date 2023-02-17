@@ -43,7 +43,11 @@ Vue.use(VueAwesomeSwiper);
 Vue.use(VModal);
 Vue.use(VRipple);
 Vue.use(vmodal);
-Vue.use(VueSocialSharing);
+Vue.use(VueSocialSharing, {
+	networks: {
+		kakaotalk: "https://kakaotalkapp.com"
+	}
+});
 Vue.use(vueScrollwatch);
 
 VueClipboard.config.autoSetContainer = true;

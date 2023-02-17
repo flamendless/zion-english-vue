@@ -1,10 +1,12 @@
 <template>
 <modal name="teacher_modal" v-animate="'slide-up'"
 	@before-open="before_open"
+	@before-close="on_close"
 	:focus-trap="true"
 	:adaptive="true"
 	:width="960"
-	:height="480">
+	:height="720"
+>
 
 	<div class="box">
 		<div id="bp-left" class="box-part">
@@ -14,12 +16,20 @@
 						<h1>{{ name }}</h1>
 					</div>
 
+					<div class="partition-details">
+						<ul>
+							<li v-for="(str, i) in text" :key="i">
+								{{ str }}
+							</li>
+						</ul>
+					</div>
+
 					<div class="partition-text">
-						<h5>
-							<font-awesome-icon icon="quote-left" class="icn_quote" />
-							{{ text }}
-							<font-awesome-icon icon="quote-right" class="icn_quote" />
-						</h5>
+						<!-- <h5> -->
+						<!-- 	<font-awesome-icon icon="quote-left" class="icn_quote" /> -->
+						<!-- 	{{ text }} -->
+						<!-- 	<font-awesome-icon icon="quote-right" class="icn_quote" /> -->
+						<!-- </h5> -->
 					</div>
 				</vuescroll>
 			</div>
@@ -38,10 +48,12 @@ import vuescroll from "vuescroll";
 export default {
 	name: "TeacherModal",
 	components: { vuescroll },
+	props: ["on_close"],
+
 	data: function() {
 		return {
 			name: "",
-			text: "",
+			text: [],
 			bg: "",
 		}
 	},
@@ -68,7 +80,7 @@ $background_color: #404142;
 	color: #4b4c4d;
 	font-size: 0;
 	width: 960px;
-	height: 480px;
+	height: 720px;
 
 	.box-part {
 		display: inline-block;
@@ -81,7 +93,7 @@ $background_color: #404142;
 		&#bp-right {
 			box-shadow: 0px 0px 8px grey;
 			background-repeat: no-repeat;
-			background-size: auto;
+			background-size: contain;
 			background-position: center;
 			border-left: 1px solid #eee;
 		}
@@ -99,6 +111,17 @@ $background_color: #404142;
 				font-family: "Montserrat";
 				text-align: center;
 				font-size: 6vh;
+			}
+		}
+
+		.partition-details {
+			padding: 8px;
+			width: 100%;
+
+			ul {
+				font-family: "Montserrat";
+				text-align: left;
+				font-size: 3vh;
 			}
 		}
 

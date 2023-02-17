@@ -38,19 +38,19 @@ export default {
 			carousel: [
 				{
 					title: "Let's Break The Barriers...",
-					subtitle: "with Zion English",
+					subtitle: "with Zion Cha's English Academy",
 					caption: "It is our goal to help students learn English language with our quality service/teaching yet made affordable to everyone.",
 					image: "../assets/images/header.jpg",
 				},
 				{
 					title: "Learn With Best Quality...",
-					subtitle: "with Zion English",
+					subtitle: "with Zion Cha's English Academy",
 					caption: "We hire only experienced Filipino online teachers with wide experience of teaching and variety of specialties.",
 					image: "../assets/images/header.jpg",
 				},
 				{
 					title: "Love The Language...",
-					subtitle: "with Zion English",
+					subtitle: "with Zion Cha's English Academy",
 					caption: "We hope to meet and even exceed our learner’s expectation. We cater to all ages from zero beginners to adult professional covering wide range of topics.",
 					image: "../assets/images/header.jpg",
 				},

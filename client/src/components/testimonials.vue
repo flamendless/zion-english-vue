@@ -67,7 +67,7 @@ export default {
 					name: "JK, korean student",
 					initials: "JK",
 					title: "Excellent Teaching",
-					desc: "I really like my teacher because he's good and I learned so much from his teaching. I've also improved my English speaking skills a lot and becamse more confident when I enrolled here in Zion English",
+					desc: "I really like my teacher because he's good and I learned so much from his teaching. I've also improved my English speaking skills a lot and becamse more confident when I enrolled here in Zion Cha's English Academy",
 				},
 			]
 		}

@@ -7,7 +7,8 @@
 		:title="sharing.title"
 		:description="sharing.description"
 		:quote="sharing.quote"
-		:hashtags="sharing.hashtags">
+		:hashtags="sharing.hashtags"
+	>
 
 	<div class="link">
 		<font-awesome-icon :icon="[item.pre, item.icon]" size="sm">
@@ -24,17 +25,18 @@ export default {
 	data: function() {
 		return {
 			sharing: {
-				url: "https://zion-english.com",
-				title: "Zion English",
-				description: "Breaking The Barrier with Zion English",
+				url: "https://zion-cha-english.academy",
+				title: "Zion Cha's English Academy",
+				description: "Breaking The Barrier with Zion Cha's English Academy",
 				quote: "Learning English in the Best Way",
-				hashtags: "learn,english,zion-english",
+				hashtags: "learn,english,zion-english,zion-chas-english-academy",
 			},
 			items: [
 				{network: "email", name: "E-Mail", icon: "envelope", color: "#333333", pre: "fas"},
 				{network: "facebook", name: "Facebook", icon: "facebook", color: "#1877f2", pre: "fab"},
 				{network: "skype", name: "Skype", icon: "skype", color: "#00aff0", pre: "fab"},
 				{network: "whatsapp", name: "Whatsapp", icon: "whatsapp", color: "#25d366", pre: "fab"},
+				{network: "kakaotalk", name: "KakaoTalk", icon: "mobile-alt", color: "#25d366", pre: "fas"},
 			]
 		}
 	}

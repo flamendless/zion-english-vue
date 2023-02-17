@@ -7,7 +7,7 @@
 	</b-row>
 	<b-row>
 		<b-col>
-			<h3>Don't be shy, ask <em>Zion English!</em></h3>
+			<h3>Don't be shy, ask <em>Zion Cha's English Academy!</em></h3>
 		</b-col>
 	</b-row>
 
@@ -35,6 +35,17 @@
 <script>
 import Toasts from "@/toasts.js"
 import Data from "@/data.js"
+
+const BASE = "https://sharer.kakao.com/talk/friends/picker/easylink";
+function getKakaoShareLink(appKey, message) {
+	const validation_params = {
+		link_ver: "4.0",
+		template_object: message
+	};
+	let params = `?app_key=${appKey}&ka=sdk/1.35.0 os/javascript lang/zh-CN device/MacIntel origin/https%3A%2F%2Fdevelopers.kakao.com&validation_action=default&validation_params=${JSON.stringify(validation_params)}`;
+	//return `${BASE}${encodeURIComponent(params)}`
+	return `${BASE}${params}`
+}
 
 export default {
 	name: "ContactUs",
@@ -72,7 +83,17 @@ export default {
 				});
 			}
 			else if (id == "fb")
+			{
 				window.open(Data.fb, "_blank");
+			}
+			else if (id == "ktalk")
+			{
+				this.to_clipboard(Data.ktalk, function() {
+					Toasts.copy_number(toast);
+				});
+
+				window.open(getKakaoShareLink("3e786f8df14fcfc89d159421a6a7c9b6", `Message ${Data.ktalk}`), "_blank");
+			}
 		}
 	},
 
@@ -83,6 +104,7 @@ export default {
 				{id: "text", title: "message us", btn: "Text", pre: "fas", icon: "mobile-alt"},
 				{id: "skype", title: "reach out to us", btn: "Skype", pre: "fab", icon: "skype"},
 				{id: "fb", title: "let us chat", btn: "Facebook", pre: "fab", icon: "facebook-square"},
+				{id: "ktalk", title: "kakaotalk", btn: "Kakaotalk", pre: "fas", icon: "mobile-alt"},
 			]
 		}
 	}
