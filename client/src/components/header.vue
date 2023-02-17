@@ -80,7 +80,7 @@ export default {
 			},
 
 			button: {
-				title: "Affordable Price at CAD 4.9 or KW 4,240 for 25 minutes",
+				title: "Affordable Price at KW 5000 for 25 minutes",
 				// href: "/get_started",
 				href: "#contact_us",
 			}

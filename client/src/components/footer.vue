@@ -1,13 +1,13 @@
 <template>
 <div class="footer">
 	<div class="info">
-		<h3>Zion English 사온 영어</h3>
+		<h3>Zion Cha's English Academy 사온 영어</h3>
 		<h5>Philippines</h5>
-		<h5>©️  zion-english 2020-2021</h5>
+		<h5>©️  zion-chas-english 2020-2023</h5>
 	</div>
 
 	<div class="logo" v-if="$resize && $mq.above(640)">
-		<b-img src="@/assets/images/logo.png" width="96" class="logo">
+		<b-img src="@/assets/images/logo.png" height="96" class="logo">
 		</b-img>
 	</div>
 

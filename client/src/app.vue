@@ -28,26 +28,26 @@ export default {
 	},
 
 	meta_info: {
-		titleTemplate: "Zion English 사온 영어",
+		titleTemplate: "Zion Cha's English Academy 사온 영어",
 		meta: [
 			{charset: "utf-8"},
 			{name: "viewport", content: "width=device-width, initial-scale=1"},
 			{name: "description", content: "Learn English with our quality service made affordable to everyone"},
 			{name: "keywords", content: "learn,english,tutor,asia,teach,education"},
 			{name: "robots", content: "index,follow"},
-			{property: "og:title", content: "Zion English 사온 영어"},
+			{property: "og:title", content: "Zion Cha's English Academy 사온 영어"},
 			{property: "og:description", content: "Learn English with our quality service made affordable to everyone"},
 			{property: "og:site_name", content: "Zion English 사온 영어"},
 			{property: "og:type", content: "website"},
-			{property: "og:image", content: "https://zion-english.com/assets/twitter_card.jpg"},
+			{property: "og:image", content: "https://zion-cha-english.academy/assets/twitter_card.jpg"},
 
 			{property: "twitter:site", content: "@flamendless"},
 			{property: "twitter:author", content: "Brandon B. Lim-it"},
 			{property: "twitter:card", content: "summary"},
-			{property: "twitter:url", content: "https://zion-english.com"},
-			{property: "twitter:title", content: "Learn English with Zion English 사온 영어"},
+			{property: "twitter:url", content: "https://zion-cha-english.academy"},
+			{property: "twitter:title", content: "Learn English with Zion Cha's English Academy 사온 영어"},
 			{property: "twitter:description", content: "Learn English with our quality service made affordable to everyone"},
-			{property: "twitter:image", content: "https://zion-english.com/assets/twitter_card.jpg"},
+			{property: "twitter:image", content: "https://zion-cha-english.academy/assets/twitter_card.jpg"},
 		]
 	},
 }
