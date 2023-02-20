@@ -45,7 +45,7 @@ export default {
 				"Daily conversational topics for adults and young learners",
 				"Job interviews",
 				"Reading (beginner to advance)",
-				"English proficiency exams like IELTS (Speaking and writing) TOIEC, TOFL and CELPIP, etc.",
+				"English proficiency exams like IELTS (Speaking and writing) TOIEC, TOFL, etc.",
 				"Business English",
 				"Accent/ pronunciation training",
 				"Grammar",
