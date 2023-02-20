@@ -181,7 +181,6 @@ export default {
 					alt: "hazel_tamayo",
 					title: "Filipino Manager",
 					text: [
-						"47 Years old",
 						"Bachelor of Science in Business Administration",
 						"TESOL Certified",
 						"5 years of Teaching Experience to Koreans, Chinese, Vietnamese and Taiwanese",
@@ -193,7 +192,6 @@ export default {
 					name: "MA. KRISTINE URRIZA-MADERAL",
 					alt: "ma_maderal",
 					text: [
-						"40 YEARS OLD",
 						"BS PSYCHOLOGY",
 						"TESOL & TEYL CERTIFIED",
 						"Experience: 3 yrs",
@@ -204,7 +202,6 @@ export default {
 					name: "CHARLENE ANN EBITE",
 					alt: "charlene_ebite",
 					text: [
-						"26 years old",
 						"International Business",
 						"Years of teaching: 2 years",
 						"American accent training, Native accent reduction training, Reading, Essay writing, Speech writing, Conversational English for junior and adult learners, and General Academic English for junior and beginner learners",
@@ -223,7 +220,6 @@ export default {
 					name: "CHARISMA MONTIANO",
 					alt: "charisma_montiano",
 					text: [
-						"Age: 28 years old",
 						"Course: AB English",
 						"Years of Experience: 5 years",
 						"Specialization: Reading, Grammar, Word Enunciation, Conversation, and Vocabulary Enrichment for young and adult learners",
@@ -233,7 +229,6 @@ export default {
 					name: "MARGIE HAGOS",
 					alt: "margie_hagos",
 					text: [
-						"Age : 34 years old",
 						"Course: Bachelor of Science in Elementary Education",
 						"Years of Experience: 4 years ( offline school) 4 years - online teaching",
 						"Specialization : Phonics,Reading,Grammar,Word Enunciation,Conversation and Vocabulary Enrichment for young and adult learners.",
@@ -243,7 +238,6 @@ export default {
 					name: "CHERRIE ANN DECENA",
 					alt: "cherrie_decena",
 					text: [
-						"Age: 28 years old",
 						"Course: BACHELOR OF ARTS MAJOR IN ENGLISH",
 						"Years of Experience: 5",
 						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Pronunciation modification, Daily Conversation, Vocabulary Enrichment, Freetalk and Conversation, Business English, IELTS Speaking",
@@ -253,7 +247,6 @@ export default {
 					name: "ROGELYN AMIL",
 					alt: "rogelyn_amil",
 					text: [
-						"Age: 23 years old",
 						"Course: BACHELOR OF SECONDARY EDUCATION, MAJOR IN TLE",
 						"Years of Experience: 3 years",
 						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment, Freetalk and Daily Conversation",
@@ -263,7 +256,6 @@ export default {
 					name: "MARY ROSE CASTILLO",
 					alt: "mary_castillo",
 					text: [
-						"Age: 36 years old",
 						"Course: BACHELOR OF SECONDARY EDUCATION, MAJOR IN ENGLISH",
 						"Years of Experience: 8 years",
 						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment,  Freetalk and Conversation, Daily Conversation, Test Preparation (IELTS, TOEFL, TOEIC, CELPIP)",
@@ -273,7 +265,6 @@ export default {
 					name: "RICHIE CORDON",
 					alt: "richie_cordon",
 					text: [
-						"Age: 37 years old",
 						"Course: BACHELOR OF SCIENCE IN BUSINESS MANAGEMENT",
 						"Years of Experience: 7 years",
 						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Vocabulary Enrichment,  Freetalk and Conversation, Daily Conversation, Business English",
@@ -283,7 +274,6 @@ export default {
 					name: "ROMA PAULA LAZARO",
 					alt: "roma_lazaro",
 					text: [
-						"Age: 31 years old",
 						"Course: AB COMMUNICATION",
 						"Years of Experience: 7 years",
 						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Vocabulary Enrichment,  Freetalk and Conversation, Daily Conversation",
@@ -293,7 +283,6 @@ export default {
 					name: "AIREEN MAE MARTIZANO",
 					alt: "aireen_martizano",
 					text: [
-						"Age: 26 years old",
 						"Course: BACHELOR OF ARTS, MAJOR IN ENGLISH",
 						"Years of Experience: 7 years",
 						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Pronunciation modification, Daily Conversation, Vocabulary Enrichment, Freetalk and Conversation, Business English, IELTS Speaking",
@@ -303,7 +292,6 @@ export default {
 					name: "YVONNE MAGALLANES",
 					alt: "yvonne_magallanes",
 					text: [
-						"Age: 39 years old",
 						"Course: BACHELOR OF ARTS, MAJOR IN POLITICAL SCIENCE",
 						"Years of Experience: 7 years",
 						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Pronunciation modification, Daily Conversation, Vocabulary Enrichment, Freetalk and Conversation, Business English, IELTS Speaking",
@@ -313,7 +301,6 @@ export default {
 					name: "RHEA DUERO",
 					alt: "rhea_duero",
 					text: [
-						"Age: 35 years old",
 						"Course: BS COMPUTER SCIENCE",
 						"Years of Experience: 13 years",
 						"Specialization:  Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment,  Freetalk and Conversation, Daily Conversation, Test Preparation (IELTS)",
@@ -323,7 +310,6 @@ export default {
 					name: "ANN WILNER JHOY BERTOLANO",
 					alt: "ann_bertolano",
 					text: [
-						"25 years old",
 						"Bachelor of Secondary Education with Specialization in English",
 						"Five (5) years as an ESL Teacher",
 						"Specialization: Conversational English for Young and Adult Learners, Academic English Grammar (middle and high school), Interactive General English, Reading Comprehension",
@@ -333,7 +319,6 @@ export default {
 					name: "JENNA GEPANAGA",
 					alt: "jenna_gepanaga",
 					text: [
-						"29 years of age",
 						"AB in Foreign Service Major in Diplomacy",
 						"TEFL Certified",
 						"10 years of teaching My specializations include pronunciation, broaden your vocabulary words, listening skills, and writing skills. My top priority is to teach the proper usage of grammar rules from basic level to advanced students.",
@@ -344,7 +329,6 @@ export default {
 					alt: "karl_aro",
 					title: "English Consultant",
 					text: [
-						"32 years old",
 						"Bachelor of Science in Agribusiness Economics",
 						"University of the Philippines",
 						"TEFL and TESOL Certified",
@@ -357,7 +341,6 @@ export default {
 					name: "Journey Balares",
 					alt: "journey_balares",
 					text: [
-						"Age: 29 years old",
 						"Course: Midwifery & Bachelor of Science in Secondary Education Major in English",
 						"Specialization: Teaching kids with Special Needs (Dyslexia, Dysgraphia, Down Syndrome, with ADHD) Reading and Comprehension, Grammar, Writing, Conversational, Vocabulary, Good Listening skills, Communication skills and Speaking in English confidently",
 					],
