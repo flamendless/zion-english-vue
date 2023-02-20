@@ -1,5 +1,5 @@
 export default {
-	site_name: "Zion Cha's English Academy",
+	site_name: "Zion English",
 	skype_id: "hazeltam1975",
 	email: "zion.english.learn@gmail.com",
 	fb: "https://facebook.com/zion.english.learn",

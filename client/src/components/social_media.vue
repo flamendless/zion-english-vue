@@ -26,8 +26,8 @@ export default {
 		return {
 			sharing: {
 				url: "https://zion-cha-english.academy",
-				title: "Zion Cha's English Academy",
-				description: "Breaking The Barrier with Zion Cha's English Academy",
+				title: "Zion English",
+				description: "Breaking The Barrier with Zion English",
 				quote: "Learning English in the Best Way",
 				hashtags: "learn,english,zion-english,zion-chas-english-academy",
 			},

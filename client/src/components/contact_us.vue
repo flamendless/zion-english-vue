@@ -7,7 +7,7 @@
 	</b-row>
 	<b-row>
 		<b-col>
-			<h3>Don't be shy, ask <em>Zion Cha's English Academy!</em></h3>
+			<h3>Don't be shy, ask <em>Zion English!</em></h3>
 		</b-col>
 	</b-row>
 
