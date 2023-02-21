@@ -345,6 +345,43 @@ export default {
 						"Specialization: Teaching kids with Special Needs (Dyslexia, Dysgraphia, Down Syndrome, with ADHD) Reading and Comprehension, Grammar, Writing, Conversational, Vocabulary, Good Listening skills, Communication skills and Speaking in English confidently",
 					],
 				},
+				{
+					name: "KIA VYNNE PUNZALAN",
+					alt: "kia_punzalan",
+					text: [
+						"Course: BACHELOR OF SECONDARY EDUCATION, MAJOR IN ENGLISH",
+						"LICENSED PROFESSIONAL TEACHER",
+						"Years of Experience: 5 years ",
+						"Specialization:  Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment,  Free Talk and Conversation, Daily Conversation, Test Preparation (IELTS)",
+					],
+				},
+				{
+					name: "KRISTINE JOY DIAZ",
+					alt: "kristine_diaz",
+					text: [
+						"Course: BACHELOR OF SECONDARY EDUCATION, MAJOR IN ENGLISH",
+						"Years of Experience: 3 years",
+						"Specialization:  Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment,  Free Talk and Conversation, Daily Conversation",
+					],
+				},
+				{
+					name: "Jeannelee M. Buhanghang",
+					alt: "jeannelee_buhanghang",
+					text: [
+						"Course: Bachelor of Secondary Education- TLE",
+						"Years of Experience: 3 years",
+						"Specialization: Phonics for beginners, Grammar, Sentence Construction, Reading for Beginners and advanced learners, Vocabulary Enrichment, Pronunciation modification, Daily Conversation, Free Talk, and conversation.",
+					],
+				},
+				{
+					name: "Ma. Adelene Mae A. Teruel",
+					alt: "ma_teruel",
+					text: [
+						"Course: Bachelor of Science in Information Technology",
+						"Years of Experience: 9 years",
+						"Specialization: Phonics for kids, Leveled reader for grade school, Toefl for university students, Free talking, Business English, IELTS Speaking.",
+					],
+				},
 			]
 		}
 	},

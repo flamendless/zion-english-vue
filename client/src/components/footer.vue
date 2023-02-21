@@ -1,7 +1,7 @@
 <template>
 <div class="footer">
 	<div class="info">
-		<h3>Zion English 사온 영어</h3>
+		<h3>Zion English 자이온 영어</h3>
 		<h5>Philippines</h5>
 		<h5>©️  zion-english 2020-2023</h5>
 	</div>
