@@ -188,16 +188,18 @@ export default {
 						"Daily conversation for adults, accent modification, English proficiency exam preparations such as:  IELTS, TOEFL and CELPIP.",
 					],
 				},
+
 				{
-					name: "MA. KRISTINE URRIZA-MADERAL",
-					alt: "ma_maderal",
+					name: "EZRA RUTH DELOTINDO",
+					alt: "ezra_ruth_delotindo",
 					text: [
-						"BS PSYCHOLOGY",
-						"TESOL & TEYL CERTIFIED",
-						"Experience: 3 yrs",
-						"Specialization: Reading and Phonics, Speaking, Grammar, Conversation, and Vocabulary Enrichment for young and adult learners",
+						"Bachelor of Science in Psychology",
+						"5 Years Experience",
+						"Specialization: Reading and Phonics, vocabulary, speaking, grammar and Conversation",
+						"Conversational English for junior and adult learners, and General Academic English for junior and beginner learners",
 					],
 				},
+
 				{
 					name: "CHARLENE ANN EBITE",
 					alt: "charlene_ebite",
@@ -207,42 +209,18 @@ export default {
 						"American accent training, Native accent reduction training, Reading, Essay writing, Speech writing, Conversational English for junior and adult learners, and General Academic English for junior and beginner learners",
 					],
 				},
-				{
-					name: "ANDRE MICO URRIZA",
-					alt: "andre_urriza",
-					text: [
-						"Course: AB Philosophy",
-						"Years of Experience: 1 year",
-						"Specialization: English for Young and Adult Levels, Conversation, Grammar, Speaking and Writing, Research Writing and Presentation",
-					]
-				},
-				{
-					name: "CHARISMA MONTIANO",
-					alt: "charisma_montiano",
-					text: [
-						"Course: AB English",
-						"Years of Experience: 5 years",
-						"Specialization: Reading, Grammar, Word Enunciation, Conversation, and Vocabulary Enrichment for young and adult learners",
-					]
-				},
-				{
-					name: "MARGIE HAGOS",
-					alt: "margie_hagos",
-					text: [
-						"Course: Bachelor of Science in Elementary Education",
-						"Years of Experience: 4 years ( offline school) 4 years - online teaching",
-						"Specialization : Phonics,Reading,Grammar,Word Enunciation,Conversation and Vocabulary Enrichment for young and adult learners.",
-					],
-				},
+
 				{
 					name: "CHERRIE ANN DECENA",
-					alt: "cherrie_decena",
+					alt: "cherrie_ann_decena",
 					text: [
-						"Course: BACHELOR OF ARTS MAJOR IN ENGLISH",
-						"Years of Experience: 5",
-						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Pronunciation modification, Daily Conversation, Vocabulary Enrichment, Freetalk and Conversation, Business English, IELTS Speaking",
+						"Bachelor of Arts Major in English",
+						"5 years of experience",
+						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Pronunciation modification,",
+						"Daily Conversation, Vocabulary Enrichment, Free Talk and Conversation, Business English, IELTS Speaking",
 					],
 				},
+
 				{
 					name: "ROGELYN AMIL",
 					alt: "rogelyn_amil",
@@ -252,6 +230,7 @@ export default {
 						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment, Freetalk and Daily Conversation",
 					],
 				},
+
 				{
 					name: "MARY ROSE CASTILLO",
 					alt: "mary_castillo",
@@ -261,24 +240,7 @@ export default {
 						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment,  Freetalk and Conversation, Daily Conversation, Test Preparation (IELTS, TOEFL, TOEIC, CELPIP)",
 					],
 				},
-				{
-					name: "RICHIE CORDON",
-					alt: "richie_cordon",
-					text: [
-						"Course: BACHELOR OF SCIENCE IN BUSINESS MANAGEMENT",
-						"Years of Experience: 7 years",
-						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Vocabulary Enrichment,  Freetalk and Conversation, Daily Conversation, Business English",
-					],
-				},
-				{
-					name: "ROMA PAULA LAZARO",
-					alt: "roma_lazaro",
-					text: [
-						"Course: AB COMMUNICATION",
-						"Years of Experience: 7 years",
-						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Vocabulary Enrichment,  Freetalk and Conversation, Daily Conversation",
-					],
-				},
+
 				{
 					name: "AIREEN MAE MARTIZANO",
 					alt: "aireen_martizano",
@@ -288,6 +250,7 @@ export default {
 						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Pronunciation modification, Daily Conversation, Vocabulary Enrichment, Freetalk and Conversation, Business English, IELTS Speaking",
 					],
 				},
+
 				{
 					name: "YVONNE MAGALLANES",
 					alt: "yvonne_magallanes",
@@ -297,15 +260,7 @@ export default {
 						"Specialization: Phonics for Beginners, Grammar and Sentence Construction, Pronunciation modification, Daily Conversation, Vocabulary Enrichment, Freetalk and Conversation, Business English, IELTS Speaking",
 					],
 				},
-				{
-					name: "RHEA DUERO",
-					alt: "rhea_duero",
-					text: [
-						"Course: BS COMPUTER SCIENCE",
-						"Years of Experience: 13 years",
-						"Specialization:  Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment,  Freetalk and Conversation, Daily Conversation, Test Preparation (IELTS)",
-					],
-				},
+
 				{
 					name: "ANN WILNER JHOY BERTOLANO",
 					alt: "ann_bertolano",
@@ -355,6 +310,7 @@ export default {
 						"Specialization:  Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment,  Free Talk and Conversation, Daily Conversation, Test Preparation (IELTS)",
 					],
 				},
+
 				{
 					name: "KRISTINE JOY DIAZ",
 					alt: "kristine_diaz",
@@ -364,22 +320,77 @@ export default {
 						"Specialization:  Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners, Pronunciation modification, Vocabulary Enrichment,  Free Talk and Conversation, Daily Conversation",
 					],
 				},
+
 				{
-					name: "Jeannelee M. Buhanghang",
-					alt: "jeannelee_buhanghang",
+					name: "BEVERLY ESCUBIO",
+					alt: "beverly_escubio",
 					text: [
-						"Course: Bachelor of Secondary Education- TLE",
-						"Years of Experience: 3 years",
-						"Specialization: Phonics for beginners, Grammar, Sentence Construction, Reading for Beginners and advanced learners, Vocabulary Enrichment, Pronunciation modification, Daily Conversation, Free Talk, and conversation.",
+						"BACHELOR OF SECONDARY EDUCATION, MAJOR IN ENGLISH",
+						"12 years of experience",
+						"Specialization:  Phonics for Beginners, Grammar and Sentence Construction, Reading for beginners and advanced learners,",
+						"Pronunciation modification, Vocabulary Enrichment,  Free Talk and Conversation, Daily Conversation, IELTS, TOEFL, OPIC",
 					],
 				},
+
 				{
-					name: "Ma. Adelene Mae A. Teruel",
-					alt: "ma_teruel",
+					name: "YVONNE EPLER",
+					alt: "yvonne_epler",
 					text: [
-						"Course: Bachelor of Science in Information Technology",
-						"Years of Experience: 9 years",
-						"Specialization: Phonics for kids, Leveled reader for grade school, Toefl for university students, Free talking, Business English, IELTS Speaking.",
+						"Bachelor of Secondary Education Major in English",
+						"TOEIC Certified",
+						"12 years of Teaching Experience with Japanese, Koreans, Chinese, Taiwanese, and Russians",
+						"Specializes in Grammar, Reading, Writing and Casual Conversation for all ages",
+						"Pronunciation Enhancement and English proficiency exam preparation such as IELTS, TOEFL and CELPIP",
+					],
+				},
+
+				{
+					name: "Cherry Joy Tuazon",
+					alt: "cherry_joy_tuazon",
+					text: [
+						"Bachelor of Secondary Education, Major in English",
+						"TEFL Certified",
+						"2 years of teaching experience to Japanese, Vietnamese, and Koreans",
+						"Specializes in reading, writing, grammat structures, and",
+						"daily english conversation enhancement for kids and teenagers"
+					],
+				},
+
+				{
+					name: "Crome-J Amoylen Lee",
+					alt: "crome_amoylen_lee",
+					text: [
+						"Bachelor of Science in Business Management",
+						"Masteral Units in Business Administration",
+						"6 years of experience in ESL",
+						"Specialization: KET & PET (Cambridge A2 and B1), IELTS Speaking,",
+						"English conversation (free talk), and reading classes,",
+						"English for Specific Purposes (ESP): Business and Commerce,",
+						"Tourism and Hospitality, Aviation, Science and Technology, Health and Engineering",
+					],
+				},
+
+				{
+					name: "Marie Mhel Dacapio",
+					alt: "marie_mhel_dacapio",
+					text: [
+						"Bachelor of Elementary Education",
+						"LET Passer",
+						"1 year of experience (Filipino, Chinese, and Korean Students)",
+						"Specialization: Phonics for beginners, basic mathematics, reading,",
+						"grammar and sentence construction, english conversation for kids and teenagers",
+					],
+				},
+
+				{
+					name: "Shanine Hughes",
+					alt: "shanine_hughes",
+					text: [
+						"Bachelor of Science in Computer Science, Major in Programming",
+						"6 years of experience",
+						"Specialization: Phonics, Vocabulary enhancement, Grammar improvement,",
+						"Office Presentation assistance, Article discussions, Free conversation,",
+						"and IELTS Speaking Review assistance",
 					],
 				},
 			]
