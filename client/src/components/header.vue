@@ -7,11 +7,11 @@
 				<div class="subtitle">{{ item.subtitle }}</div>
 				<div class="caption">{{ item.caption }}</div>
 
-				<b-button class="btn" :href="button.href" variant="dark" v-ripple>
-					<b-icon-heart class="icon">
-					</b-icon-heart>
-					{{ button.title }}
-				</b-button>
+				<!-- <b-button class="btn" :href="button.href" variant="dark" v-ripple> -->
+				<!-- 	<b-icon-heart class="icon"> -->
+				<!-- 	</b-icon-heart> -->
+				<!-- 	{{ button.title }} -->
+				<!-- </b-button> -->
 			</div>
 		</swiper-slide>
 
@@ -79,11 +79,13 @@ export default {
 				}
 			},
 
+			/**
 			button: {
 				title: "Affordable Price at KW 5000 for 25 minutes",
 				// href: "/get_started",
 				href: "#contact_us",
 			}
+			*/
 		}
 	},
 }
