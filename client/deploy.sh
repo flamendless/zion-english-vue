@@ -5,6 +5,7 @@ function deploy() {
 	# abort on errors
 	set -e
 	# build
+	# export NODE_OPTIONS=--openssl-legacy-provider
 	yarn run build
 	# navigate into the build output directory
 	cd dist
